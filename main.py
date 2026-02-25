@@ -1,7 +1,7 @@
 # main.py
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from agent import ask_agent
+from agents.agent import ask_agent
 
 app = FastAPI(title="Finance Chatbot API")
 
