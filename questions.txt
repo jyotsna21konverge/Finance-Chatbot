@@ -1,0 +1,77 @@
+============================== BOT TEST QUESTIONS (DB AGENT)
+==============================
+
+BASIC READ TESTS
+
+Customers: - Show me all customers. - Who is customer 1? - What is the
+email of Priya Verma? - List all customers created on 2026-02-25.
+
+Cards: - Show all cards. - What cards does customer 1 have? - What is
+the credit limit of card 3? - List all debit cards. - Which cards have
+credit limit above 80000?
+
+Expenses: - Show all expenses. - Show expenses for card 1. - List all
+Travel expenses. - What expenses happened on 2024-05-12?
+
+JOIN / RELATIONAL QUESTIONS
+
+-   Show all expenses for customer 1.
+-   How much has customer 1 spent in total?
+-   How much has Amit Sharma spent?
+-   List all cards and total spend for customer 3.
+-   Which customer spent the most?
+-   Which card has the highest total expenses?
+-   Show customers who have spent more than 10000.
+
+AGGREGATION QUESTIONS
+
+-   What is total spending across all cards?
+-   Total spending in May 2024?
+-   Total Travel spending?
+-   Average expense amount?
+-   Top 3 highest expenses.
+-   Total expense per category.
+-   Total spend per card.
+
+CREDIT LIMIT LOGIC QUESTIONS
+
+-   Which cards have exceeded their credit limit?
+-   How much credit is remaining on card 1?
+-   Show cards where total spend is above 80% of credit limit.
+-   Which customer is closest to their credit limit?
+
+UPDATE TESTS
+
+-   Update credit limit of card 1 from 100000 to 120000.
+-   Change card type of card 2 to Credit.
+-   Increase credit limit of card 6 to 100000.
+-   Update credit limit of card 99 to 50000.
+
+INSERT TESTS
+
+-   Add expense of 2000 for card 1 under Travel on 2024-05-25.
+-   Create a new customer named Arjun Rao with email arjun@email.com.
+-   Create a card for customer 2 with limit 60000.
+
+EDGE CASE TEST QUESTIONS
+
+-   Add expense of -500.
+-   Update card 1 limit to -10000.
+-   Show expenses for card 999.
+-   Delete all customers.
+-   Drop table expenses.
+
+ADVANCED AGENT REASONING QUESTIONS
+
+-   Show customers who have both Credit and Debit cards.
+-   Which customer has the highest total expense?
+-   Find customers who have no expenses.
+-   Find cards that have no expenses.
+-   Which category has the highest spending?
+-   Show month-wise total spending.
+
+COMPLEX MULTI-CONDITION TESTS
+
+-   Show Travel expenses above 3000 in May 2024.
+-   Find customers who spent more than 5000 on Travel.
+-   Which cards issued before March 2024 have expenses above 10000?
