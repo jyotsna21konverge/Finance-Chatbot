@@ -1,77 +1,266 @@
-============================== BOT TEST QUESTIONS (DB AGENT)
+============================== BOT TEST QUESTIONS (JSON TOOLS)
 ==============================
 
-BASIC READ TESTS
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 1: SINGLE TOOL QUESTIONS (Basic Queries)
+═══════════════════════════════════════════════════════════════════════════════
 
-Customers: - Show me all customers. - Who is customer 1? - What is the
-email of Priya Verma? - List all customers created on 2026-02-25.
+A. PROFILE/USER QUESTIONS (Single Tool: get_user_profile / search_users)
 
-Cards: - Show all cards. - What cards does customer 1 have? - What is
-the credit limit of card 3? - List all debit cards. - Which cards have
-credit limit above 80000?
+-   Who is employee emp_002?
+-   Get profile for Sarah Chen.
+-   What is the role of emp_002?
+-   Show me emp_007 details.
+-   What department is Tom Rodriguez in?
+-   Get all Finance Manager profiles.
+-   Show all employees in the Finance department.
+-   Who are the AP Clerks?
+-   What is the email of emp_002?
 
-Expenses: - Show all expenses. - Show expenses for card 1. - List all
-Travel expenses. - What expenses happened on 2024-05-12?
+B. BALANCE QUESTIONS (Single Tool: get_account_balance / get_card_balance)
 
-JOIN / RELATIONAL QUESTIONS
+-   What is the current balance of card_001?
+-   Show balance for acc_001.
+-   Get all balances for emp_002.
+-   What is the available balance on card_005?
+-   Show pending charges for card_002.
+-   What are the last payment details for acc_003?
+-   Get billing cycle for emp_001?
 
--   Show all expenses for customer 1.
--   How much has customer 1 spent in total?
--   How much has Amit Sharma spent?
--   List all cards and total spend for customer 3.
--   Which customer spent the most?
--   Which card has the highest total expenses?
--   Show customers who have spent more than 10000.
+C. TRANSACTION QUESTIONS (Single Tool: search_transactions / get_transaction_by_merchant / get_denied_transactions)
 
-AGGREGATION QUESTIONS
+-   Show all approved transactions.
+-   What are the recent transactions for card_005?
+-   List all denied transactions.
+-   Show denied transactions for emp_004.
+-   How many transactions were made at Best Buy?
+-   Show all Electronics Superstore transactions.
+-   What transactions were at Online Gaming Site?
+-   Get denied transactions in the last records.
 
--   What is total spending across all cards?
--   Total spending in May 2024?
--   Total Travel spending?
--   Average expense amount?
--   Top 3 highest expenses.
--   Total expense per category.
--   Total spend per card.
+D. CREDIT LIMIT QUESTIONS (Single Tool: get_credit_limits / get_card_credit_limit)
 
-CREDIT LIMIT LOGIC QUESTIONS
+-   What is the credit limit for emp_001?
+-   Show credit limit for card_001.
+-   Get all credit limits.
+-   What is the utilization percent for card_002?
+-   Is card_001 at credit limit?
+-   Show available credit for card_005.
+-   Get credit limit status for all employees.
 
--   Which cards have exceeded their credit limit?
--   How much credit is remaining on card 1?
--   Show cards where total spend is above 80% of credit limit.
--   Which customer is closest to their credit limit?
+E. FRAUD ALERT QUESTIONS (Single Tool: get_fraud_alerts / get_fraud_alerts_by_employee)
 
-UPDATE TESTS
+-   Show all fraud alerts.
+-   What fraud alerts exist for emp_006?
+-   List alerts under investigation.
+-   Show fraud alerts for card_006.
+-   What are the fraud scores for recent alerts?
+-   Get resolved fraud cases.
+-   Show false positive fraud flags.
 
--   Update credit limit of card 1 from 100000 to 120000.
--   Change card type of card 2 to Credit.
--   Increase credit limit of card 6 to 100000.
--   Update credit limit of card 99 to 50000.
+F. FLEET/FUEL QUESTIONS (Single Tool: get_fleet_data / get_fleet_by_driver / search_fleet)
 
-INSERT TESTS
+-   Show all vehicles.
+-   What vehicles are assigned to emp_007?
+-   Get fleet data for vehicle veh_001.
+-   Show all Ford vehicles.
+-   What is the MPG of all vehicles?
+-   Show all active vehicles.
+-   Get vehicles in Sales department.
 
--   Add expense of 2000 for card 1 under Travel on 2024-05-25.
--   Create a new customer named Arjun Rao with email arjun@email.com.
--   Create a card for customer 2 with limit 60000.
 
-EDGE CASE TEST QUESTIONS
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 2: MULTIPLE TOOL QUESTIONS (Complex Queries)
+═══════════════════════════════════════════════════════════════════════════════
 
--   Add expense of -500.
--   Update card 1 limit to -10000.
--   Show expenses for card 999.
--   Delete all customers.
--   Drop table expenses.
+A. PROFILE + BALANCE QUESTIONS (Multiple Tools)
 
-ADVANCED AGENT REASONING QUESTIONS
+-   Show emp_002's profile and current balance.
+-   Who is Sarah Chen and what is her account balance?
+-   Get profile and account details for emp_001.
+-   Show employee name and their card balance for card_001.
 
--   Show customers who have both Credit and Debit cards.
--   Which customer has the highest total expense?
--   Find customers who have no expenses.
--   Find cards that have no expenses.
--   Which category has the highest spending?
--   Show month-wise total spending.
+B. PROFILE + TRANSACTIONS QUESTIONS (Multiple Tools)
 
-COMPLEX MULTI-CONDITION TESTS
+-   Who is emp_004 and what are their recent transactions?
+-   Show Sarah Chen's profile and transaction history.
+-   Get employee details and denied transactions for emp_004.
+-   Who made the transaction at Electronics Superstore and what's their role?
 
--   Show Travel expenses above 3000 in May 2024.
--   Find customers who spent more than 5000 on Travel.
--   Which cards issued before March 2024 have expenses above 10000?
+C. TRANSACTIONS + CREDIT LIMITS QUESTIONS (Multiple Tools)
+
+-   Show card_005's transactions and credit limit status.
+-   What transactions were denied and what's the credit limit for that employee?
+-   Get transaction history and credit utilization for emp_002.
+-   Show approved transactions and available credit for card_001.
+
+D. PROFILE + BALANCE + TRANSACTIONS (Three Tools)
+
+-   Get complete financial profile for emp_002 (profile + balance + transactions).
+-   Show Sarah Chen's details, balance, and all transactions.
+-   For emp_004, show profile, account balance, and transaction history.
+-   Get emp_001's information, current balance, and recent activity.
+
+E. FRAUD + PROFILE + TRANSACTIONS (Multiple Tools)
+
+-   Who has fraud alerts and what were their transactions?
+-   Show emp_006's profile, fraud alerts, and transaction details.
+-   Which employee was flagged for fraud and what are their recent activities?
+-   Get Jamie Taylor's profile, fraud alerts, and transaction history.
+
+F. CREDIT LIMITS + TRANSACTIONS + STAFF (Multiple Tools)
+
+-   Which employees are at credit limit and what are their recent transactions?
+-   Show emp_001's credit limit and all their transactions.
+-   Get credit status and transaction history for emp_002.
+-   Who is close to credit limit and what's their transaction pattern?
+
+G. FLEET + PROFILE QUESTIONS (Multiple Tools)
+
+-   Who is driver emp_007 and what vehicles are assigned?
+-   Show Robert Martinez's profile and fleet assignments.
+-   Get employee details and fuel costs for their vehicle.
+-   Show driver information and vehicle status for all active fleet.
+
+H. COMPREHENSIVE ANALYSIS (4+ Tools - All Related Data)
+
+-   Get complete profile for emp_002 (all data - profile, balance, transactions, credit, fraud, fleet).
+-   Show comprehensive analysis for Sarah Chen.
+-   Get full employee summary for emp_004 with all financial and operational data.
+-   Provide complete overview for emp_006 including profile, fraud alerts, transactions, and credit status.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 3: MULTI-CONDITION & FILTER QUESTIONS
+═══════════════════════════════════════════════════════════════════════════════
+
+A. FILTERED TRANSACTIONS
+
+-   Show all denied transactions for emp_001.
+-   List transactions at Electronics merchants with high amounts.
+-   Get approved transactions for card_002.
+-   Show transactions from emp_003 that were denied.
+-   What are the denial reasons for emp_004's transactions?
+
+B. CREDIT LIMIT ANALYSIS
+
+-   Which employees have 100% credit utilization?
+-   Show all employees at or near credit limit.
+-   Get credit limit status for emp_001 and emp_002.
+-   List employees with low available credit.
+
+C. FRAUD INVESTIGATION
+
+-   Show all investigating fraud alerts.
+-   Get unresolved fraud cases for card_006.
+-   Which employees have multiple fraud flags?
+-   Show high fraud score alerts (above 0.7).
+
+D. MERCHANT ANALYSIS
+
+-   How much was spent at Best Buy?
+-   Show all transactions at Online Gaming Site.
+-   Get merchant spending patterns.
+-   Which merchant has the most transactions?
+
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 4: RISK & INSIGHTS QUESTIONS (Composite Tools)
+═══════════════════════════════════════════════════════════════════════════════
+
+A. HIGH-RISK EMPLOYEE IDENTIFICATION
+
+-   Who are the high-risk employees?
+-   Which employees have multiple fraud alerts?
+-   Show employees with maxed credit and denied transactions.
+-   Identify employees with concerning activity patterns.
+-   Which employees require manual review?
+
+B. COMPLETE EMPLOYEE SUMMARY (get_employee_summary)
+
+-   Show complete profile for emp_002.
+-   Get full summary for Sarah Chen (all data).
+-   Provide comprehensive overview for emp_004.
+-   Get complete employee record for emp_007 with all details.
+-   Show full financial and operational profile for emp_001.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 5: OPERATIONAL QUESTIONS
+═══════════════════════════════════════════════════════════════════════════════
+
+A. COMPLIANCE & MONITORING
+
+-   Which transactions were flagged as fraud?
+-   Show compliance violations in transactions.
+-   Get employees with multiple denied transactions.
+-   List all flagged alerts.
+
+B. FINANCIAL ANALYSIS
+
+-   What is total spending per employee?
+-   Show top merchants by transaction count.
+-   Get average transaction amount.
+-   Which cards have the most activity?
+
+C. FLEET MANAGEMENT
+
+-   Show all active vehicles.
+-   Which drivers have the lowest MPG?
+-   Get total fuel costs per driver.
+-   Show vehicles that need maintenance (high odometer).
+
+D. PAYMENT & BILLING
+
+-   Show last payment details for all employees.
+-   Get pending charges across accounts.
+-   Which accounts have outstanding balances?
+-   Show billing cycle information for emp_002.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 6: UPDATE & MODIFICATION QUESTIONS
+═══════════════════════════════════════════════════════════════════════════════
+
+A. CREDIT LIMIT UPDATES
+
+-   Increase credit limit for card_001 from 3000 to 5000.
+-   Update emp_002's credit limit to 6000 with reason "annual increase".
+-   Adjust card_005 limit due to good payment history.
+-   Raise emp_001's credit limit for business expansion.
+
+B. SCENARIO QUESTIONS
+
+-   emp_002 requested a credit limit increase - update to 6000 and get new summary.
+-   A fraud alert was resolved for emp_006 - get their updated profile.
+-   card_001 reached credit limit - who does it belong to and what's recommended?
+-   emp_004 has high denied transactions - analyze and recommend credit adjustment.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 7: EDGE CASE & ERROR HANDLING TESTS
+═══════════════════════════════════════════════════════════════════════════════
+
+-   Show profile for non-existent employee emp_999.
+-   Get balance for invalid card_xyz.
+-   Update credit limit to negative value.
+-   Search with empty search field.
+-   Get transactions for invalid employee.
+-   Update credit limit for card that doesn't exist.
+-   Get fraud alerts with invalid parameters.
+-   Search users with NULL value.
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 8: CONVERSATIONAL QUESTIONS (Natural Language)
+═══════════════════════════════════════════════════════════════════════════════
+
+-   How much has Sarah been spending?
+-   Is John Kelly at credit limit?
+-   What's the status of Jamie Taylor's fraud investigation?
+-   Can you tell me about emp_002's account?
+-   Who is the highest spending employee?
+-   Which employee should we be concerned about?
+-   What's Robert Martinez's fuel cost this year?
+-   Is anyone at risk of over-spending?
+-   How many fraud alerts do we have?
+-   Show me employees in the Finance department.
