@@ -1,0 +1,301 @@
+{
+  "fraud_alerts": [
+    {
+      "alert_id": "fraud_jt_001",
+      "transaction_id": "txn_jt_001",
+      "card_id": "card_006",
+      "employee_id": "emp_006",
+      "employee_name": "Jamie Taylor",
+      "amount": 1250.00,
+      "merchant": "Online Gaming Site",
+      "fraud_score": 0.78,
+      "reason_codes": [
+        "UNUSUAL_CATEGORY",
+        "UNUSUAL_TIME",
+        "HIGH_AMOUNT"
+      ],
+      "flagged_at": "2025-10-14T02:35:00Z",
+      "investigation_status": "investigating",
+      "resolution_notes": null,
+      "risk_factors": [
+        "Entertainment/Gaming category unusual for this employee",
+        "Transaction at 2:30 AM (unusual time)",
+        "Amount significantly higher than typical purchases"
+      ]
+    },
+    {
+      "alert_id": "fraud_js_001",
+      "transaction_id": "txn_js_001",
+      "card_id": "card_005",
+      "employee_id": "emp_004",
+      "employee_name": "John Smith",
+      "amount": 1850.00,
+      "merchant": "Electronics Superstore",
+      "fraud_score": 0.89,
+      "reason_codes": [
+        "UNUSUAL_AMOUNT",
+        "HIGH_RISK_CATEGORY",
+        "VELOCITY_CHECK_FAILED"
+      ],
+      "flagged_at": "2025-10-28T14:22:00Z",
+      "investigation_status": "pending",
+      "resolution_notes": null,
+      "risk_factors": [
+        "Transaction amount 3x higher than average",
+        "Electronics category has high fraud rate",
+        "Multiple transactions in short timeframe"
+      ]
+    },
+    {
+      "alert_id": "fraud_dp_001",
+      "transaction_id": "txn_005",
+      "card_id": "card_005",
+      "employee_id": "emp_005",
+      "employee_name": "David Park",
+      "amount": 2800.00,
+      "merchant": "Cryptocurrency ATM",
+      "fraud_score": 0.94,
+      "reason_codes": [
+        "PROHIBITED_CATEGORY",
+        "POLICY_VIOLATION",
+        "HIGH_RISK_MERCHANT"
+      ],
+      "flagged_at": "2025-10-25T19:45:00Z",
+      "investigation_status": "investigating",
+      "resolution_notes": null,
+      "risk_factors": [
+        "Cryptocurrency transactions prohibited by policy",
+        "High-risk merchant category",
+        "Clear policy violation"
+      ]
+    },
+    {
+      "alert_id": "fraud_mc_001",
+      "transaction_id": "txn_mc_001",
+      "card_id": "card_003",
+      "employee_id": "emp_003",
+      "employee_name": "Michael Chen",
+      "amount": 2500.00,
+      "merchant": "Electronics Store XYZ",
+      "fraud_score": 0.85,
+      "reason_codes": [
+        "UNUSUAL_AMOUNT",
+        "NEW_MERCHANT",
+        "HIGH_RISK_CATEGORY"
+      ],
+      "flagged_at": "2025-10-20T11:30:00Z",
+      "investigation_status": "investigating",
+      "resolution_notes": null,
+      "risk_factors": [
+        "Transaction amount 3x higher than average",
+        "First time transaction with this merchant",
+        "Electronics category has high fraud rate"
+      ]
+    },
+    {
+      "alert_id": "fraud_jw_001",
+      "transaction_id": "txn_jw_001",
+      "card_id": "card_009",
+      "employee_id": "emp_009",
+      "employee_name": "James Wilson",
+      "amount": 5000.00,
+      "merchant": "Suspicious Vendor LLC",
+      "fraud_score": 0.95,
+      "reason_codes": [
+        "BLACKLISTED_MERCHANT",
+        "UNUSUAL_AMOUNT",
+        "UNUSUAL_TIME",
+        "VELOCITY_CHECK_FAILED"
+      ],
+      "flagged_at": "2025-09-15T23:15:00Z",
+      "investigation_status": "resolved",
+      "resolution_notes": "Confirmed fraudulent transaction. Card blocked and reissued.",
+      "risk_factors": [
+        "Merchant on fraud watchlist",
+        "Transaction at unusual time (11:30 PM)",
+        "Amount exceeds typical spending by 5x",
+        "Multiple failed attempts before success"
+      ]
+    },
+    {
+      "alert_id": "fraud_001",
+      "transaction_id": "txn_003",
+      "card_id": "card_003",
+      "employee_id": "emp_003",
+      "employee_name": "Michael Chen",
+      "amount": 2500.00,
+      "merchant": "Electronics Store XYZ",
+      "fraud_score": 0.85,
+      "reason_codes": [
+        "UNUSUAL_AMOUNT",
+        "NEW_MERCHANT",
+        "HIGH_RISK_CATEGORY"
+      ],
+      "flagged_at": "2024-01-13T16:50:00Z",
+      "investigation_status": "investigating",
+      "resolution_notes": null,
+      "risk_factors": [
+        "Transaction amount 3x higher than average",
+        "First time transaction with this merchant",
+        "Electronics category has high fraud rate"
+      ]
+    },
+    {
+      "alert_id": "fraud_002",
+      "transaction_id": "txn_010",
+      "card_id": "card_009",
+      "employee_id": "emp_009",
+      "employee_name": "James Wilson",
+      "amount": 5000.00,
+      "merchant": "Suspicious Vendor LLC",
+      "fraud_score": 0.95,
+      "reason_codes": [
+        "BLACKLISTED_MERCHANT",
+        "UNUSUAL_AMOUNT",
+        "UNUSUAL_TIME",
+        "VELOCITY_CHECK_FAILED"
+      ],
+      "flagged_at": "2024-01-07T23:31:00Z",
+      "investigation_status": "resolved",
+      "resolution_notes": "Confirmed fraudulent transaction. Card blocked and reissued.",
+      "risk_factors": [
+        "Merchant on fraud watchlist",
+        "Transaction at unusual time (11:30 PM)",
+        "Amount exceeds typical spending by 5x",
+        "Multiple failed attempts before success"
+      ]
+    },
+    {
+      "alert_id": "fraud_003",
+      "transaction_id": "txn_031",
+      "card_id": "card_002",
+      "employee_id": "emp_002",
+      "employee_name": "Sarah Chen",
+      "amount": 1850.00,
+      "merchant": "Online Gaming Site",
+      "fraud_score": 0.78,
+      "reason_codes": [
+        "PROHIBITED_CATEGORY",
+        "UNUSUAL_MERCHANT_TYPE"
+      ],
+      "flagged_at": "2023-12-05T22:15:00Z",
+      "investigation_status": "false_positive",
+      "resolution_notes": "Employee confirmed legitimate business expense for client entertainment research.",
+      "risk_factors": [
+        "Gaming category typically prohibited",
+        "Unusual merchant type for employee role"
+      ]
+    },
+    {
+      "alert_id": "fraud_004",
+      "transaction_id": "txn_032",
+      "card_id": "card_006",
+      "employee_id": "emp_006",
+      "employee_name": "Jamie Taylor",
+      "amount": 3200.00,
+      "merchant": "International Wire Transfer",
+      "fraud_score": 0.72,
+      "reason_codes": [
+        "INTERNATIONAL_TRANSACTION",
+        "HIGH_RISK_COUNTRY",
+        "UNUSUAL_AMOUNT"
+      ],
+      "flagged_at": "2023-11-20T14:30:00Z",
+      "investigation_status": "resolved",
+      "resolution_notes": "Legitimate international vendor payment. Pre-approved by finance.",
+      "risk_factors": [
+        "Transaction from high-risk country",
+        "International wire transfer",
+        "Large amount for single transaction"
+      ]
+    },
+    {
+      "alert_id": "fraud_005",
+      "transaction_id": "txn_033",
+      "card_id": "card_010",
+      "employee_id": "emp_010",
+      "employee_name": "Amanda Brown",
+      "amount": 450.00,
+      "merchant": "Duplicate Charge - Hotel",
+      "fraud_score": 0.68,
+      "reason_codes": [
+        "DUPLICATE_TRANSACTION",
+        "SAME_MERCHANT_SAME_AMOUNT"
+      ],
+      "flagged_at": "2023-10-08T09:00:00Z",
+      "investigation_status": "resolved",
+      "resolution_notes": "Duplicate charge identified and refunded by merchant.",
+      "risk_factors": [
+        "Identical transaction within 24 hours",
+        "Same merchant and exact amount"
+      ]
+    },
+    {
+      "alert_id": "fraud_006",
+      "transaction_id": "txn_034",
+      "card_id": "card_012",
+      "employee_id": "emp_012",
+      "employee_name": "Michelle Garcia",
+      "amount": 2800.00,
+      "merchant": "Cryptocurrency Exchange",
+      "fraud_score": 0.92,
+      "reason_codes": [
+        "PROHIBITED_CATEGORY",
+        "HIGH_RISK_MERCHANT",
+        "POLICY_VIOLATION"
+      ],
+      "flagged_at": "2023-09-15T16:45:00Z",
+      "investigation_status": "investigating",
+      "resolution_notes": null,
+      "risk_factors": [
+        "Cryptocurrency transactions prohibited by policy",
+        "High-risk merchant category",
+        "Potential policy violation"
+      ]
+    },
+    {
+      "alert_id": "fraud_007",
+      "transaction_id": "txn_035",
+      "card_id": "card_005",
+      "employee_id": "emp_005",
+      "employee_name": "David Park",
+      "amount": 125.00,
+      "merchant": "ATM Cash Withdrawal",
+      "fraud_score": 0.55,
+      "reason_codes": [
+        "UNUSUAL_TRANSACTION_TYPE",
+        "CASH_ADVANCE"
+      ],
+      "flagged_at": "2023-08-22T23:00:00Z",
+      "investigation_status": "pending",
+      "resolution_notes": null,
+      "risk_factors": [
+        "Cash withdrawal at unusual time",
+        "Cash advances require additional approval"
+      ]
+    },
+    {
+      "alert_id": "fraud_008",
+      "transaction_id": "txn_036",
+      "card_id": "card_008",
+      "employee_id": "emp_008",
+      "employee_name": "Jennifer Lee",
+      "amount": 4500.00,
+      "merchant": "Jewelry Store",
+      "fraud_score": 0.81,
+      "reason_codes": [
+        "UNUSUAL_MERCHANT_CATEGORY",
+        "HIGH_AMOUNT",
+        "PERSONAL_EXPENSE_SUSPECTED"
+      ],
+      "flagged_at": "2023-07-10T15:20:00Z",
+      "investigation_status": "resolved",
+      "resolution_notes": "Confirmed as corporate gift for major client. Approved by executive team.",
+      "risk_factors": [
+        "Jewelry typically personal expense",
+        "High transaction amount",
+        "Unusual category for business expense"
+      ]
+    }
+  ]
+}

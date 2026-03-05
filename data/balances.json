@@ -1,0 +1,405 @@
+{
+  "current_balances": [
+    {
+      "account_id": "acc_001",
+      "employee_id": "emp_001",
+      "employee_name": "John Kelly",
+      "card_id": "card_001",
+      "current_balance": 3000.0,
+      "available_balance": 0.0,
+      "pending_charges": 0.0,
+      "last_payment": {
+        "payment_id": "pay_001",
+        "amount": 2500.0,
+        "payment_date": "2023-12-28T10:00:00Z",
+        "payment_method": "ACH"
+      },
+      "billing_cycle_start": "2024-01-01T00:00:00Z",
+      "billing_cycle_end": "2024-01-31T23:59:59Z"
+    },
+    {
+      "account_id": "acc_002",
+      "employee_id": "emp_002",
+      "employee_name": "Sarah Chen",
+      "card_id": "card_002",
+      "current_balance": 4750.0,
+      "available_balance": 250.0,
+      "pending_charges": 125.0,
+      "last_payment": {
+        "payment_id": "pay_002",
+        "amount": 3200.0,
+        "payment_date": "2023-12-30T14:30:00Z",
+        "payment_method": "Wire Transfer"
+      },
+      "billing_cycle_start": "2024-01-01T00:00:00Z",
+      "billing_cycle_end": "2024-01-31T23:59:59Z"
+    },
+    {
+      "account_id": "acc_003",
+      "employee_id": "emp_003",
+      "employee_name": "Michael Chen",
+      "card_id": "card_003",
+      "current_balance": 3600.0,
+      "available_balance": 400.0,
+      "pending_charges": 0.0,
+      "last_payment": {
+        "payment_id": "pay_003",
+        "amount": 2800.0,
+        "payment_date": "2023-12-29T09:15:00Z",
+        "payment_method": "ACH"
+      },
+      "billing_cycle_start": "2024-01-01T00:00:00Z",
+      "billing_cycle_end": "2024-01-31T23:59:59Z"
+    },
+    {
+      "account_id": "acc_004",
+      "employee_id": "emp_004",
+      "employee_name": "John Smith",
+      "card_id": "card_004",
+      "current_balance": 2100.0,
+      "available_balance": 1900.0,
+      "pending_charges": 50.0,
+      "last_payment": {
+        "payment_id": "pay_004",
+        "amount": 1800.0,
+        "payment_date": "2023-12-27T11:00:00Z",
+        "payment_method": "ACH"
+      },
+      "billing_cycle_start": "2024-01-01T00:00:00Z",
+      "billing_cycle_end": "2024-01-31T23:59:59Z"
+    },
+    {
+      "account_id": "acc_006",
+      "employee_id": "emp_006",
+      "employee_name": "Jamie Taylor",
+      "card_id": "card_006",
+      "current_balance": 2800.0,
+      "available_balance": 1200.0,
+      "pending_charges": 75.0,
+      "last_payment": {
+        "payment_id": "pay_006",
+        "amount": 2200.0,
+        "payment_date": "2023-12-29T13:00:00Z",
+        "payment_method": "ACH"
+      },
+      "billing_cycle_start": "2024-01-01T00:00:00Z",
+      "billing_cycle_end": "2024-01-31T23:59:59Z"
+    },
+    {
+      "account_id": "acc_company",
+      "employee_id": null,
+      "employee_name": "Company Total",
+      "card_id": null,
+      "current_balance": 35250.0,
+      "available_balance": 8750.0,
+      "pending_charges": 450.0,
+      "last_payment": {
+        "payment_id": "pay_company_001",
+        "amount": 28000.0,
+        "payment_date": "2023-12-31T16:00:00Z",
+        "payment_method": "Wire Transfer"
+      },
+      "billing_cycle_start": "2024-01-01T00:00:00Z",
+      "billing_cycle_end": "2024-01-31T23:59:59Z"
+    }
+  ],
+  "balance_history": [
+    {
+      "account_id": "acc_company",
+      "month": "2024-01",
+      "opening_balance": 28000.0,
+      "closing_balance": 35250.0,
+      "total_charges": 7250.0,
+      "total_payments": 0.0,
+      "average_daily_balance": 31625.0
+    },
+    {
+      "account_id": "acc_company",
+      "month": "2023-12",
+      "opening_balance": 32500.0,
+      "closing_balance": 28000.0,
+      "total_charges": 8750.0,
+      "total_payments": 13250.0,
+      "average_daily_balance": 30250.0
+    },
+    {
+      "account_id": "acc_company",
+      "month": "2023-11",
+      "opening_balance": 29800.0,
+      "closing_balance": 32500.0,
+      "total_charges": 9200.0,
+      "total_payments": 6500.0,
+      "average_daily_balance": 31150.0
+    },
+    {
+      "account_id": "acc_company",
+      "month": "2023-10",
+      "opening_balance": 27500.0,
+      "closing_balance": 29800.0,
+      "total_charges": 8300.0,
+      "total_payments": 6000.0,
+      "average_daily_balance": 28650.0
+    },
+    {
+      "account_id": "acc_company",
+      "month": "2023-09",
+      "opening_balance": 31200.0,
+      "closing_balance": 27500.0,
+      "total_charges": 7800.0,
+      "total_payments": 11500.0,
+      "average_daily_balance": 29350.0
+    },
+    {
+      "account_id": "acc_company",
+      "month": "2023-08",
+      "opening_balance": 28900.0,
+      "closing_balance": 31200.0,
+      "total_charges": 9500.0,
+      "total_payments": 7200.0,
+      "average_daily_balance": 30050.0
+    },
+    {
+      "account_id": "acc_company",
+      "month": "2023-07",
+      "opening_balance": 26500.0,
+      "closing_balance": 28900.0,
+      "total_charges": 8400.0,
+      "total_payments": 6000.0,
+      "average_daily_balance": 27700.0
+    },
+    {
+      "account_id": "acc_company",
+      "month": "2023-06",
+      "opening_balance": 30100.0,
+      "closing_balance": 26500.0,
+      "total_charges": 7900.0,
+      "total_payments": 11500.0,
+      "average_daily_balance": 28300.0
+    },
+    {
+      "account_id": "acc_company",
+      "month": "2023-05",
+      "opening_balance": 27800.0,
+      "closing_balance": 30100.0,
+      "total_charges": 9300.0,
+      "total_payments": 7000.0,
+      "average_daily_balance": 28950.0
+    },
+    {
+      "account_id": "acc_company",
+      "month": "2023-04",
+      "opening_balance": 25600.0,
+      "closing_balance": 27800.0,
+      "total_charges": 8200.0,
+      "total_payments": 6000.0,
+      "average_daily_balance": 26700.0
+    },
+    {
+      "account_id": "acc_company",
+      "month": "2023-03",
+      "opening_balance": 29400.0,
+      "closing_balance": 25600.0,
+      "total_charges": 7700.0,
+      "total_payments": 11500.0,
+      "average_daily_balance": 27500.0
+    },
+    {
+      "account_id": "acc_company",
+      "month": "2023-02",
+      "opening_balance": 26200.0,
+      "closing_balance": 29400.0,
+      "total_charges": 9200.0,
+      "total_payments": 6000.0,
+      "average_daily_balance": 27800.0
+    },
+    {
+      "account_id": "acc_001",
+      "month": "2024-01",
+      "opening_balance": 2500.0,
+      "closing_balance": 3000.0,
+      "total_charges": 500.0,
+      "total_payments": 0.0,
+      "average_daily_balance": 2750.0
+    },
+    {
+      "account_id": "acc_001",
+      "month": "2023-12",
+      "opening_balance": 2800.0,
+      "closing_balance": 2500.0,
+      "total_charges": 850.0,
+      "total_payments": 1150.0,
+      "average_daily_balance": 2650.0
+    },
+    {
+      "account_id": "acc_001",
+      "month": "2023-11",
+      "opening_balance": 2400.0,
+      "closing_balance": 2800.0,
+      "total_charges": 750.0,
+      "total_payments": 350.0,
+      "average_daily_balance": 2600.0
+    },
+    {
+      "account_id": "acc_001",
+      "month": "2023-10",
+      "opening_balance": 2200.0,
+      "closing_balance": 2400.0,
+      "total_charges": 650.0,
+      "total_payments": 450.0,
+      "average_daily_balance": 2300.0
+    },
+    {
+      "account_id": "acc_001",
+      "month": "2023-09",
+      "opening_balance": 2600.0,
+      "closing_balance": 2200.0,
+      "total_charges": 600.0,
+      "total_payments": 1000.0,
+      "average_daily_balance": 2400.0
+    },
+    {
+      "account_id": "acc_001",
+      "month": "2023-08",
+      "opening_balance": 2300.0,
+      "closing_balance": 2600.0,
+      "total_charges": 800.0,
+      "total_payments": 500.0,
+      "average_daily_balance": 2450.0
+    },
+    {
+      "account_id": "acc_002",
+      "month": "2024-01",
+      "opening_balance": 3200.0,
+      "closing_balance": 4750.0,
+      "total_charges": 1550.0,
+      "total_payments": 0.0,
+      "average_daily_balance": 3975.0
+    },
+    {
+      "account_id": "acc_002",
+      "month": "2023-12",
+      "opening_balance": 4100.0,
+      "closing_balance": 3200.0,
+      "total_charges": 1275.0,
+      "total_payments": 2175.0,
+      "average_daily_balance": 3650.0
+    },
+    {
+      "account_id": "acc_002",
+      "month": "2023-11",
+      "opening_balance": 3800.0,
+      "closing_balance": 4100.0,
+      "total_charges": 950.0,
+      "total_payments": 650.0,
+      "average_daily_balance": 3950.0
+    },
+    {
+      "account_id": "acc_002",
+      "month": "2023-10",
+      "opening_balance": 3500.0,
+      "closing_balance": 3800.0,
+      "total_charges": 850.0,
+      "total_payments": 550.0,
+      "average_daily_balance": 3650.0
+    },
+    {
+      "account_id": "acc_003",
+      "month": "2024-01",
+      "opening_balance": 2800.0,
+      "closing_balance": 3600.0,
+      "total_charges": 800.0,
+      "total_payments": 0.0,
+      "average_daily_balance": 3200.0
+    },
+    {
+      "account_id": "acc_003",
+      "month": "2023-12",
+      "opening_balance": 3200.0,
+      "closing_balance": 2800.0,
+      "total_charges": 450.0,
+      "total_payments": 850.0,
+      "average_daily_balance": 3000.0
+    },
+    {
+      "account_id": "acc_003",
+      "month": "2023-11",
+      "opening_balance": 2900.0,
+      "closing_balance": 3200.0,
+      "total_charges": 750.0,
+      "total_payments": 450.0,
+      "average_daily_balance": 3050.0
+    },
+    {
+      "account_id": "acc_004",
+      "month": "2024-01",
+      "opening_balance": 1800.0,
+      "closing_balance": 2100.0,
+      "total_charges": 300.0,
+      "total_payments": 0.0,
+      "average_daily_balance": 1950.0
+    },
+    {
+      "account_id": "acc_004",
+      "month": "2023-12",
+      "opening_balance": 2200.0,
+      "closing_balance": 1800.0,
+      "total_charges": 550.0,
+      "total_payments": 950.0,
+      "average_daily_balance": 2000.0
+    },
+    {
+      "account_id": "acc_004",
+      "month": "2023-11",
+      "opening_balance": 1900.0,
+      "closing_balance": 2200.0,
+      "total_charges": 650.0,
+      "total_payments": 350.0,
+      "average_daily_balance": 2050.0
+    },
+    {
+      "account_id": "acc_004",
+      "month": "2023-10",
+      "opening_balance": 1700.0,
+      "closing_balance": 1900.0,
+      "total_charges": 500.0,
+      "total_payments": 300.0,
+      "average_daily_balance": 1800.0
+    },
+    {
+      "account_id": "acc_006",
+      "month": "2024-01",
+      "opening_balance": 2200.0,
+      "closing_balance": 2800.0,
+      "total_charges": 600.0,
+      "total_payments": 0.0,
+      "average_daily_balance": 2500.0
+    },
+    {
+      "account_id": "acc_006",
+      "month": "2023-12",
+      "opening_balance": 2600.0,
+      "closing_balance": 2200.0,
+      "total_charges": 750.0,
+      "total_payments": 1150.0,
+      "average_daily_balance": 2400.0
+    },
+    {
+      "account_id": "acc_006",
+      "month": "2023-11",
+      "opening_balance": 2300.0,
+      "closing_balance": 2600.0,
+      "total_charges": 700.0,
+      "total_payments": 400.0,
+      "average_daily_balance": 2450.0
+    },
+    {
+      "account_id": "acc_006",
+      "month": "2023-10",
+      "opening_balance": 2000.0,
+      "closing_balance": 2300.0,
+      "total_charges": 650.0,
+      "total_payments": 350.0,
+      "average_daily_balance": 2150.0
+    }
+  ]
+}

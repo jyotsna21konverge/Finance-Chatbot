@@ -1,0 +1,313 @@
+{
+  "users": [
+    {
+      "employee_id": "emp_002",
+      "name": "Sarah Chen",
+      "email": "sarah.chen@omnipay.com",
+      "phone": "+1-555-0101",
+      "persona": "finance-manager",
+      "role": "Finance Manager",
+      "department": "Finance",
+      "permissions": [
+        "all"
+      ],
+      "created_at": "2023-01-15T09:00:00Z",
+      "last_login": "2024-01-15T14:30:00Z",
+      "first_time_user": false,
+      "preferences": {
+        "email_notifications": true,
+        "login_notifications": true,
+        "sms_fraud_alerts": true,
+        "credit_limit_alerts": true,
+        "transaction_denial_alerts": true
+      }
+    },
+    {
+      "employee_id": "emp_007",
+      "name": "Tom Rodriguez",
+      "email": "tom.rodriguez@omnipay.com",
+      "phone": "+1-555-0102",
+      "persona": "ap-clerk",
+      "role": "AP Clerk",
+      "department": "Accounts Payable",
+      "permissions": [
+        "ap-automation",
+        "commercial-cards"
+      ],
+      "created_at": "2023-02-10T10:00:00Z",
+      "last_login": "2024-01-15T13:45:00Z",
+      "first_time_user": false,
+      "preferences": {
+        "email_notifications": true,
+        "login_notifications": true,
+        "sms_fraud_alerts": true,
+        "credit_limit_alerts": true,
+        "transaction_denial_alerts": true
+      }
+    },
+    {
+      "employee_id": "emp_013",
+      "name": "Maria Garcia",
+      "email": "maria.garcia@omnipay.com",
+      "phone": "+1-555-0103",
+      "persona": "fleet-manager",
+      "role": "Fleet Manager",
+      "department": "Fleet Operations",
+      "permissions": [
+        "fleet-fuel"
+      ],
+      "created_at": "2023-03-20T11:00:00Z",
+      "last_login": "2024-01-15T12:20:00Z",
+      "first_time_user": false,
+      "preferences": {
+        "email_notifications": true,
+        "login_notifications": false,
+        "sms_fraud_alerts": true,
+        "credit_limit_alerts": true,
+        "transaction_denial_alerts": true
+      }
+    },
+    {
+      "employee_id": "emp_004",
+      "name": "John Smith",
+      "email": "john.smith@omnipay.com",
+      "phone": "+1-555-0104",
+      "persona": "card-holder",
+      "role": "Card Holder",
+      "department": "Sales",
+      "permissions": [
+        "commercial-cards"
+      ],
+      "created_at": "2023-04-15T09:30:00Z",
+      "last_login": "2024-01-15T11:15:00Z",
+      "first_time_user": false,
+      "preferences": {
+        "email_notifications": true,
+        "login_notifications": false,
+        "sms_fraud_alerts": true,
+        "credit_limit_alerts": false,
+        "transaction_denial_alerts": true
+      }
+    },
+    {
+      "employee_id": "emp_014",
+      "name": "Alex Kim",
+      "email": "alex.kim@omnipay.com",
+      "phone": "+1-555-0105",
+      "persona": "cross-border-specialist",
+      "role": "Cross Border Specialist",
+      "department": "International Payments",
+      "permissions": [
+        "cross-border"
+      ],
+      "created_at": "2023-05-10T10:00:00Z",
+      "last_login": "2024-01-15T10:30:00Z",
+      "first_time_user": false,
+      "preferences": {
+        "email_notifications": true,
+        "login_notifications": true,
+        "sms_fraud_alerts": true,
+        "credit_limit_alerts": true,
+        "transaction_denial_alerts": true
+      }
+    },
+    {
+      "employee_id": "emp_006",
+      "name": "Jamie Taylor",
+      "email": "jamie.taylor@omnipay.com",
+      "phone": "+1-555-0106",
+      "persona": "card-holder",
+      "role": "Card Holder",
+      "department": "Marketing",
+      "permissions": [
+        "commercial-cards"
+      ],
+      "created_at": "2024-01-15T16:00:00Z",
+      "last_login": null,
+      "first_time_user": true,
+      "preferences": {
+        "email_notifications": true,
+        "login_notifications": true,
+        "sms_fraud_alerts": true,
+        "credit_limit_alerts": true,
+        "transaction_denial_alerts": true
+      }
+    },
+    {
+      "employee_id": "emp_001",
+      "name": "John Kelly",
+      "email": "john.kelly@omnipay.com",
+      "phone": "+1-555-0107",
+      "persona": "card-holder",
+      "role": "Card Holder",
+      "department": "Marketing",
+      "permissions": [
+        "commercial-cards"
+      ],
+      "created_at": "2023-01-10T09:00:00Z",
+      "last_login": "2024-01-15T09:00:00Z",
+      "first_time_user": false,
+      "preferences": {
+        "email_notifications": true,
+        "login_notifications": true,
+        "sms_fraud_alerts": true,
+        "credit_limit_alerts": true,
+        "transaction_denial_alerts": true
+      }
+    },
+    {
+      "employee_id": "emp_003",
+      "name": "Michael Chen",
+      "email": "michael.chen@omnipay.com",
+      "phone": "+1-555-0108",
+      "persona": "card-holder",
+      "role": "Card Holder",
+      "department": "Engineering",
+      "permissions": [
+        "commercial-cards"
+      ],
+      "created_at": "2023-02-15T10:00:00Z",
+      "last_login": "2024-01-14T16:00:00Z",
+      "first_time_user": false,
+      "preferences": {
+        "email_notifications": true,
+        "login_notifications": false,
+        "sms_fraud_alerts": true,
+        "credit_limit_alerts": true,
+        "transaction_denial_alerts": true
+      }
+    },
+    {
+      "employee_id": "emp_005",
+      "name": "David Park",
+      "email": "david.park@omnipay.com",
+      "phone": "+1-555-0109",
+      "persona": "card-holder",
+      "role": "Card Holder",
+      "department": "Operations",
+      "permissions": [
+        "commercial-cards"
+      ],
+      "created_at": "2023-03-20T11:00:00Z",
+      "last_login": "2024-01-13T14:30:00Z",
+      "first_time_user": false,
+      "preferences": {
+        "email_notifications": true,
+        "login_notifications": true,
+        "sms_fraud_alerts": true,
+        "credit_limit_alerts": false,
+        "transaction_denial_alerts": true
+      }
+    },
+    {
+      "employee_id": "emp_008",
+      "name": "Jennifer Lee",
+      "email": "jennifer.lee@omnipay.com",
+      "phone": "+1-555-0110",
+      "persona": "card-holder",
+      "role": "Card Holder",
+      "department": "Sales",
+      "permissions": [
+        "commercial-cards"
+      ],
+      "created_at": "2023-04-10T09:30:00Z",
+      "last_login": "2024-01-14T11:00:00Z",
+      "first_time_user": false,
+      "preferences": {
+        "email_notifications": true,
+        "login_notifications": true,
+        "sms_fraud_alerts": true,
+        "credit_limit_alerts": true,
+        "transaction_denial_alerts": true
+      }
+    },
+    {
+      "employee_id": "emp_009",
+      "name": "James Wilson",
+      "email": "james.wilson@omnipay.com",
+      "phone": "+1-555-0111",
+      "persona": "card-holder",
+      "role": "Card Holder",
+      "department": "Finance",
+      "permissions": [
+        "commercial-cards"
+      ],
+      "created_at": "2023-05-15T10:00:00Z",
+      "last_login": "2024-01-12T15:30:00Z",
+      "first_time_user": false,
+      "preferences": {
+        "email_notifications": true,
+        "login_notifications": false,
+        "sms_fraud_alerts": true,
+        "credit_limit_alerts": true,
+        "transaction_denial_alerts": true
+      }
+    },
+    {
+      "employee_id": "emp_010",
+      "name": "Amanda Brown",
+      "email": "amanda.brown@omnipay.com",
+      "phone": "+1-555-0112",
+      "persona": "card-holder",
+      "role": "Card Holder",
+      "department": "HR",
+      "permissions": [
+        "commercial-cards"
+      ],
+      "created_at": "2023-06-01T09:00:00Z",
+      "last_login": "2024-01-15T10:00:00Z",
+      "first_time_user": false,
+      "preferences": {
+        "email_notifications": true,
+        "login_notifications": true,
+        "sms_fraud_alerts": true,
+        "credit_limit_alerts": true,
+        "transaction_denial_alerts": true
+      }
+    },
+    {
+      "employee_id": "emp_011",
+      "name": "Christopher Davis",
+      "email": "christopher.davis@omnipay.com",
+      "phone": "+1-555-0113",
+      "persona": "card-holder",
+      "role": "Card Holder",
+      "department": "Operations",
+      "permissions": [
+        "commercial-cards"
+      ],
+      "created_at": "2023-07-10T10:30:00Z",
+      "last_login": "2024-01-14T13:00:00Z",
+      "first_time_user": false,
+      "preferences": {
+        "email_notifications": true,
+        "login_notifications": true,
+        "sms_fraud_alerts": true,
+        "credit_limit_alerts": false,
+        "transaction_denial_alerts": true
+      }
+    },
+    {
+      "employee_id": "emp_012",
+      "name": "Michelle Garcia",
+      "email": "michelle.garcia@omnipay.com",
+      "phone": "+1-555-0114",
+      "persona": "card-holder",
+      "role": "Card Holder",
+      "department": "Marketing",
+      "permissions": [
+        "commercial-cards"
+      ],
+      "created_at": "2023-08-15T11:00:00Z",
+      "last_login": "2024-01-15T14:00:00Z",
+      "first_time_user": false,
+      "preferences": {
+        "email_notifications": true,
+        "login_notifications": true,
+        "sms_fraud_alerts": true,
+        "credit_limit_alerts": true,
+        "transaction_denial_alerts": true
+      }
+    }
+  ]
+}
