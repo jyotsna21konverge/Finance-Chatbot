@@ -1,9 +1,30 @@
 # main.py
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from agents.agent import ask_agent
 
 app = FastAPI(title="Finance Chatbot API")
+
+# CORS configuration origin whitelisting for production; allowing all for development
+origins = [
+    "http://localhost:5173",      # Vite React
+    "http://localhost:3000",      # React default
+    "http://localhost:8501",      # Streamlit
+    "http://localhost:8000",      # FastAPI itself
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:8501",
+    "http://127.0.0.1:8000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins for development; restrict in production
+    allow_credentials=True,
+    allow_methods=["*"],          # allows OPTIONS, POST, GET, etc
+    allow_headers=["*"],          # allows all headers
+)
 
 
 class ChatRequest(BaseModel):
