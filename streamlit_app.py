@@ -35,7 +35,7 @@ def parse_output(output):
 
 # Page configuration
 st.set_page_config(
-    page_title="Finance Chatbot",
+    page_title="Payment Analytics Agent",
     page_icon="💰",
     layout="wide",
     initial_sidebar_state="expanded"
