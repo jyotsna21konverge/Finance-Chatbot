@@ -143,7 +143,7 @@ with st.sidebar:
         st.info("No chat sessions yet. Start a conversation!")
 
 # ============ MAIN CONTENT AREA ============
-st.title("💰 Finance Chatbot Assistant")
+st.title("💰 Payment Analytics Agent")
 
 # Create initial session if needed
 if st.session_state.current_session_idx is None and len(st.session_state.chat_sessions) == 0:
