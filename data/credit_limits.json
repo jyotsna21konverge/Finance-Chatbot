@@ -1,82 +1,15 @@
 {
   "vendors": [
-    {
-      "vendor_id": "vend_001",
-      "vendor_name": "TechSupply Solutions",
-      "credit_limit": 100000.00,
-      "current_ar_balance": 45000.00,
-      "available_credit": 55000.00,
-      "utilization_percent": 45.0,
-      "payment_terms": "Net 30",
-      "credit_rating": "A",
-      "last_reviewed": "2026-02-01T00:00:00Z",
-      "status": "active",
-      "review_notes": "Excellent payment history"
-    },
-    {
-      "vendor_id": "vend_002",
-      "vendor_name": "Global Manufacturing Corp",
-      "credit_limit": 300000.00,
-      "current_ar_balance": 125000.00,
-      "available_credit": 175000.00,
-      "utilization_percent": 41.7,
-      "payment_terms": "Net 45",
-      "credit_rating": "B",
-      "last_reviewed": "2026-01-15T00:00:00Z",
-      "status": "active",
-      "review_notes": "Occasional late payments, monitor closely"
-    },
-    {
-      "vendor_id": "vend_003",
-      "vendor_name": "Office Pro Supplies",
-      "credit_limit": 50000.00,
-      "current_ar_balance": 12500.00,
-      "available_credit": 37500.00,
-      "utilization_percent": 25.0,
-      "payment_terms": "Net 15",
-      "credit_rating": "A",
-      "last_reviewed": "2026-02-15T00:00:00Z",
-      "status": "active",
-      "review_notes": "Reliable vendor, consistent on-time payments"
-    },
-    {
-      "vendor_id": "vend_004",
-      "vendor_name": "Logistics Express International",
-      "credit_limit": 150000.00,
-      "current_ar_balance": 95000.00,
-      "available_credit": 55000.00,
-      "utilization_percent": 63.3,
-      "payment_terms": "Net 30",
-      "credit_rating": "C",
-      "last_reviewed": "2026-01-10T00:00:00Z",
-      "status": "at_risk",
-      "review_notes": "Multiple overdue invoices, enforce payment schedule"
-    },
-    {
-      "vendor_id": "vend_005",
-      "vendor_name": "Premium Consulting Group",
-      "credit_limit": 200000.00,
-      "current_ar_balance": 58000.00,
-      "available_credit": 142000.00,
-      "utilization_percent": 29.0,
-      "payment_terms": "Net 60",
-      "credit_rating": "A",
-      "last_reviewed": "2026-02-20T00:00:00Z",
-      "status": "active",
-      "review_notes": "Strategic partner, excellent terms negotiated"
-    },
-    {
-      "vendor_id": "vend_006",
-      "vendor_name": "CloudHost Solutions",
-      "credit_limit": 75000.00,
-      "current_ar_balance": 38500.00,
-      "available_credit": 36500.00,
-      "utilization_percent": 51.3,
-      "payment_terms": "Net 20",
-      "credit_rating": "D",
-      "last_reviewed": "2025-11-01T00:00:00Z",
-      "status": "suspended",
-      "review_notes": "Critical: Significant overdue balance, payment plan required before credit restoration"
-    }
+    {"vendor_id": "vend_001", "vendor_name": "TechSupply Solutions", "credit_limit": 100000.00, "current_ar_balance": 45000.00, "available_credit": 55000.00, "utilization_percent": 45.0, "payment_terms": "Net 30", "credit_rating": "A", "last_reviewed": "2026-02-01T00:00:00Z", "status": "active", "review_notes": "Excellent payment history"},
+    {"vendor_id": "vend_002", "vendor_name": "Global Manufacturing Corp", "credit_limit": 300000.00, "current_ar_balance": 173000.00, "available_credit": 127000.00, "utilization_percent": 57.7, "payment_terms": "Net 45", "credit_rating": "B", "last_reviewed": "2026-01-15T00:00:00Z", "status": "active", "review_notes": "Occasional late payments, monitor closely"},
+    {"vendor_id": "vend_003", "vendor_name": "Office Pro Supplies", "credit_limit": 50000.00, "current_ar_balance": 18700.00, "available_credit": 31300.00, "utilization_percent": 37.4, "payment_terms": "Net 15", "credit_rating": "A", "last_reviewed": "2026-02-15T00:00:00Z", "status": "active", "review_notes": "Reliable vendor, consistent on-time payments"},
+    {"vendor_id": "vend_004", "vendor_name": "Logistics Express International", "credit_limit": 150000.00, "current_ar_balance": 103500.00, "available_credit": 46500.00, "utilization_percent": 69.0, "payment_terms": "Net 30", "credit_rating": "C", "last_reviewed": "2026-01-10T00:00:00Z", "status": "at_risk", "review_notes": "Multiple overdue invoices, enforce payment schedule"},
+    {"vendor_id": "vend_005", "vendor_name": "Premium Consulting Group", "credit_limit": 200000.00, "current_ar_balance": 58000.00, "available_credit": 142000.00, "utilization_percent": 29.0, "payment_terms": "Net 60", "credit_rating": "A", "last_reviewed": "2026-02-20T00:00:00Z", "status": "active", "review_notes": "Strategic partner, excellent terms negotiated"},
+    {"vendor_id": "vend_006", "vendor_name": "CloudHost Solutions", "credit_limit": 75000.00, "current_ar_balance": 38500.00, "available_credit": 36500.00, "utilization_percent": 51.3, "payment_terms": "Net 20", "credit_rating": "D", "last_reviewed": "2025-11-01T00:00:00Z", "status": "suspended", "review_notes": "Critical: Significant overdue balance, payment plan required"},
+    {"vendor_id": "vend_007", "vendor_name": "Stellar Manufacturing Ltd", "credit_limit": 200000.00, "current_ar_balance": 80000.00, "available_credit": 120000.00, "utilization_percent": 40.0, "payment_terms": "Net 30", "credit_rating": "A", "last_reviewed": "2026-02-10T00:00:00Z", "status": "active", "review_notes": "Excellent credit history, growth opportunity"},
+    {"vendor_id": "vend_008", "vendor_name": "Swift Packaging Solutions", "credit_limit": 120000.00, "current_ar_balance": 47000.00, "available_credit": 73000.00, "utilization_percent": 39.2, "payment_terms": "Net 45", "credit_rating": "B", "last_reviewed": "2026-02-08T00:00:00Z", "status": "active", "review_notes": "Solid vendor, generally reliable"},
+    {"vendor_id": "vend_009", "vendor_name": "FlexPoint Technologies", "credit_limit": 90000.00, "current_ar_balance": 34100.00, "available_credit": 55900.00, "utilization_percent": 37.9, "payment_terms": "Net 30", "credit_rating": "A", "last_reviewed": "2026-02-18T00:00:00Z", "status": "active", "review_notes": "Professional services vendor with excellent track record"},
+    {"vendor_id": "vend_010", "vendor_name": "Reliable Distribution Inc", "credit_limit": 250000.00, "current_ar_balance": 166000.00, "available_credit": 84000.00, "utilization_percent": 66.4, "payment_terms": "Net 30", "credit_rating": "B", "last_reviewed": "2026-02-05T00:00:00Z", "status": "at_risk", "review_notes": "High volume vendor with aging issues"}
   ]
 }
+
