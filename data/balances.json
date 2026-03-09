@@ -1,133 +1,39 @@
 {
   "ar_balances": [
-    {
-      "vendor_id": "vend_001",
-      "vendor_name": "TechSupply Solutions",
-      "ar_balance": 45000.00,
-      "invoices_outstanding": 3,
-      "current_due": 12000.00,
-      "overdue_30": 18000.00,
-      "overdue_60": 15000.00,
-      "overdue_90": 0.00,
-      "last_payment": {
-        "payment_id": "pmt_001",
-        "amount": 50000.00,
-        "payment_date": "2026-02-10T10:00:00Z",
-        "payment_method": "ACH"
-      },
-      "terms": "Net 30",
-      "due_date_next": "2026-03-20T00:00:00Z",
-      "days_overdue": 0
-    },
-    {
-      "vendor_id": "vend_002",
-      "vendor_name": "Global Manufacturing Corp",
-      "ar_balance": 125000.00,
-      "invoices_outstanding": 5,
-      "current_due": 30000.00,
-      "overdue_30": 35000.00,
-      "overdue_60": 40000.00,
-      "overdue_90": 20000.00,
-      "last_payment": {
-        "payment_id": "pmt_002",
-        "amount": 80000.00,
-        "payment_date": "2026-01-15T14:30:00Z",
-        "payment_method": "Wire Transfer"
-      },
-      "terms": "Net 45",
-      "due_date_next": "2026-03-30T00:00:00Z",
-      "days_overdue": 38
-    },
-    {
-      "vendor_id": "vend_003",
-      "vendor_name": "Office Pro Supplies",
-      "ar_balance": 12500.00,
-      "invoices_outstanding": 2,
-      "current_due": 8500.00,
-      "overdue_30": 4000.00,
-      "overdue_60": 0.00,
-      "overdue_90": 0.00,
-      "last_payment": {
-        "payment_id": "pmt_003",
-        "amount": 15000.00,
-        "payment_date": "2026-02-28T09:15:00Z",
-        "payment_method": "Credit Card"
-      },
-      "terms": "Net 15",
-      "due_date_next": "2026-03-15T00:00:00Z",
-      "days_overdue": 0
-    },
-    {
-      "vendor_id": "vend_004",
-      "vendor_name": "Logistics Express International",
-      "ar_balance": 95000.00,
-      "invoices_outstanding": 4,
-      "current_due": 22000.00,
-      "overdue_30": 28000.00,
-      "overdue_60": 25000.00,
-      "overdue_90": 20000.00,
-      "last_payment": {
-        "payment_id": "pmt_004",
-        "amount": 35000.00,
-        "payment_date": "2025-12-20T11:00:00Z",
-        "payment_method": "ACH"
-      },
-      "terms": "Net 30",
-      "due_date_next": "2026-03-25T00:00:00Z",
-      "days_overdue": 78
-    },
-    {
-      "vendor_id": "vend_005",
-      "vendor_name": "Premium Consulting Group",
-      "ar_balance": 58000.00,
-      "invoices_outstanding": 2,
-      "current_due": 29000.00,
-      "overdue_30": 29000.00,
-      "overdue_60": 0.00,
-      "overdue_90": 0.00,
-      "last_payment": {
-        "payment_id": "pmt_005",
-        "amount": 40000.00,
-        "payment_date": "2026-01-30T13:00:00Z",
-        "payment_method": "Wire Transfer"
-      },
-      "terms": "Net 60",
-      "due_date_next": "2026-04-15T00:00:00Z",
-      "days_overdue": 0
-    },
-    {
-      "vendor_id": "vend_006",
-      "vendor_name": "CloudHost Solutions",
-      "ar_balance": 38500.00,
-      "invoices_outstanding": 6,
-      "current_due": 5200.00,
-      "overdue_30": 8300.00,
-      "overdue_60": 12000.00,
-      "overdue_90": 13000.00,
-      "last_payment": {
-        "payment_id": "pmt_006",
-        "amount": 12000.00,
-        "payment_date": "2025-11-10T16:00:00Z",
-        "payment_method": "Credit Card"
-      },
-      "terms": "Net 20",
-      "due_date_next": "2026-03-30T00:00:00Z",
-      "days_overdue": 120
-    }
+    {"vendor_id": "vend_001", "vendor_name": "TechSupply Solutions", "ar_balance": 45000.00, "invoices_outstanding": 4, "current_due": 12000.00, "overdue_30": 18000.00, "overdue_60": 15000.00, "overdue_90": 0.00, "last_payment": {"payment_id": "pmt_001", "amount": 50000.00, "payment_date": "2026-02-10T10:00:00Z", "payment_method": "ACH"}, "terms": "Net 30", "due_date_next": "2026-03-20T00:00:00Z", "days_overdue": 0},
+    {"vendor_id": "vend_002", "vendor_name": "Global Manufacturing Corp", "ar_balance": 173000.00, "invoices_outstanding": 5, "current_due": 30000.00, "overdue_30": 35000.00, "overdue_60": 40000.00, "overdue_90": 68000.00, "last_payment": {"payment_id": "pmt_002", "amount": 80000.00, "payment_date": "2026-01-15T14:30:00Z", "payment_method": "Wire Transfer"}, "terms": "Net 45", "due_date_next": "2026-03-30T00:00:00Z", "days_overdue": 38},
+    {"vendor_id": "vend_003", "vendor_name": "Office Pro Supplies", "ar_balance": 18700.00, "invoices_outstanding": 3, "current_due": 8500.00, "overdue_30": 4000.00, "overdue_60": 6200.00, "overdue_90": 0.00, "last_payment": {"payment_id": "pmt_003", "amount": 15000.00, "payment_date": "2026-02-28T09:15:00Z", "payment_method": "Credit Card"}, "terms": "Net 15", "due_date_next": "2026-03-15T00:00:00Z", "days_overdue": 0},
+    {"vendor_id": "vend_004", "vendor_name": "Logistics Express International", "ar_balance": 103500.00, "invoices_outstanding": 4, "current_due": 22000.00, "overdue_30": 28000.00, "overdue_60": 18500.00, "overdue_90": 35000.00, "last_payment": {"payment_id": "pmt_004", "amount": 35000.00, "payment_date": "2025-12-20T11:00:00Z", "payment_method": "ACH"}, "terms": "Net 30", "due_date_next": "2026-03-25T00:00:00Z", "days_overdue": 78},
+    {"vendor_id": "vend_005", "vendor_name": "Premium Consulting Group", "ar_balance": 58000.00, "invoices_outstanding": 2, "current_due": 29000.00, "overdue_30": 29000.00, "overdue_60": 0.00, "overdue_90": 0.00, "last_payment": {"payment_id": "pmt_005", "amount": 40000.00, "payment_date": "2026-01-30T13:00:00Z", "payment_method": "Wire Transfer"}, "terms": "Net 60", "due_date_next": "2026-04-15T00:00:00Z", "days_overdue": 0},
+    {"vendor_id": "vend_006", "vendor_name": "CloudHost Solutions", "ar_balance": 38500.00, "invoices_outstanding": 4, "current_due": 5200.00, "overdue_30": 8300.00, "overdue_60": 12000.00, "overdue_90": 13000.00, "last_payment": {"payment_id": "pmt_006", "amount": 12000.00, "payment_date": "2025-11-10T16:00:00Z", "payment_method": "Credit Card"}, "terms": "Net 20", "due_date_next": "2026-03-30T00:00:00Z", "days_overdue": 120},
+    {"vendor_id": "vend_007", "vendor_name": "Stellar Manufacturing Ltd", "ar_balance": 80000.00, "invoices_outstanding": 2, "current_due": 42000.00, "overdue_30": 38000.00, "overdue_60": 0.00, "overdue_90": 0.00, "last_payment": {"payment_id": "pmt_007", "amount": 645000.00, "payment_date": "2026-02-05T12:00:00Z", "payment_method": "Wire Transfer"}, "terms": "Net 30", "due_date_next": "2026-03-28T00:00:00Z", "days_overdue": 0},
+    {"vendor_id": "vend_008", "vendor_name": "Swift Packaging Solutions", "ar_balance": 47000.00, "invoices_outstanding": 2, "current_due": 25000.00, "overdue_30": 22000.00, "overdue_60": 0.00, "overdue_90": 0.00, "last_payment": {"payment_id": "pmt_008", "amount": 55000.00, "payment_date": "2026-01-28T10:30:00Z", "payment_method": "ACH"}, "terms": "Net 45", "due_date_next": "2026-04-03T00:00:00Z", "days_overdue": 0},
+    {"vendor_id": "vend_009", "vendor_name": "FlexPoint Technologies", "ar_balance": 34100.00, "invoices_outstanding": 2, "current_due": 18500.00, "overdue_30": 15600.00, "overdue_60": 0.00, "overdue_90": 0.00, "last_payment": {"payment_id": "pmt_009", "amount": 32000.00, "payment_date": "2026-02-15T14:00:00Z", "payment_method": "ACH"}, "terms": "Net 30", "due_date_next": "2026-03-12T00:00:00Z", "days_overdue": 0},
+    {"vendor_id": "vend_010", "vendor_name": "Reliable Distribution Inc", "ar_balance": 166000.00, "invoices_outstanding": 3, "current_due": 56000.00, "overdue_30": 48000.00, "overdue_60": 0.00, "overdue_90": 62000.00, "last_payment": {"payment_id": "pmt_010", "amount": 120000.00, "payment_date": "2026-01-22T11:45:00Z", "payment_method": "Wire Transfer"}, "terms": "Net 30", "due_date_next": "2026-03-25T00:00:00Z", "days_overdue": 42},
+    {"vendor_id": "vend_011", "vendor_name": "ProServe HR Solutions", "ar_balance": 22500.00, "invoices_outstanding": 2, "current_due": 12000.00, "overdue_30": 10500.00, "overdue_60": 0.00, "overdue_90": 0.00, "last_payment": {"payment_id": "pmt_011", "amount": 28000.00, "payment_date": "2026-02-20T09:00:00Z", "payment_method": "ACH"}, "terms": "Net 20", "due_date_next": "2026-03-20T00:00:00Z", "days_overdue": 0},
+    {"vendor_id": "vend_012", "vendor_name": "EdgeCase Industries", "ar_balance": 133000.00, "invoices_outstanding": 2, "current_due": 75000.00, "overdue_30": 0.00, "overdue_60": 58000.00, "overdue_90": 0.00, "last_payment": {"payment_id": "pmt_012", "amount": 150000.00, "payment_date": "2025-12-18T13:30:00Z", "payment_method": "Wire Transfer"}, "terms": "Net 60", "due_date_next": "2026-04-15T00:00:00Z", "days_overdue": 0},
+    {"vendor_id": "vend_013", "vendor_name": "NexGen Marketing Services", "ar_balance": 25500.00, "invoices_outstanding": 2, "current_due": 14000.00, "overdue_30": 11500.00, "overdue_60": 0.00, "overdue_90": 0.00, "last_payment": {"payment_id": "pmt_013", "amount": 22000.00, "payment_date": "2026-02-10T10:15:00Z", "payment_method": "ACH"}, "terms": "Net 30", "due_date_next": "2026-03-22T00:00:00Z", "days_overdue": 0},
+    {"vendor_id": "vend_014", "vendor_name": "Secure Systems Corp", "ar_balance": 35500.00, "invoices_outstanding": 2, "current_due": 19000.00, "overdue_30": 16500.00, "overdue_60": 0.00, "overdue_90": 0.00, "last_payment": {"payment_id": "pmt_014", "amount": 38000.00, "payment_date": "2026-02-15T15:00:00Z", "payment_method": "ACH"}, "terms": "Net 30", "due_date_next": "2026-03-27T00:00:00Z", "days_overdue": 0},
+    {"vendor_id": "vend_015", "vendor_name": "Omega Supply Chain", "ar_balance": 60500.00, "invoices_outstanding": 2, "current_due": 32000.00, "overdue_30": 28500.00, "overdue_60": 0.00, "overdue_90": 0.00, "last_payment": {"payment_id": "pmt_015", "amount": 65000.00, "payment_date": "2026-02-12T12:00:00Z", "payment_method": "Wire Transfer"}, "terms": "Net 45", "due_date_next": "2026-03-27T00:00:00Z", "days_overdue": 0},
+    {"vendor_id": "vend_016", "vendor_name": "Quality Materials Corp", "ar_balance": 140000.00, "invoices_outstanding": 2, "current_due": 68000.00, "overdue_30": 72000.00, "overdue_60": 0.00, "overdue_90": 0.00, "last_payment": {"payment_id": "pmt_016", "amount": 180000.00, "payment_date": "2026-02-08T11:00:00Z", "payment_method": "Wire Transfer"}, "terms": "Net 30", "due_date_next": "2026-03-03T00:00:00Z", "days_overdue": 0},
+    {"vendor_id": "vend_017", "vendor_name": "VisionCorp Analytics", "ar_balance": 28500.00, "invoices_outstanding": 2, "current_due": 15500.00, "overdue_30": 13000.00, "overdue_60": 0.00, "overdue_90": 0.00, "last_payment": {"payment_id": "pmt_017", "amount": 25000.00, "payment_date": "2026-02-18T14:30:00Z", "payment_method": "ACH"}, "terms": "Net 30", "due_date_next": "2026-03-22T00:00:00Z", "days_overdue": 0},
+    {"vendor_id": "vend_018", "vendor_name": "Industrial Maintenance Pro", "ar_balance": 33500.00, "invoices_outstanding": 2, "current_due": 18000.00, "overdue_30": 15500.00, "overdue_60": 0.00, "overdue_90": 0.00, "last_payment": {"payment_id": "pmt_018", "amount": 30000.00, "payment_date": "2026-02-20T10:00:00Z", "payment_method": "ACH"}, "terms": "Net 45", "due_date_next": "2026-03-31T00:00:00Z", "days_overdue": 0},
+    {"vendor_id": "vend_019", "vendor_name": "Elite Energy Solutions", "ar_balance": 52500.00, "invoices_outstanding": 2, "current_due": 28000.00, "overdue_30": 24500.00, "overdue_60": 0.00, "overdue_90": 0.00, "last_payment": {"payment_id": "pmt_019", "amount": 55000.00, "payment_date": "2026-02-12T16:00:00Z", "payment_method": "Wire Transfer"}, "terms": "Net 30", "due_date_next": "2026-03-30T00:00:00Z", "days_overdue": 0},
+    {"vendor_id": "vend_020", "vendor_name": "CrossTrade International", "ar_balance": 142000.00, "invoices_outstanding": 3, "current_due": 45000.00, "overdue_30": 42000.00, "overdue_60": 0.00, "overdue_90": 55000.00, "last_payment": {"payment_id": "pmt_020", "amount": 95000.00, "payment_date": "2025-11-20T13:00:00Z", "payment_method": "Wire Transfer"}, "terms": "Net 60", "due_date_next": "2026-04-02T00:00:00Z", "days_overdue": 29}
   ],
   "ar_summary": {
-    "total_ar": 373500.00,
-    "total_current": 106700.00,
-    "total_overdue_30": 122300.00,
-    "total_overdue_60": 92000.00,
-    "total_overdue_90": 53000.00,
-    "vendors_at_risk": 2,
-    "vendors_overdue": 4,
+    "total_ar": 1437200.00,
+    "total_current": 510200.00,
+    "total_overdue_30": 473300.00,
+    "total_overdue_60": 267700.00,
+    "total_overdue_90": 233000.00,
+    "vendors_at_risk": 4,
+    "vendors_overdue": 9,
     "aging_analysis": {
-      "current_percent": 28.5,
-      "overdue_30_percent": 32.7,
-      "overdue_60_percent": 24.6,
-      "overdue_90_percent": 14.2
+      "current_percent": 35.5,
+      "overdue_30_percent": 32.9,
+      "overdue_60_percent": 18.6,
+      "overdue_90_percent": 16.2
     }
   }
 }
