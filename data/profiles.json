@@ -1,313 +1,124 @@
 {
-  "users": [
+  "vendors": [
     {
-      "employee_id": "emp_002",
-      "name": "Sarah Chen",
-      "email": "sarah.chen@omnipay.com",
-      "phone": "+1-555-0101",
-      "persona": "finance-manager",
-      "role": "Finance Manager",
-      "department": "Finance",
-      "permissions": [
-        "all"
-      ],
-      "created_at": "2023-01-15T09:00:00Z",
-      "last_login": "2024-01-15T14:30:00Z",
-      "first_time_user": false,
-      "preferences": {
-        "email_notifications": true,
-        "login_notifications": true,
-        "sms_fraud_alerts": true,
-        "credit_limit_alerts": true,
-        "transaction_denial_alerts": true
-      }
+      "vendor_id": "vend_001",
+      "vendor_name": "TechSupply Solutions",
+      "business_type": "B2B Technology",
+      "industry": "IT Equipment & Software",
+      "contact_person": "John Peterson",
+      "email": "ap@techsupply.com",
+      "phone": "+1-555-0201",
+      "address": "123 Silicon Valley Dr, San Francisco, CA 94107",
+      "vendor_since": "2021-06-15T00:00:00Z",
+      "status": "active",
+      "payment_terms": "Net 30",
+      "preferred_payment_method": "ACH",
+      "country": "USA",
+      "tax_id": "98-7654321",
+      "credit_rating": "A",
+      "total_order_volume_ytd": 450000.00,
+      "payment_history": "excellent",
+      "dispute_count": 0
     },
     {
-      "employee_id": "emp_007",
-      "name": "Tom Rodriguez",
-      "email": "tom.rodriguez@omnipay.com",
-      "phone": "+1-555-0102",
-      "persona": "ap-clerk",
-      "role": "AP Clerk",
-      "department": "Accounts Payable",
-      "permissions": [
-        "ap-automation",
-        "commercial-cards"
-      ],
-      "created_at": "2023-02-10T10:00:00Z",
-      "last_login": "2024-01-15T13:45:00Z",
-      "first_time_user": false,
-      "preferences": {
-        "email_notifications": true,
-        "login_notifications": true,
-        "sms_fraud_alerts": true,
-        "credit_limit_alerts": true,
-        "transaction_denial_alerts": true
-      }
+      "vendor_id": "vend_002",
+      "vendor_name": "Global Manufacturing Corp",
+      "business_type": "Manufacturing",
+      "industry": "Industrial Parts & Components",
+      "contact_person": "Maria Gonzalez",
+      "email": "billing@globalmfg.com",
+      "phone": "+1-555-0202",
+      "address": "456 Industrial Blvd, Houston, TX 77002",
+      "vendor_since": "2020-03-22T00:00:00Z",
+      "status": "active",
+      "payment_terms": "Net 45",
+      "preferred_payment_method": "Wire Transfer",
+      "country": "USA",
+      "tax_id": "87-6543210",
+      "credit_rating": "B",
+      "total_order_volume_ytd": 720000.00,
+      "payment_history": "good",
+      "dispute_count": 1
     },
     {
-      "employee_id": "emp_013",
-      "name": "Maria Garcia",
-      "email": "maria.garcia@omnipay.com",
-      "phone": "+1-555-0103",
-      "persona": "fleet-manager",
-      "role": "Fleet Manager",
-      "department": "Fleet Operations",
-      "permissions": [
-        "fleet-fuel"
-      ],
-      "created_at": "2023-03-20T11:00:00Z",
-      "last_login": "2024-01-15T12:20:00Z",
-      "first_time_user": false,
-      "preferences": {
-        "email_notifications": true,
-        "login_notifications": false,
-        "sms_fraud_alerts": true,
-        "credit_limit_alerts": true,
-        "transaction_denial_alerts": true
-      }
+      "vendor_id": "vend_003",
+      "vendor_name": "Office Pro Supplies",
+      "business_type": "Office Supplies",
+      "industry": "Stationery & Office Equipment",
+      "contact_person": "James Chen",
+      "email": "accounts@officepro.com",
+      "phone": "+1-555-0203",
+      "address": "789 Commerce St, New York, NY 10007",
+      "vendor_since": "2022-01-10T00:00:00Z",
+      "status": "active",
+      "payment_terms": "Net 15",
+      "preferred_payment_method": "Credit Card",
+      "country": "USA",
+      "tax_id": "76-5432109",
+      "credit_rating": "A",
+      "total_order_volume_ytd": 185000.00,
+      "payment_history": "excellent",
+      "dispute_count": 0
     },
     {
-      "employee_id": "emp_004",
-      "name": "John Smith",
-      "email": "john.smith@omnipay.com",
-      "phone": "+1-555-0104",
-      "persona": "card-holder",
-      "role": "Card Holder",
-      "department": "Sales",
-      "permissions": [
-        "commercial-cards"
-      ],
-      "created_at": "2023-04-15T09:30:00Z",
-      "last_login": "2024-01-15T11:15:00Z",
-      "first_time_user": false,
-      "preferences": {
-        "email_notifications": true,
-        "login_notifications": false,
-        "sms_fraud_alerts": true,
-        "credit_limit_alerts": false,
-        "transaction_denial_alerts": true
-      }
+      "vendor_id": "vend_004",
+      "vendor_name": "Logistics Express International",
+      "business_type": "Logistics & Shipping",
+      "industry": "Freight & Courier Services",
+      "contact_person": "Sarah Mitchell",
+      "email": "billing@logexpress.com",
+      "phone": "+1-555-0204",
+      "address": "321 Shipping Lane, Memphis, TN 38103",
+      "vendor_since": "2019-09-05T00:00:00Z",
+      "status": "at_risk",
+      "payment_terms": "Net 30",
+      "preferred_payment_method": "ACH",
+      "country": "USA",
+      "tax_id": "65-4321098",
+      "credit_rating": "C",
+      "total_order_volume_ytd": 380000.00,
+      "payment_history": "fair",
+      "dispute_count": 3
     },
     {
-      "employee_id": "emp_014",
-      "name": "Alex Kim",
-      "email": "alex.kim@omnipay.com",
-      "phone": "+1-555-0105",
-      "persona": "cross-border-specialist",
-      "role": "Cross Border Specialist",
-      "department": "International Payments",
-      "permissions": [
-        "cross-border"
-      ],
-      "created_at": "2023-05-10T10:00:00Z",
-      "last_login": "2024-01-15T10:30:00Z",
-      "first_time_user": false,
-      "preferences": {
-        "email_notifications": true,
-        "login_notifications": true,
-        "sms_fraud_alerts": true,
-        "credit_limit_alerts": true,
-        "transaction_denial_alerts": true
-      }
+      "vendor_id": "vend_005",
+      "vendor_name": "Premium Consulting Group",
+      "business_type": "Professional Services",
+      "industry": "Management & Strategy Consulting",
+      "contact_person": "Dr. Robert Walsh",
+      "email": "invoicing@premiumconsult.com",
+      "phone": "+1-555-0205",
+      "address": "654 Executive Plaza, Boston, MA 02116",
+      "vendor_since": "2023-02-20T00:00:00Z",
+      "status": "active",
+      "payment_terms": "Net 60",
+      "preferred_payment_method": "Wire Transfer",
+      "country": "USA",
+      "tax_id": "54-3210987",
+      "credit_rating": "A",
+      "total_order_volume_ytd": 290000.00,
+      "payment_history": "excellent",
+      "dispute_count": 0
     },
     {
-      "employee_id": "emp_006",
-      "name": "Jamie Taylor",
-      "email": "jamie.taylor@omnipay.com",
-      "phone": "+1-555-0106",
-      "persona": "card-holder",
-      "role": "Card Holder",
-      "department": "Marketing",
-      "permissions": [
-        "commercial-cards"
-      ],
-      "created_at": "2024-01-15T16:00:00Z",
-      "last_login": null,
-      "first_time_user": true,
-      "preferences": {
-        "email_notifications": true,
-        "login_notifications": true,
-        "sms_fraud_alerts": true,
-        "credit_limit_alerts": true,
-        "transaction_denial_alerts": true
-      }
-    },
-    {
-      "employee_id": "emp_001",
-      "name": "John Kelly",
-      "email": "john.kelly@omnipay.com",
-      "phone": "+1-555-0107",
-      "persona": "card-holder",
-      "role": "Card Holder",
-      "department": "Marketing",
-      "permissions": [
-        "commercial-cards"
-      ],
-      "created_at": "2023-01-10T09:00:00Z",
-      "last_login": "2024-01-15T09:00:00Z",
-      "first_time_user": false,
-      "preferences": {
-        "email_notifications": true,
-        "login_notifications": true,
-        "sms_fraud_alerts": true,
-        "credit_limit_alerts": true,
-        "transaction_denial_alerts": true
-      }
-    },
-    {
-      "employee_id": "emp_003",
-      "name": "Michael Chen",
-      "email": "michael.chen@omnipay.com",
-      "phone": "+1-555-0108",
-      "persona": "card-holder",
-      "role": "Card Holder",
-      "department": "Engineering",
-      "permissions": [
-        "commercial-cards"
-      ],
-      "created_at": "2023-02-15T10:00:00Z",
-      "last_login": "2024-01-14T16:00:00Z",
-      "first_time_user": false,
-      "preferences": {
-        "email_notifications": true,
-        "login_notifications": false,
-        "sms_fraud_alerts": true,
-        "credit_limit_alerts": true,
-        "transaction_denial_alerts": true
-      }
-    },
-    {
-      "employee_id": "emp_005",
-      "name": "David Park",
-      "email": "david.park@omnipay.com",
-      "phone": "+1-555-0109",
-      "persona": "card-holder",
-      "role": "Card Holder",
-      "department": "Operations",
-      "permissions": [
-        "commercial-cards"
-      ],
-      "created_at": "2023-03-20T11:00:00Z",
-      "last_login": "2024-01-13T14:30:00Z",
-      "first_time_user": false,
-      "preferences": {
-        "email_notifications": true,
-        "login_notifications": true,
-        "sms_fraud_alerts": true,
-        "credit_limit_alerts": false,
-        "transaction_denial_alerts": true
-      }
-    },
-    {
-      "employee_id": "emp_008",
-      "name": "Jennifer Lee",
-      "email": "jennifer.lee@omnipay.com",
-      "phone": "+1-555-0110",
-      "persona": "card-holder",
-      "role": "Card Holder",
-      "department": "Sales",
-      "permissions": [
-        "commercial-cards"
-      ],
-      "created_at": "2023-04-10T09:30:00Z",
-      "last_login": "2024-01-14T11:00:00Z",
-      "first_time_user": false,
-      "preferences": {
-        "email_notifications": true,
-        "login_notifications": true,
-        "sms_fraud_alerts": true,
-        "credit_limit_alerts": true,
-        "transaction_denial_alerts": true
-      }
-    },
-    {
-      "employee_id": "emp_009",
-      "name": "James Wilson",
-      "email": "james.wilson@omnipay.com",
-      "phone": "+1-555-0111",
-      "persona": "card-holder",
-      "role": "Card Holder",
-      "department": "Finance",
-      "permissions": [
-        "commercial-cards"
-      ],
-      "created_at": "2023-05-15T10:00:00Z",
-      "last_login": "2024-01-12T15:30:00Z",
-      "first_time_user": false,
-      "preferences": {
-        "email_notifications": true,
-        "login_notifications": false,
-        "sms_fraud_alerts": true,
-        "credit_limit_alerts": true,
-        "transaction_denial_alerts": true
-      }
-    },
-    {
-      "employee_id": "emp_010",
-      "name": "Amanda Brown",
-      "email": "amanda.brown@omnipay.com",
-      "phone": "+1-555-0112",
-      "persona": "card-holder",
-      "role": "Card Holder",
-      "department": "HR",
-      "permissions": [
-        "commercial-cards"
-      ],
-      "created_at": "2023-06-01T09:00:00Z",
-      "last_login": "2024-01-15T10:00:00Z",
-      "first_time_user": false,
-      "preferences": {
-        "email_notifications": true,
-        "login_notifications": true,
-        "sms_fraud_alerts": true,
-        "credit_limit_alerts": true,
-        "transaction_denial_alerts": true
-      }
-    },
-    {
-      "employee_id": "emp_011",
-      "name": "Christopher Davis",
-      "email": "christopher.davis@omnipay.com",
-      "phone": "+1-555-0113",
-      "persona": "card-holder",
-      "role": "Card Holder",
-      "department": "Operations",
-      "permissions": [
-        "commercial-cards"
-      ],
-      "created_at": "2023-07-10T10:30:00Z",
-      "last_login": "2024-01-14T13:00:00Z",
-      "first_time_user": false,
-      "preferences": {
-        "email_notifications": true,
-        "login_notifications": true,
-        "sms_fraud_alerts": true,
-        "credit_limit_alerts": false,
-        "transaction_denial_alerts": true
-      }
-    },
-    {
-      "employee_id": "emp_012",
-      "name": "Michelle Garcia",
-      "email": "michelle.garcia@omnipay.com",
-      "phone": "+1-555-0114",
-      "persona": "card-holder",
-      "role": "Card Holder",
-      "department": "Marketing",
-      "permissions": [
-        "commercial-cards"
-      ],
-      "created_at": "2023-08-15T11:00:00Z",
-      "last_login": "2024-01-15T14:00:00Z",
-      "first_time_user": false,
-      "preferences": {
-        "email_notifications": true,
-        "login_notifications": true,
-        "sms_fraud_alerts": true,
-        "credit_limit_alerts": true,
-        "transaction_denial_alerts": true
-      }
+      "vendor_id": "vend_006",
+      "vendor_name": "CloudHost Solutions",
+      "business_type": "SaaS/Cloud Services",
+      "industry": "Cloud Infrastructure & Hosting",
+      "contact_person": "Lisa Anderson",
+      "email": "billing@cloudhost.io",
+      "phone": "+1-555-0206",
+      "address": "111 Cloud Lane, Seattle, WA 98101",
+      "vendor_since": "2022-07-14T00:00:00Z",
+      "status": "suspended",
+      "payment_terms": "Net 20",
+      "preferred_payment_method": "Credit Card",
+      "country": "USA",
+      "tax_id": "43-2109876",
+      "credit_rating": "D",
+      "total_order_volume_ytd": 125000.00,
+      "payment_history": "poor",
+      "dispute_count": 5
     }
   ]
 }

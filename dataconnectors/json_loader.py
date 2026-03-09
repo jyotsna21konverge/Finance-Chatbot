@@ -50,72 +50,57 @@ class JSONDataLoader:
         self._data_cache.clear()
     
     # =====================
-    # Profile Data
+    # Vendor Profile Data
     # =====================
     
-    def get_profiles(self, employee_id: Optional[str] = None) -> List[Dict[str, Any]]:
-        """Get user profiles from profiles.json."""
+    def get_profiles(self, vendor_id: Optional[str] = None) -> List[Dict[str, Any]]:
+        """Get vendor profiles from profiles.json."""
         data = self._load_json_file("profiles.json")
-        users = data.get("users", [])
+        vendors = data.get("vendors", [])
         
-        if employee_id:
-            return [u for u in users if u.get("employee_id") == employee_id]
-        return users
+        if vendor_id:
+            return [v for v in vendors if v.get("vendor_id") == vendor_id]
+        return vendors
     
     def search_profiles(self, search_field: str, search_value: Any) -> List[Dict[str, Any]]:
-        """Search profiles by any field."""
-        users = self.get_profiles()
-        return [u for u in users if u.get(search_field) == search_value]
+        """Search vendor profiles by any field."""
+        vendors = self.get_profiles()
+        return [v for v in vendors if v.get(search_field) == search_value]
     
     # =====================
-    # Balance Data
+    # AR Balance & Aging Data
     # =====================
     
-    def get_balances(self, account_id: Optional[str] = None) -> List[Dict[str, Any]]:
-        """Get current balances from balances.json."""
+    def get_balances(self, vendor_id: Optional[str] = None) -> List[Dict[str, Any]]:
+        """Get AR aging report data from balances.json."""
         data = self._load_json_file("balances.json")
-        balances = data.get("current_balances", [])
+        balances = data.get("ar_balances", [])
         
-        if account_id:
-            return [b for b in balances if b.get("account_id") == account_id]
+        if vendor_id:
+            return [b for b in balances if b.get("vendor_id") == vendor_id]
         return balances
-    
-    def get_balance_by_employee(self, employee_id: str) -> List[Dict[str, Any]]:
-        """Get balance records for a specific employee."""
-        balances = self.get_balances()
-        return [b for b in balances if b.get("employee_id") == employee_id]
-    
-    def get_balance_by_card(self, card_id: str) -> Optional[Dict[str, Any]]:
-        """Get balance for a specific card."""
-        balances = self.get_balances()
-        results = [b for b in balances if b.get("card_id") == card_id]
-        return results[0] if results else None
-    
     # =====================
-    # Transaction Data
+    # Invoice/Transaction Data
     # =====================
     
     def get_transactions(
         self,
-        card_id: Optional[str] = None,
-        employee_id: Optional[str] = None,
+        vendor_id: Optional[str] = None,
         status: Optional[str] = None,
         limit: int = 50,
     ) -> List[Dict[str, Any]]:
-        """Get transactions from transactions.json with optional filters."""
+        """Get invoices from transactions.json with optional filters."""
         data = self._load_json_file("transactions.json")
-        transactions = data.get("transactions", [])
+        invoices = data.get("invoices", [])
         
         # Apply filters
-        if card_id:
-            transactions = [t for t in transactions if t.get("card_id") == card_id]
-        if employee_id:
-            transactions = [t for t in transactions if t.get("employee_id") == employee_id]
+        if vendor_id:
+            invoices = [i for i in invoices if i.get("vendor_id") == vendor_id]
         if status:
-            transactions = [t for t in transactions if t.get("status") == status]
+            invoices = [i for i in invoices if i.get("status") == status]
         
         # Return limited results
-        return transactions[:limit]
+        return invoices[:limit]
     
     def search_transactions(
         self,
@@ -123,119 +108,87 @@ class JSONDataLoader:
         search_value: Any,
         limit: int = 50,
     ) -> List[Dict[str, Any]]:
-        """Search transactions by any field."""
+        """Search invoices by any field."""
         data = self._load_json_file("transactions.json")
-        transactions = data.get("transactions", [])
-        results = [t for t in transactions if t.get(search_field) == search_value]
+        invoices = data.get("invoices", [])
+        results = [i for i in invoices if i.get(search_field) == search_value]
         return results[:limit]
     
     # =====================
-    # Credit Limits Data
+    # Vendor Credit Terms Data
     # =====================
     
-    def get_credit_limits(self, employee_id: Optional[str] = None) -> List[Dict[str, Any]]:
-        """Get credit limits from credit_limits.json."""
+    def get_credit_limits(self, vendor_id: Optional[str] = None) -> List[Dict[str, Any]]:
+        """Get vendor credit terms from credit_limits.json."""
         data = self._load_json_file("credit_limits.json")
-        employees = data.get("employees", [])
+        vendors = data.get("vendors", [])
         
-        if employee_id:
-            return [e for e in employees if e.get("employee_id") == employee_id]
-        return employees
-    
-    def get_credit_limit_by_card(self, card_id: str) -> Optional[Dict[str, Any]]:
-        """Get credit limit for a specific card."""
-        employees = self.get_credit_limits()
-        results = [e for e in employees if e.get("card_id") == card_id]
-        return results[0] if results else None
+        if vendor_id:
+            return [v for v in vendors if v.get("vendor_id") == vendor_id]
+        return vendors
     
     def update_credit_limit(
         self,
-        card_id: str,
+        vendor_id: str,
         new_limit: float,
         adjustment_reason: str = "Manual adjustment",
     ) -> Dict[str, Any]:
-        """Update credit limit for a card."""
+        """Update credit limit for a vendor."""
         data = self._load_json_file("credit_limits.json")
-        employees = data.get("employees", [])
+        vendors = data.get("vendors", [])
         
-        for emp in employees:
-            if emp.get("card_id") == card_id:
-                old_limit = emp.get("credit_limit")
-                emp["credit_limit"] = new_limit
-                emp["available_credit"] = new_limit - emp.get("current_balance", 0)
-                emp["utilization_percent"] = (
-                    (emp.get("current_balance", 0) / new_limit * 100) if new_limit > 0 else 0
+        for vendor in vendors:
+            if vendor.get("vendor_id") == vendor_id:
+                old_limit = vendor.get("credit_limit")
+                vendor["credit_limit"] = new_limit
+                vendor["available_credit"] = new_limit - vendor.get("current_ar_balance", 0)
+                vendor["utilization_percent"] = (
+                    (vendor.get("current_ar_balance", 0) / new_limit * 100) if new_limit > 0 else 0
                 )
                 
                 # Add to adjustment history
-                if "adjustment_history" not in emp:
-                    emp["adjustment_history"] = []
+                if "adjustment_history" not in vendor:
+                    vendor["adjustment_history"] = []
                 
                 adjustment = {
-                    "adjustment_id": f"adj_{len(emp['adjustment_history']) + 1:03d}",
+                    "adjustment_id": f"adj_{len(vendor['adjustment_history']) + 1:03d}",
                     "timestamp": "2026-03-05T00:00:00Z",
                     "previous_limit": old_limit,
                     "new_limit": new_limit,
                     "adjustment_type": "permanent",
                     "adjustment_reason": adjustment_reason,
                 }
-                emp["adjustment_history"].append(adjustment)
+                vendor["adjustment_history"].append(adjustment)
                 
                 self._save_json_file("credit_limits.json", data)
                 return {"ok": True, "message": f"Credit limit updated from {old_limit} to {new_limit}"}
         
-        return {"ok": False, "error": f"Card {card_id} not found"}
+        return {"ok": False, "error": f"Vendor {vendor_id} not found"}
     
     # =====================
-    # Fraud Alerts Data
+    # AR Disputes Data
     # =====================
     
     def get_fraud_alerts(
         self,
-        card_id: Optional[str] = None,
+        vendor_id: Optional[str] = None,
         status: Optional[str] = None,
         limit: int = 50,
     ) -> List[Dict[str, Any]]:
-        """Get fraud alerts from fraud_alerts.json."""
+        """Get AR disputes and payment issues from fraud_alerts.json."""
         data = self._load_json_file("fraud_alerts.json")
-        alerts = data.get("fraud_alerts", [])
+        disputes = data.get("ar_disputes", [])
         
-        if card_id:
-            alerts = [a for a in alerts if a.get("card_id") == card_id]
+        if vendor_id:
+            disputes = [d for d in disputes if d.get("vendor_id") == vendor_id]
         if status:
-            alerts = [a for a in alerts if a.get("investigation_status") == status]
+            disputes = [d for d in disputes if d.get("dispute_status") == status]
         
-        return alerts[:limit]
+        return disputes[:limit]
     
-    def get_fraud_alerts_by_employee(self, employee_id: str, limit: int = 50) -> List[Dict[str, Any]]:
-        """Get fraud alerts for a specific employee."""
-        data = self._load_json_file("fraud_alerts.json")
-        alerts = data.get("fraud_alerts", [])
-        results = [a for a in alerts if a.get("employee_id") == employee_id]
-        return results[:limit]
-    
-    # =====================
-    # Fleet/Fuel Data
-    # =====================
-    
-    def get_fleet_data(self, vehicle_id: Optional[str] = None) -> List[Dict[str, Any]]:
-        """Get fleet/fuel data from fleet_fuel.json."""
-        data = self._load_json_file("fleet_fuel.json")
-        vehicles = data.get("vehicles", [])
-        
-        if vehicle_id:
-            return [v for v in vehicles if v.get("vehicle_id") == vehicle_id]
-        return vehicles
-    
-    def get_fleet_by_driver(self, driver_id: str) -> List[Dict[str, Any]]:
-        """Get fleet data for a specific driver."""
-        vehicles = self.get_fleet_data()
-        return [v for v in vehicles if v.get("driver_id") == driver_id]
-    
-    def search_fleet(self, search_field: str, search_value: Any) -> List[Dict[str, Any]]:
-        """Search fleet data by any field."""
-        vehicles = self.get_fleet_data()
-        return [v for v in vehicles if v.get(search_field) == search_value]
+    def get_fraud_alerts_by_employee(self, vendor_id: str, limit: int = 50) -> List[Dict[str, Any]]:
+        """Get disputes for a specific vendor (AR-focused)."""
+        return self.get_fraud_alerts(vendor_id=vendor_id, limit=limit)
 
 
 # Global instance for easy access

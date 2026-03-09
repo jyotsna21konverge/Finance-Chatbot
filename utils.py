@@ -4,8 +4,6 @@ from datetime import date, datetime
 from decimal import Decimal
 from typing import Any, Iterable, List, Optional
 
-from constants import TABLES
-
 
 def quote_ident(name: str) -> str:
     # very strict identifier validation to avoid injection via columns/tables
@@ -40,24 +38,15 @@ def format_value(v: Any) -> str:
 
 
 def validate_table(table: str) -> None:
-    if table not in TABLES:
-        raise ValueError(f"Table not allowed: {table}. Allowed: {sorted(TABLES.keys())}")
+    """Deprecated: SQL validation functions no longer used in AR agent (uses JSON loader instead)."""
+    raise NotImplementedError("SQL validation deprecated - AR agent uses JSON loader")
 
 
 def validate_column(table: str, column: str) -> None:
-    validate_table(table)
-    if column not in TABLES[table]:
-        raise ValueError(f"Column not allowed for {table}: {column}. Allowed: {sorted(TABLES[table])}")
+    """Deprecated: SQL validation functions no longer used in AR agent (uses JSON loader instead)."""
+    raise NotImplementedError("SQL validation deprecated - AR agent uses JSON loader")
 
 
 def validate_select(table: str, select: Optional[List[str]]) -> List[str]:
-    validate_table(table)
-    if not select:
-        # caller can decide defaults; we keep '*' disallowed by default
-        raise ValueError("select must be provided (explicit columns only).")
-
-    cols: List[str] = []
-    for c in select:
-        validate_column(table, c)
-        cols.append(quote_ident(c))
-    return cols
+    """Deprecated: SQL validation functions no longer used in AR agent (uses JSON loader instead)."""
+    raise NotImplementedError("SQL validation deprecated - AR agent uses JSON loader")

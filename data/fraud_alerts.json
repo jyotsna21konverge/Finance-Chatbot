@@ -1,301 +1,129 @@
 {
-  "fraud_alerts": [
+  "ar_disputes": [
     {
-      "alert_id": "fraud_jt_001",
-      "transaction_id": "txn_jt_001",
-      "card_id": "card_006",
-      "employee_id": "emp_006",
-      "employee_name": "Jamie Taylor",
-      "amount": 1250.00,
-      "merchant": "Online Gaming Site",
-      "fraud_score": 0.78,
-      "reason_codes": [
-        "UNUSUAL_CATEGORY",
-        "UNUSUAL_TIME",
-        "HIGH_AMOUNT"
-      ],
-      "flagged_at": "2025-10-14T02:35:00Z",
-      "investigation_status": "investigating",
-      "resolution_notes": null,
-      "risk_factors": [
-        "Entertainment/Gaming category unusual for this employee",
-        "Transaction at 2:30 AM (unusual time)",
-        "Amount significantly higher than typical purchases"
-      ]
+      "dispute_id": "disp_001",
+      "invoice_id": "INV-2026-005",
+      "vendor_id": "vend_002",
+      "vendor_name": "Global Manufacturing Corp",
+      "invoice_amount": 35000.00,
+      "disputed_amount": 5000.00,
+      "dispute_date": "2026-02-28T10:30:00Z",
+      "dispute_reason": "Quality Issues",
+      "dispute_status": "open",
+      "resolution_date": null,
+      "priority": "high",
+      "notes": "Defective components received, affecting 40% of shipment. Vendor disputes claim.",
+      "impact": "Payment pending resolution, straining vendor relationship"
     },
     {
-      "alert_id": "fraud_js_001",
-      "transaction_id": "txn_js_001",
-      "card_id": "card_005",
-      "employee_id": "emp_004",
-      "employee_name": "John Smith",
-      "amount": 1850.00,
-      "merchant": "Electronics Superstore",
-      "fraud_score": 0.89,
-      "reason_codes": [
-        "UNUSUAL_AMOUNT",
-        "HIGH_RISK_CATEGORY",
-        "VELOCITY_CHECK_FAILED"
-      ],
-      "flagged_at": "2025-10-28T14:22:00Z",
-      "investigation_status": "pending",
-      "resolution_notes": null,
-      "risk_factors": [
-        "Transaction amount 3x higher than average",
-        "Electronics category has high fraud rate",
-        "Multiple transactions in short timeframe"
-      ]
+      "dispute_id": "disp_002",
+      "invoice_id": "INV-2025-012",
+      "vendor_id": "vend_002",
+      "vendor_name": "Global Manufacturing Corp",
+      "invoice_amount": 40000.00,
+      "disputed_amount": 8000.00,
+      "dispute_date": "2026-02-15T14:45:00Z",
+      "dispute_reason": "Pricing Discrepancy",
+      "dispute_status": "investigating",
+      "resolution_date": null,
+      "priority": "medium",
+      "notes": "Invoice shows different unit price than purchase order. 200 units affected.",
+      "impact": "Payment withheld, potential credit memo required"
     },
     {
-      "alert_id": "fraud_dp_001",
-      "transaction_id": "txn_005",
-      "card_id": "card_005",
-      "employee_id": "emp_005",
-      "employee_name": "David Park",
-      "amount": 2800.00,
-      "merchant": "Cryptocurrency ATM",
-      "fraud_score": 0.94,
-      "reason_codes": [
-        "PROHIBITED_CATEGORY",
-        "POLICY_VIOLATION",
-        "HIGH_RISK_MERCHANT"
-      ],
-      "flagged_at": "2025-10-25T19:45:00Z",
-      "investigation_status": "investigating",
-      "resolution_notes": null,
-      "risk_factors": [
-        "Cryptocurrency transactions prohibited by policy",
-        "High-risk merchant category",
-        "Clear policy violation"
-      ]
+      "dispute_id": "disp_003",
+      "invoice_id": "INV-2026-002",
+      "vendor_id": "vend_001",
+      "vendor_name": "TechSupply Solutions",
+      "invoice_amount": 18000.00,
+      "disputed_amount": 2500.00,
+      "dispute_date": "2026-02-20T09:15:00Z",
+      "dispute_reason": "Partial Delivery",
+      "dispute_status": "resolved",
+      "resolution_date": "2026-03-01T11:00:00Z",
+      "priority": "low",
+      "notes": "2 out of 5 workstations not delivered as scheduled. Credit memo issued for $2,500.",
+      "impact": "Partially resolved - adjusted invoice amount"
     },
     {
-      "alert_id": "fraud_mc_001",
-      "transaction_id": "txn_mc_001",
-      "card_id": "card_003",
-      "employee_id": "emp_003",
-      "employee_name": "Michael Chen",
-      "amount": 2500.00,
-      "merchant": "Electronics Store XYZ",
-      "fraud_score": 0.85,
-      "reason_codes": [
-        "UNUSUAL_AMOUNT",
-        "NEW_MERCHANT",
-        "HIGH_RISK_CATEGORY"
-      ],
-      "flagged_at": "2025-10-20T11:30:00Z",
-      "investigation_status": "investigating",
-      "resolution_notes": null,
-      "risk_factors": [
-        "Transaction amount 3x higher than average",
-        "First time transaction with this merchant",
-        "Electronics category has high fraud rate"
-      ]
+      "dispute_id": "disp_004",
+      "invoice_id": "INV-2025-015",
+      "vendor_id": "vend_006",
+      "vendor_name": "CloudHost Solutions",
+      "invoice_amount": 13000.00,
+      "disputed_amount": 13000.00,
+      "dispute_date": "2026-01-20T16:20:00Z",
+      "dispute_reason": "Service Downtime",
+      "dispute_status": "escalated",
+      "resolution_date": null,
+      "priority": "critical",
+      "notes": "24-hour service outage in November resulted in business loss. Full refund demanded.",
+      "impact": "Critical - vendor payment suspended, legal review recommended"
     },
     {
-      "alert_id": "fraud_jw_001",
-      "transaction_id": "txn_jw_001",
-      "card_id": "card_009",
-      "employee_id": "emp_009",
-      "employee_name": "James Wilson",
-      "amount": 5000.00,
-      "merchant": "Suspicious Vendor LLC",
-      "fraud_score": 0.95,
-      "reason_codes": [
-        "BLACKLISTED_MERCHANT",
-        "UNUSUAL_AMOUNT",
-        "UNUSUAL_TIME",
-        "VELOCITY_CHECK_FAILED"
-      ],
-      "flagged_at": "2025-09-15T23:15:00Z",
-      "investigation_status": "resolved",
-      "resolution_notes": "Confirmed fraudulent transaction. Card blocked and reissued.",
-      "risk_factors": [
-        "Merchant on fraud watchlist",
-        "Transaction at unusual time (11:30 PM)",
-        "Amount exceeds typical spending by 5x",
-        "Multiple failed attempts before success"
-      ]
+      "dispute_id": "disp_005",
+      "invoice_id": "INV-2026-009",
+      "vendor_id": "vend_004",
+      "vendor_name": "Logistics Express International",
+      "invoice_amount": 28000.00,
+      "disputed_amount": 3500.00,
+      "dispute_date": "2026-03-05T13:10:00Z",
+      "dispute_reason": "Late Delivery",
+      "dispute_status": "open",
+      "resolution_date": null,
+      "priority": "high",
+      "notes": "Shipment arrived 10 days late, causing production delays and expediting costs.",
+      "impact": "Deduction requested for expediting costs incurred"
     },
     {
-      "alert_id": "fraud_001",
-      "transaction_id": "txn_003",
-      "card_id": "card_003",
-      "employee_id": "emp_003",
-      "employee_name": "Michael Chen",
-      "amount": 2500.00,
-      "merchant": "Electronics Store XYZ",
-      "fraud_score": 0.85,
-      "reason_codes": [
-        "UNUSUAL_AMOUNT",
-        "NEW_MERCHANT",
-        "HIGH_RISK_CATEGORY"
-      ],
-      "flagged_at": "2024-01-13T16:50:00Z",
-      "investigation_status": "investigating",
-      "resolution_notes": null,
-      "risk_factors": [
-        "Transaction amount 3x higher than average",
-        "First time transaction with this merchant",
-        "Electronics category has high fraud rate"
-      ]
+      "dispute_id": "disp_006",
+      "invoice_id": "INV-2026-013",
+      "vendor_id": "vend_006",
+      "vendor_name": "CloudHost Solutions",
+      "invoice_amount": 8300.00,
+      "disputed_amount": 1200.00,
+      "dispute_date": "2026-02-25T10:45:00Z",
+      "dispute_reason": "Underbilling Resolution",
+      "dispute_status": "resolved",
+      "resolution_date": "2026-03-08T14:30:00Z",
+      "priority": "medium",
+      "notes": "Previous month's usage higher than billed. Credit applied from this month's invoice.",
+      "impact": "Resolved - adjustment applied to current invoice"
+    }
+  ],
+  "payment_issues": [
+    {
+      "issue_id": "piss_001",
+      "vendor_id": "vend_004",
+      "vendor_name": "Logistics Express International",
+      "issue_type": "Repeated Late Payment",
+      "severity": "high",
+      "status": "active",
+      "description": "Vendor has 3+ invoices overdue 60+ days. Payment terms consistently not met.",
+      "reported_date": "2026-02-10T00:00:00Z",
+      "required_action": "Enforce payment schedule, consider payment plan"
     },
     {
-      "alert_id": "fraud_002",
-      "transaction_id": "txn_010",
-      "card_id": "card_009",
-      "employee_id": "emp_009",
-      "employee_name": "James Wilson",
-      "amount": 5000.00,
-      "merchant": "Suspicious Vendor LLC",
-      "fraud_score": 0.95,
-      "reason_codes": [
-        "BLACKLISTED_MERCHANT",
-        "UNUSUAL_AMOUNT",
-        "UNUSUAL_TIME",
-        "VELOCITY_CHECK_FAILED"
-      ],
-      "flagged_at": "2024-01-07T23:31:00Z",
-      "investigation_status": "resolved",
-      "resolution_notes": "Confirmed fraudulent transaction. Card blocked and reissued.",
-      "risk_factors": [
-        "Merchant on fraud watchlist",
-        "Transaction at unusual time (11:30 PM)",
-        "Amount exceeds typical spending by 5x",
-        "Multiple failed attempts before success"
-      ]
+      "issue_id": "piss_002",
+      "vendor_id": "vend_006",
+      "vendor_name": "CloudHost Solutions",
+      "issue_type": "Compliance Risk",
+      "severity": "critical",
+      "status": "active",
+      "description": "Multiple overdue invoices 100+ days past due. Vendor credit suspended.",
+      "reported_date": "2026-01-15T00:00:00Z",
+      "required_action": "Urgent - Payment plan required before credit restoration"
     },
     {
-      "alert_id": "fraud_003",
-      "transaction_id": "txn_031",
-      "card_id": "card_002",
-      "employee_id": "emp_002",
-      "employee_name": "Sarah Chen",
-      "amount": 1850.00,
-      "merchant": "Online Gaming Site",
-      "fraud_score": 0.78,
-      "reason_codes": [
-        "PROHIBITED_CATEGORY",
-        "UNUSUAL_MERCHANT_TYPE"
-      ],
-      "flagged_at": "2023-12-05T22:15:00Z",
-      "investigation_status": "false_positive",
-      "resolution_notes": "Employee confirmed legitimate business expense for client entertainment research.",
-      "risk_factors": [
-        "Gaming category typically prohibited",
-        "Unusual merchant type for employee role"
-      ]
-    },
-    {
-      "alert_id": "fraud_004",
-      "transaction_id": "txn_032",
-      "card_id": "card_006",
-      "employee_id": "emp_006",
-      "employee_name": "Jamie Taylor",
-      "amount": 3200.00,
-      "merchant": "International Wire Transfer",
-      "fraud_score": 0.72,
-      "reason_codes": [
-        "INTERNATIONAL_TRANSACTION",
-        "HIGH_RISK_COUNTRY",
-        "UNUSUAL_AMOUNT"
-      ],
-      "flagged_at": "2023-11-20T14:30:00Z",
-      "investigation_status": "resolved",
-      "resolution_notes": "Legitimate international vendor payment. Pre-approved by finance.",
-      "risk_factors": [
-        "Transaction from high-risk country",
-        "International wire transfer",
-        "Large amount for single transaction"
-      ]
-    },
-    {
-      "alert_id": "fraud_005",
-      "transaction_id": "txn_033",
-      "card_id": "card_010",
-      "employee_id": "emp_010",
-      "employee_name": "Amanda Brown",
-      "amount": 450.00,
-      "merchant": "Duplicate Charge - Hotel",
-      "fraud_score": 0.68,
-      "reason_codes": [
-        "DUPLICATE_TRANSACTION",
-        "SAME_MERCHANT_SAME_AMOUNT"
-      ],
-      "flagged_at": "2023-10-08T09:00:00Z",
-      "investigation_status": "resolved",
-      "resolution_notes": "Duplicate charge identified and refunded by merchant.",
-      "risk_factors": [
-        "Identical transaction within 24 hours",
-        "Same merchant and exact amount"
-      ]
-    },
-    {
-      "alert_id": "fraud_006",
-      "transaction_id": "txn_034",
-      "card_id": "card_012",
-      "employee_id": "emp_012",
-      "employee_name": "Michelle Garcia",
-      "amount": 2800.00,
-      "merchant": "Cryptocurrency Exchange",
-      "fraud_score": 0.92,
-      "reason_codes": [
-        "PROHIBITED_CATEGORY",
-        "HIGH_RISK_MERCHANT",
-        "POLICY_VIOLATION"
-      ],
-      "flagged_at": "2023-09-15T16:45:00Z",
-      "investigation_status": "investigating",
-      "resolution_notes": null,
-      "risk_factors": [
-        "Cryptocurrency transactions prohibited by policy",
-        "High-risk merchant category",
-        "Potential policy violation"
-      ]
-    },
-    {
-      "alert_id": "fraud_007",
-      "transaction_id": "txn_035",
-      "card_id": "card_005",
-      "employee_id": "emp_005",
-      "employee_name": "David Park",
-      "amount": 125.00,
-      "merchant": "ATM Cash Withdrawal",
-      "fraud_score": 0.55,
-      "reason_codes": [
-        "UNUSUAL_TRANSACTION_TYPE",
-        "CASH_ADVANCE"
-      ],
-      "flagged_at": "2023-08-22T23:00:00Z",
-      "investigation_status": "pending",
-      "resolution_notes": null,
-      "risk_factors": [
-        "Cash withdrawal at unusual time",
-        "Cash advances require additional approval"
-      ]
-    },
-    {
-      "alert_id": "fraud_008",
-      "transaction_id": "txn_036",
-      "card_id": "card_008",
-      "employee_id": "emp_008",
-      "employee_name": "Jennifer Lee",
-      "amount": 4500.00,
-      "merchant": "Jewelry Store",
-      "fraud_score": 0.81,
-      "reason_codes": [
-        "UNUSUAL_MERCHANT_CATEGORY",
-        "HIGH_AMOUNT",
-        "PERSONAL_EXPENSE_SUSPECTED"
-      ],
-      "flagged_at": "2023-07-10T15:20:00Z",
-      "investigation_status": "resolved",
-      "resolution_notes": "Confirmed as corporate gift for major client. Approved by executive team.",
-      "risk_factors": [
-        "Jewelry typically personal expense",
-        "High transaction amount",
-        "Unusual category for business expense"
-      ]
+      "issue_id": "piss_003",
+      "vendor_id": "vend_002",
+      "vendor_name": "Global Manufacturing Corp",
+      "issue_type": "Payment Pattern Alert",
+      "severity": "medium",
+      "status": "monitoring",
+      "description": "Increasing pattern of late payments over past 6 months. Currently 38 days overdue.",
+      "reported_date": "2026-02-15T00:00:00Z",
+      "required_action": "Monitor closely, escalate if pattern continues"
     }
   ]
 }
