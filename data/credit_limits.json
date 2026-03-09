@@ -1,340 +1,82 @@
 {
-  "employees": [
+  "vendors": [
     {
-      "employee_id": "emp_001",
-      "employee_name": "John Kelly",
-      "card_id": "card_001",
-      "credit_limit": 3000.0,
-      "current_balance": 3000.0,
-      "available_credit": 0.0,
-      "utilization_percent": 100.0,
-      "last_updated": "2024-01-15T10:00:00Z",
-      "status": "at_limit",
-      "adjustment_history": [
-        {
-          "adjustment_id": "adj_001",
-          "timestamp": "2023-06-15T14:30:00Z",
-          "previous_limit": 2500.0,
-          "new_limit": 3000.0,
-          "adjustment_type": "permanent",
-          "adjusted_by": "tom_apclerk",
-          "reason": "Increased travel requirements"
-        }
-      ]
+      "vendor_id": "vend_001",
+      "vendor_name": "TechSupply Solutions",
+      "credit_limit": 100000.00,
+      "current_ar_balance": 45000.00,
+      "available_credit": 55000.00,
+      "utilization_percent": 45.0,
+      "payment_terms": "Net 30",
+      "credit_rating": "A",
+      "last_reviewed": "2026-02-01T00:00:00Z",
+      "status": "active",
+      "review_notes": "Excellent payment history"
     },
     {
-      "employee_id": "emp_002",
-      "employee_name": "Sarah Chen",
-      "card_id": "card_002",
-      "credit_limit": 5000.0,
-      "current_balance": 4750.0,
-      "available_credit": 250.0,
-      "utilization_percent": 95.0,
-      "last_updated": "2024-01-15T09:30:00Z",
-      "status": "near_limit",
-      "adjustment_history": []
+      "vendor_id": "vend_002",
+      "vendor_name": "Global Manufacturing Corp",
+      "credit_limit": 300000.00,
+      "current_ar_balance": 125000.00,
+      "available_credit": 175000.00,
+      "utilization_percent": 41.7,
+      "payment_terms": "Net 45",
+      "credit_rating": "B",
+      "last_reviewed": "2026-01-15T00:00:00Z",
+      "status": "active",
+      "review_notes": "Occasional late payments, monitor closely"
     },
     {
-      "employee_id": "emp_003",
-      "employee_name": "Michael Chen",
-      "card_id": "card_003",
-      "credit_limit": 4000.0,
-      "current_balance": 3600.0,
-      "available_credit": 400.0,
-      "utilization_percent": 90.0,
-      "last_updated": "2024-01-15T08:45:00Z",
-      "status": "near_limit",
-      "adjustment_history": []
-    },
-    {
-      "employee_id": "emp_004",
-      "employee_name": "John Smith",
-      "card_id": "card_005",
-      "credit_limit": 4000.0,
-      "current_balance": 3745.0,
-      "available_credit": 255.0,
-      "utilization_percent": 93.6,
-      "last_updated": "2025-10-14T15:00:00Z",
-      "status": "near_limit",
-      "adjustment_history": []
-    },
-    {
-      "employee_id": "emp_006",
-      "employee_name": "Jamie Taylor",
-      "card_id": "card_006",
-      "credit_limit": 4000.0,
-      "current_balance": 3725.0,
-      "available_credit": 275.0,
-      "utilization_percent": 93.1,
-      "last_updated": "2025-10-14T15:00:00Z",
-      "status": "near_limit",
-      "adjustment_history": []
-    },
-    {
-      "employee_id": "emp_005",
-      "employee_name": "John Smith",
-      "card_id": "card_004",
-      "credit_limit": 3500.0,
-      "current_balance": 1750.0,
-      "available_credit": 1750.0,
-      "utilization_percent": 50.0,
-      "last_updated": "2025-10-06T16:30:57.299554Z",
-      "status": "normal",
-      "adjustment_history": [
-        {
-          "adjustment_id": "adj_20251006160134",
-          "timestamp": "2025-10-06T16:01:34.870756Z",
-          "previous_limit": 3500.0,
-          "new_limit": 4000.0,
-          "adjustment_type": "one-time",
-          "adjusted_by": "system",
-          "reason": "One-time adjustment via AI Concierge"
-        },
-        {
-          "adjustment_id": "adj_20251006160134",
-          "timestamp": "2025-10-06T16:01:34.871447Z",
-          "previous_limit": 4000.0,
-          "new_limit": 3500.0,
-          "adjustment_type": "permanent",
-          "adjusted_by": "system",
-          "reason": "Permanent adjustment via AI Concierge"
-        },
-        {
-          "adjustment_id": "adj_20251006163057",
-          "timestamp": "2025-10-06T16:30:57.296557Z",
-          "previous_limit": 3500.0,
-          "new_limit": 4000.0,
-          "adjustment_type": "one-time",
-          "adjusted_by": "system",
-          "reason": "One-time adjustment via AI Concierge"
-        },
-        {
-          "adjustment_id": "adj_20251006163057",
-          "timestamp": "2025-10-06T16:30:57.299533Z",
-          "previous_limit": 4000.0,
-          "new_limit": 3500.0,
-          "adjustment_type": "permanent",
-          "adjusted_by": "system",
-          "reason": "Permanent adjustment via AI Concierge"
-        }
-      ]
-    },
-    {
-      "employee_id": "emp_005",
-      "employee_name": "David Park",
-      "card_id": "card_005",
-      "credit_limit": 2500.0,
-      "current_balance": 625.0,
-      "available_credit": 1875.0,
+      "vendor_id": "vend_003",
+      "vendor_name": "Office Pro Supplies",
+      "credit_limit": 50000.00,
+      "current_ar_balance": 12500.00,
+      "available_credit": 37500.00,
       "utilization_percent": 25.0,
-      "last_updated": "2025-10-06T16:30:57.291547Z",
-      "status": "normal",
-      "adjustment_history": [
-        {
-          "adjustment_id": "adj_20251006160134",
-          "timestamp": "2025-10-06T16:01:34.868240Z",
-          "previous_limit": 2500.0,
-          "new_limit": 3000.0,
-          "adjustment_type": "permanent",
-          "adjusted_by": "system",
-          "reason": "Permanent adjustment via AI Concierge"
-        },
-        {
-          "adjustment_id": "adj_20251006160134",
-          "timestamp": "2025-10-06T16:01:34.869394Z",
-          "previous_limit": 3000.0,
-          "new_limit": 2500.0,
-          "adjustment_type": "permanent",
-          "adjusted_by": "system",
-          "reason": "Permanent adjustment via AI Concierge"
-        },
-        {
-          "adjustment_id": "adj_20251006163057",
-          "timestamp": "2025-10-06T16:30:57.287670Z",
-          "previous_limit": 2500.0,
-          "new_limit": 3000.0,
-          "adjustment_type": "permanent",
-          "adjusted_by": "system",
-          "reason": "Permanent adjustment via AI Concierge"
-        },
-        {
-          "adjustment_id": "adj_20251006163057",
-          "timestamp": "2025-10-06T16:30:57.291537Z",
-          "previous_limit": 3000.0,
-          "new_limit": 2500.0,
-          "adjustment_type": "permanent",
-          "adjusted_by": "system",
-          "reason": "Permanent adjustment via AI Concierge"
-        }
-      ]
+      "payment_terms": "Net 15",
+      "credit_rating": "A",
+      "last_reviewed": "2026-02-15T00:00:00Z",
+      "status": "active",
+      "review_notes": "Reliable vendor, consistent on-time payments"
     },
     {
-      "employee_id": "emp_006",
-      "employee_name": "Jamie Taylor",
-      "card_id": "card_006",
-      "credit_limit": 6000.0,
-      "current_balance": 5400.0,
-      "available_credit": 600.0,
-      "utilization_percent": 90.0,
-      "last_updated": "2024-01-15T11:00:00Z",
-      "status": "near_limit",
-      "adjustment_history": [
-        {
-          "adjustment_id": "adj_002",
-          "timestamp": "2023-09-01T10:00:00Z",
-          "previous_limit": 5000.0,
-          "new_limit": 6000.0,
-          "adjustment_type": "permanent",
-          "adjusted_by": "tom_apclerk",
-          "reason": "Executive travel budget increase"
-        }
-      ]
+      "vendor_id": "vend_004",
+      "vendor_name": "Logistics Express International",
+      "credit_limit": 150000.00,
+      "current_ar_balance": 95000.00,
+      "available_credit": 55000.00,
+      "utilization_percent": 63.3,
+      "payment_terms": "Net 30",
+      "credit_rating": "C",
+      "last_reviewed": "2026-01-10T00:00:00Z",
+      "status": "at_risk",
+      "review_notes": "Multiple overdue invoices, enforce payment schedule"
     },
     {
-      "employee_id": "emp_007",
-      "employee_name": "Tom Rodriguez",
-      "card_id": "card_007",
-      "credit_limit": 2000.0,
-      "current_balance": 1980.0,
-      "available_credit": 20.0,
-      "utilization_percent": 99.0,
-      "last_updated": "2024-01-15T12:15:00Z",
-      "status": "near_limit",
-      "adjustment_history": []
+      "vendor_id": "vend_005",
+      "vendor_name": "Premium Consulting Group",
+      "credit_limit": 200000.00,
+      "current_ar_balance": 58000.00,
+      "available_credit": 142000.00,
+      "utilization_percent": 29.0,
+      "payment_terms": "Net 60",
+      "credit_rating": "A",
+      "last_reviewed": "2026-02-20T00:00:00Z",
+      "status": "active",
+      "review_notes": "Strategic partner, excellent terms negotiated"
     },
     {
-      "employee_id": "emp_008",
-      "employee_name": "Jennifer Lee",
-      "card_id": "card_008",
-      "credit_limit": 4500.0,
-      "current_balance": 2250.0,
-      "available_credit": 2250.0,
-      "utilization_percent": 50.0,
-      "last_updated": "2025-10-06T16:30:57.308362Z",
-      "status": "normal",
-      "adjustment_history": [
-        {
-          "adjustment_id": "adj_20251006160134",
-          "timestamp": "2025-10-06T16:01:34.873053Z",
-          "previous_limit": 4500.0,
-          "new_limit": 6000.0,
-          "adjustment_type": "permanent",
-          "adjusted_by": "system",
-          "reason": "Permanent adjustment via AI Concierge"
-        },
-        {
-          "adjustment_id": "adj_20251006160134",
-          "timestamp": "2025-10-06T16:01:34.873905Z",
-          "previous_limit": 6000.0,
-          "new_limit": 4500.0,
-          "adjustment_type": "permanent",
-          "adjusted_by": "system",
-          "reason": "Permanent adjustment via AI Concierge"
-        },
-        {
-          "adjustment_id": "adj_20251006163057",
-          "timestamp": "2025-10-06T16:30:57.305180Z",
-          "previous_limit": 4500.0,
-          "new_limit": 6000.0,
-          "adjustment_type": "permanent",
-          "adjusted_by": "system",
-          "reason": "Permanent adjustment via AI Concierge"
-        },
-        {
-          "adjustment_id": "adj_20251006163057",
-          "timestamp": "2025-10-06T16:30:57.308352Z",
-          "previous_limit": 6000.0,
-          "new_limit": 4500.0,
-          "adjustment_type": "permanent",
-          "adjusted_by": "system",
-          "reason": "Permanent adjustment via AI Concierge"
-        }
-      ]
-    },
-    {
-      "employee_id": "emp_009",
-      "employee_name": "James Wilson",
-      "card_id": "card_009",
-      "credit_limit": 3000.0,
-      "current_balance": 900.0,
-      "available_credit": 2100.0,
-      "utilization_percent": 30.0,
-      "last_updated": "2024-01-14T15:20:00Z",
-      "status": "normal",
-      "adjustment_history": []
-    },
-    {
-      "employee_id": "emp_010",
-      "employee_name": "Amanda Brown",
-      "card_id": "card_010",
-      "credit_limit": 5500.0,
-      "current_balance": 4950.0,
-      "available_credit": 550.0,
-      "utilization_percent": 90.0,
-      "last_updated": "2024-01-15T13:00:00Z",
-      "status": "near_limit",
-      "adjustment_history": []
-    },
-    {
-      "employee_id": "emp_011",
-      "employee_name": "Christopher Davis",
-      "card_id": "card_011",
-      "credit_limit": 2800.0,
-      "current_balance": 1400.0,
-      "available_credit": 1400.0,
-      "utilization_percent": 50.0,
-      "last_updated": "2025-10-06T16:30:57.323723Z",
-      "status": "normal",
-      "adjustment_history": [
-        {
-          "adjustment_id": "adj_20251006160134",
-          "timestamp": "2025-10-06T16:01:34.881894Z",
-          "previous_limit": 2800.0,
-          "new_limit": 3500.0,
-          "adjustment_type": "permanent",
-          "adjusted_by": "system",
-          "reason": "Permanent adjustment via AI Concierge"
-        },
-        {
-          "adjustment_id": "adj_20251006160134",
-          "timestamp": "2025-10-06T16:01:34.884897Z",
-          "previous_limit": 3500.0,
-          "new_limit": 2800.0,
-          "adjustment_type": "permanent",
-          "adjusted_by": "system",
-          "reason": "Permanent adjustment via AI Concierge"
-        },
-        {
-          "adjustment_id": "adj_20251006163057",
-          "timestamp": "2025-10-06T16:30:57.321495Z",
-          "previous_limit": 2800.0,
-          "new_limit": 3500.0,
-          "adjustment_type": "permanent",
-          "adjusted_by": "system",
-          "reason": "Permanent adjustment via AI Concierge"
-        },
-        {
-          "adjustment_id": "adj_20251006163057",
-          "timestamp": "2025-10-06T16:30:57.323716Z",
-          "previous_limit": 3500.0,
-          "new_limit": 2800.0,
-          "adjustment_type": "permanent",
-          "adjusted_by": "system",
-          "reason": "Permanent adjustment via AI Concierge"
-        }
-      ]
-    },
-    {
-      "employee_id": "emp_012",
-      "employee_name": "Michelle Garcia",
-      "card_id": "card_012",
-      "credit_limit": 3200.0,
-      "current_balance": 3200.0,
-      "available_credit": 0.0,
-      "utilization_percent": 100.0,
-      "last_updated": "2024-01-15T14:30:00Z",
-      "status": "at_limit",
-      "adjustment_history": []
+      "vendor_id": "vend_006",
+      "vendor_name": "CloudHost Solutions",
+      "credit_limit": 75000.00,
+      "current_ar_balance": 38500.00,
+      "available_credit": 36500.00,
+      "utilization_percent": 51.3,
+      "payment_terms": "Net 20",
+      "credit_rating": "D",
+      "last_reviewed": "2025-11-01T00:00:00Z",
+      "status": "suspended",
+      "review_notes": "Critical: Significant overdue balance, payment plan required before credit restoration"
     }
   ]
 }

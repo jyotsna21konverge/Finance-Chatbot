@@ -1,266 +1,236 @@
-============================== BOT TEST QUESTIONS (JSON TOOLS)
+============================== BOT TEST QUESTIONS (ACCOUNTS RECEIVABLE AGENT)
 ==============================
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 1: SINGLE TOOL QUESTIONS (Basic Queries)
+SECTION 1: SINGLE TOOL QUESTIONS (Basic Vendor/Invoice Lookups)
 ═══════════════════════════════════════════════════════════════════════════════
 
-A. PROFILE/USER QUESTIONS (Single Tool: get_user_profile / search_users)
+A. VENDOR PROFILE QUESTIONS (Single Tool: get_vendor_profile / search_vendors)
 
--   Who is employee emp_002?
--   Get profile for Sarah Chen.
--   What is the role of emp_002?
--   Show me emp_007 details.
--   What department is Tom Rodriguez in?
--   Get all Finance Manager profiles.
--   Show all employees in the Finance department.
--   Who are the AP Clerks?
--   What is the email of emp_002?
+-   Who is vendor vend_001?
+-   Get profile for TechSupply Solutions.
+-   What is the credit rating of vend_001?
+-   Show me vend_003 details.
+-   What industry is Global Manufacturing Corp in?
+-   Get all vendors with credit rating A.
+-   Show all manufacturing vendors.
+-   Who are the vendors with "at_risk" status?
+-   What is the payment terms for TechSupply Solutions?
+-   Which vendors have "excellent" payment history?
 
-B. BALANCE QUESTIONS (Single Tool: get_account_balance / get_card_balance)
+B. AR BALANCE QUESTIONS (Single Tool: get_vendor_ar_balance / get_ar_aging_report)
 
--   What is the current balance of card_001?
--   Show balance for acc_001.
--   Get all balances for emp_002.
--   What is the available balance on card_005?
--   Show pending charges for card_002.
--   What are the last payment details for acc_003?
--   Get billing cycle for emp_001?
+-   What is the current AR balance for vend_001?
+-   Show AR aging report for Global Manufacturing Corp.
+-   How many invoices are outstanding for TechSupply?
+-   What is the total AR balance across all vendors?
+-   Show the overdue breakdown for Premium Consulting Group.
+-   How much is overdue 90+ days for vend_004?
+-   Get aging analysis summary.
+-   Which vendor has the highest current_due amount?
+-   What percentage of AR is overdue 30+ days?
 
-C. TRANSACTION QUESTIONS (Single Tool: search_transactions / get_transaction_by_merchant / get_denied_transactions)
+C. INVOICE QUESTIONS (Single Tool: search_invoices / get_vendor_invoices)
 
--   Show all approved transactions.
--   What are the recent transactions for card_005?
--   List all denied transactions.
--   Show denied transactions for emp_004.
--   How many transactions were made at Best Buy?
--   Show all Electronics Superstore transactions.
--   What transactions were at Online Gaming Site?
--   Get denied transactions in the last records.
+-   Show all unpaid invoices.
+-   What are the recent invoices for vend_002?
+-   List all current (not overdue) invoices.
+-   Show overdue invoices for Office Pro Supplies.
+-   How many invoices are outstanding for Logistics Express?
+-   What invoices were issued for Cloud Services?
+-   Get all invoices with status "overdue".
+-   Show invoices from Manufacturing vendors.
+-   What are the top 5 largest invoices outstanding?
 
-D. CREDIT LIMIT QUESTIONS (Single Tool: get_credit_limits / get_card_credit_limit)
+D. CREDIT TERMS QUESTIONS (Single Tool: get_vendor_credit_terms / get_all_vendor_credit_terms)
 
--   What is the credit limit for emp_001?
--   Show credit limit for card_001.
--   Get all credit limits.
--   What is the utilization percent for card_002?
--   Is card_001 at credit limit?
--   Show available credit for card_005.
--   Get credit limit status for all employees.
+-   What is the credit limit for vend_001?
+-   Show credit terms for CloudHost Solutions.
+-   Get all vendor credit information.
+-   What is the utilization percent for Global Manufacturing Corp?
+-   Which vendors have credit utilization above 50%?
+-   What is the available credit for each vendor?
+-   Show vendors at their credit limit.
 
-E. FRAUD ALERT QUESTIONS (Single Tool: get_fraud_alerts / get_fraud_alerts_by_employee)
+E. DISPUTE QUESTIONS (Single Tool: get_ar_disputes / get_vendor_disputes)
 
--   Show all fraud alerts.
--   What fraud alerts exist for emp_006?
--   List alerts under investigation.
--   Show fraud alerts for card_006.
--   What are the fraud scores for recent alerts?
--   Get resolved fraud cases.
--   Show false positive fraud flags.
-
-F. FLEET/FUEL QUESTIONS (Single Tool: get_fleet_data / get_fleet_by_driver / search_fleet)
-
--   Show all vehicles.
--   What vehicles are assigned to emp_007?
--   Get fleet data for vehicle veh_001.
--   Show all Ford vehicles.
--   What is the MPG of all vehicles?
--   Show all active vehicles.
--   Get vehicles in Sales department.
-
+-   Show all open disputes.
+-   What disputes exist for Global Manufacturing Corp?
+-   List all escalated disputes.
+-   How many critical disputes are there?
+-   Show unresolved disputes with amounts.
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 2: MULTIPLE TOOL QUESTIONS (Complex Queries)
+SECTION 2: MULTI-TOOL QUESTIONS (Combining Multiple Tools)
 ═══════════════════════════════════════════════════════════════════════════════
 
-A. PROFILE + BALANCE QUESTIONS (Multiple Tools)
+A. VENDOR PERFORMANCE & RISK ANALYSIS
 
--   Show emp_002's profile and current balance.
--   Who is Sarah Chen and what is her account balance?
--   Get profile and account details for emp_001.
--   Show employee name and their card balance for card_001.
+-   Give me a complete profile and AR status for vend_002.
+-   What is the financial health of Global Manufacturing Corp? (profile + balance + terms + disputes)
+-   Compare AR aging between all manufacturing vendors.
+-   Which vendor is most at risk based on overdue balances and disputes?
+-   What is the relationship between credit rating and payment delays for each vendor?
 
-B. PROFILE + TRANSACTIONS QUESTIONS (Multiple Tools)
+B. CASH FLOW PRIORITIZATION
 
--   Who is emp_004 and what are their recent transactions?
--   Show Sarah Chen's profile and transaction history.
--   Get employee details and denied transactions for emp_004.
--   Who made the transaction at Electronics Superstore and what's their role?
+-   Show me the top 10 invoices that need immediate attention (largest + most overdue).
+-   What invoices from at-risk vendors are past due?
+-   Which vendors should we prioritize for collections?
+-   What is the total cash at risk (invoices 60+ days overdue)?
 
-C. TRANSACTIONS + CREDIT LIMITS QUESTIONS (Multiple Tools)
+C. VENDOR RELATIONSHIP ISSUES
 
--   Show card_005's transactions and credit limit status.
--   What transactions were denied and what's the credit limit for that employee?
--   Get transaction history and credit utilization for emp_002.
--   Show approved transactions and available credit for card_001.
+-   Which vendors have active disputes? What are the amounts?
+-   What is the payment issue for Logistics Express International?
+-   Are there vendor relationship concerns with our A-rated suppliers?
+-   Show me vendors with quality or service issues (reflected in disputes).
 
-D. PROFILE + BALANCE + TRANSACTIONS (Three Tools)
+D. CREDIT MANAGEMENT
 
--   Get complete financial profile for emp_002 (profile + balance + transactions).
--   Show Sarah Chen's details, balance, and all transactions.
--   For emp_004, show profile, account balance, and transaction history.
--   Get emp_001's information, current balance, and recent activity.
-
-E. FRAUD + PROFILE + TRANSACTIONS (Multiple Tools)
-
--   Who has fraud alerts and what were their transactions?
--   Show emp_006's profile, fraud alerts, and transaction details.
--   Which employee was flagged for fraud and what are their recent activities?
--   Get Jamie Taylor's profile, fraud alerts, and transaction history.
-
-F. CREDIT LIMITS + TRANSACTIONS + STAFF (Multiple Tools)
-
--   Which employees are at credit limit and what are their recent transactions?
--   Show emp_001's credit limit and all their transactions.
--   Get credit status and transaction history for emp_002.
--   Who is close to credit limit and what's their transaction pattern?
-
-G. FLEET + PROFILE QUESTIONS (Multiple Tools)
-
--   Who is driver emp_007 and what vehicles are assigned?
--   Show Robert Martinez's profile and fleet assignments.
--   Get employee details and fuel costs for their vehicle.
--   Show driver information and vehicle status for all active fleet.
-
-H. COMPREHENSIVE ANALYSIS (4+ Tools - All Related Data)
-
--   Get complete profile for emp_002 (all data - profile, balance, transactions, credit, fraud, fleet).
--   Show comprehensive analysis for Sarah Chen.
--   Get full employee summary for emp_004 with all financial and operational data.
--   Provide complete overview for emp_006 including profile, fraud alerts, transactions, and credit status.
-
+-   Which vendors have exceeded 75% credit utilization?
+-   Should any vendor credit limits be adjusted based on payment performance?
+-   What vendors are on payment suspension?
+-   Compare credit rating with actual payment history trends.
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 3: MULTI-CONDITION & FILTER QUESTIONS
+SECTION 3: COMPLEX ANALYSIS & REPORTING QUESTIONS
 ═══════════════════════════════════════════════════════════════════════════════
 
-A. FILTERED TRANSACTIONS
+A. AR PORTFOLIO ANALYSIS
 
--   Show all denied transactions for emp_001.
--   List transactions at Electronics merchants with high amounts.
--   Get approved transactions for card_002.
--   Show transactions from emp_003 that were denied.
--   What are the denial reasons for emp_004's transactions?
+-   What is the total AR and aging distribution?
+-   How much AR is current vs overdue by age bucket?
+-   What percentage of vendors are at-risk?
+-   What is our Days Sales Outstanding (DSO)?
+-   Show all vendors with invoices overdue 90+ days.
 
-B. CREDIT LIMIT ANALYSIS
+B. RISK MANAGEMENT & COMPLIANCE
 
--   Which employees have 100% credit utilization?
--   Show all employees at or near credit limit.
--   Get credit limit status for emp_001 and emp_002.
--   List employees with low available credit.
+-   Which vendors have critical issues requiring escalation?
+-   What is the total amount at risk (overdue 60+)?
+-   Show vendors with payment suspension status.
+-   What unresolved disputes could impact cash flow?
+-   Identify all compliance risks in the vendor portfolio.
 
-C. FRAUD INVESTIGATION
+C. COLLECTIONS & FOLLOW-UP STRATEGY
 
--   Show all investigating fraud alerts.
--   Get unresolved fraud cases for card_006.
--   Which employees have multiple fraud flags?
--   Show high fraud score alerts (above 0.7).
+-   List all vendors we should contact for immediate payment.
+-   What invoices are about to breach aging thresholds?
+-   Which vendors consistently pay late despite good credit ratings?
+-   Show payment plan requirements for suspended vendors.
+-   What is the follow-up status for disputed invoices?
 
-D. MERCHANT ANALYSIS
+D. VENDOR SEGMENT ANALYSIS
 
--   How much was spent at Best Buy?
--   Show all transactions at Online Gaming Site.
--   Get merchant spending patterns.
--   Which merchant has the most transactions?
-
-
-═══════════════════════════════════════════════════════════════════════════════
-SECTION 4: RISK & INSIGHTS QUESTIONS (Composite Tools)
-═══════════════════════════════════════════════════════════════════════════════
-
-A. HIGH-RISK EMPLOYEE IDENTIFICATION
-
--   Who are the high-risk employees?
--   Which employees have multiple fraud alerts?
--   Show employees with maxed credit and denied transactions.
--   Identify employees with concerning activity patterns.
--   Which employees require manual review?
-
-B. COMPLETE EMPLOYEE SUMMARY (get_employee_summary)
-
--   Show complete profile for emp_002.
--   Get full summary for Sarah Chen (all data).
--   Provide comprehensive overview for emp_004.
--   Get complete employee record for emp_007 with all details.
--   Show full financial and operational profile for emp_001.
-
+-   Compare AR metrics across different industries.
+-   How does payment performance vary by vendor size or type?
+-   Which industry segment has the highest at-risk AR?
+-   Show performance trends for strategic vs standard vendors.
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 5: OPERATIONAL QUESTIONS
+SECTION 4: SCENARIO-BASED & DECISION-SUPPORT QUESTIONS
 ═══════════════════════════════════════════════════════════════════════════════
 
-A. COMPLIANCE & MONITORING
+A. IMMEDIATE ACTION REQUIRED
 
--   Which transactions were flagged as fraud?
--   Show compliance violations in transactions.
--   Get employees with multiple denied transactions.
--   List all flagged alerts.
+-   What is the critical AR situation right now? (critical disputes, high-risk vendors, overdue 90+)
+-   Which vendors need payment plan enforcement?
+-   What disputes are blocking cash collection?
+-   Show all vendors that should be escalated to management.
 
-B. FINANCIAL ANALYSIS
+B. VENDOR RELATIONSHIP DECISIONS
 
--   What is total spending per employee?
--   Show top merchants by transaction count.
--   Get average transaction amount.
--   Which cards have the most activity?
+-   Should we continue extending credit to CloudHost Solutions? (based on payment history, disputes, overdue)
+-   Should we adjust payment terms for Global Manufacturing Corp?
+-   Which vendors qualify for early payment discounts?
+-   What vendors should we prioritize for relationship building?
 
-C. FLEET MANAGEMENT
+C. CASH FLOW FORECASTING
 
--   Show all active vehicles.
--   Which drivers have the lowest MPG?
--   Get total fuel costs per driver.
--   Show vehicles that need maintenance (high odometer).
+-   When can we expect to collect the overdue invoices?
+-   What is the realistic cash collection for next 30 days?
+-   Which invoices are at highest risk of not being collected?
+-   What is the impact of disputed invoices on cash flow?
 
-D. PAYMENT & BILLING
+D. PROCESS IMPROVEMENT
 
--   Show last payment details for all employees.
--   Get pending charges across accounts.
--   Which accounts have outstanding balances?
--   Show billing cycle information for emp_002.
-
-
-═══════════════════════════════════════════════════════════════════════════════
-SECTION 6: UPDATE & MODIFICATION QUESTIONS
-═══════════════════════════════════════════════════════════════════════════════
-
-A. CREDIT LIMIT UPDATES
-
--   Increase credit limit for card_001 from 3000 to 5000.
--   Update emp_002's credit limit to 6000 with reason "annual increase".
--   Adjust card_005 limit due to good payment history.
--   Raise emp_001's credit limit for business expansion.
-
-B. SCENARIO QUESTIONS
-
--   emp_002 requested a credit limit increase - update to 6000 and get new summary.
--   A fraud alert was resolved for emp_006 - get their updated profile.
--   card_001 reached credit limit - who does it belong to and what's recommended?
--   emp_004 has high denied transactions - analyze and recommend credit adjustment.
-
+-   Which vendors have recurring issues (late payment, disputes)?
+-   What invoicing or billing issues can we identify?
+-   Are there patterns in dispute reasons by vendor?
+-   What operational improvements can reduce AR days?
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 7: EDGE CASE & ERROR HANDLING TESTS
+SECTION 5: SPECIFIC VENDOR DEEP DIVES
 ═══════════════════════════════════════════════════════════════════════════════
 
--   Show profile for non-existent employee emp_999.
--   Get balance for invalid card_xyz.
--   Update credit limit to negative value.
--   Search with empty search field.
--   Get transactions for invalid employee.
--   Update credit limit for card that doesn't exist.
--   Get fraud alerts with invalid parameters.
--   Search users with NULL value.
+VENDOR: vend_001 - TechSupply Solutions
+
+-   Get full summary for TechSupply Solutions.
+-   What is our current relationship status with TechSupply?
+-   Are all TechSupply invoices being paid on time?
+-   What is the outstanding amount and aging?
+-   Do we have any disputes with this vendor?
+
+VENDOR: vend_002 - Global Manufacturing Corp
+
+-   Show complete AR profile for Global Manufacturing Corp.
+-   What is the payment trend for this vendor?
+-   How many invoices are overdue and by how much?
+-   What quality or service issues have been flagged?
+-   Is credit suspension recommended?
+
+VENDOR: vend_004 - Logistics Express International
+
+-   What is the risk level for Logistics Express?
+-   How many invoices are overdue 60+ days?
+-   What payment issues need to be addressed?
+-   Should we enforce a payment plan?
+-   What is the recommended next action?
+
+VENDOR: vend_006 - CloudHost Solutions
+
+-   Why is CloudHost Solutions suspended?
+-   What is the critical situation requiring escalation?
+-   What disputes are unresolved?
+-   What is the payment plan status?
+-   What conditions must be met for credit restoration?
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 8: CONVERSATIONAL QUESTIONS (Natural Language)
+SECTION 6: METRICS & KPI QUESTIONS
 ═══════════════════════════════════════════════════════════════════════════════
 
--   How much has Sarah been spending?
--   Is John Kelly at credit limit?
--   What's the status of Jamie Taylor's fraud investigation?
--   Can you tell me about emp_002's account?
--   Who is the highest spending employee?
--   Which employee should we be concerned about?
--   What's Robert Martinez's fuel cost this year?
--   Is anyone at risk of over-spending?
--   How many fraud alerts do we have?
--   Show me employees in the Finance department.
+A. AR EFFICIENCY METRICS
+
+-   What is the Days Sales Outstanding (DSO)?
+-   What is the collection effectiveness rate?
+-   What percentage of AR is collected on time?
+-   What is the average days overdue?
+
+B. VENDOR PAYMENT METRICS
+
+-   What is the on-time payment rate by vendor?
+-   Which vendors have the best payment performance?
+-   Which vendors have the worst payment history?
+-   What is the average payment delay?
+
+C. RISK METRICS
+
+-   What percentage of AR is at risk?
+-   What is the bad debt reserve requirement?
+-   What is the total disputed amount?
+-   What is the concentration risk by vendor?
+
+═══════════════════════════════════════════════════════════════════════════════
+SECTION 7: TREND & PATTERN ANALYSIS
+═══════════════════════════════════════════════════════════════════════════════
+
+-   Which vendors are improving with payment performance?
+-   Which vendors are deteriorating?
+-   What is the seasonal pattern in AR aging?
+-   What are the top reasons for disputes?
+-   Which industries have the highest write-off risk?
+-   What is the trend in days sales outstanding?
+-   Are there vendors whose issues are getting worse?
+-   What early warning signs indicate future AR problems?
+

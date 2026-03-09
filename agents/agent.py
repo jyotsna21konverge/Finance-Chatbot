@@ -1,35 +1,31 @@
 from langchain.agents import create_agent
 from tools.tools import (
-    # Profile/User Tools
-    get_user_profile,
-    search_users,
+    # Vendor Profile Tools
+    get_vendor_profile,
+    search_vendors,
     
-    # Balance Tools
-    get_account_balance,
-    get_card_balance,
+    # AR Balance & Aging Tools
+    get_vendor_ar_balance,
+    get_ar_aging_report,
     
-    # Transaction Tools
-    search_transactions,
-    get_transaction_by_merchant,
-    get_denied_transactions,
+    # Invoice Tools
+    search_invoices,
+    get_vendor_invoices,
+    get_overdue_invoices,
     
-    # Credit Limit Tools
-    get_credit_limits,
-    get_card_credit_limit,
-    update_credit_limit,
+    # Vendor Credit/Terms Tools
+    get_vendor_credit_terms,
+    get_all_vendor_credit_terms,
     
-    # Fraud Alert Tools
-    get_fraud_alerts,
-    get_fraud_alerts_by_employee,
+    # Dispute & Issues Tools
+    get_ar_disputes,
+    get_vendor_disputes,
+    get_critical_payment_issues,
     
-    # Fleet/Fuel Tools
-    get_fleet_data,
-    get_fleet_by_driver,
-    search_fleet,
-    
-    # Composite Tools
-    get_employee_summary,
-    get_high_risk_employees,
+    # Vendor Summary/Analysis Tools
+    get_vendor_summary,
+    get_at_risk_vendors,
+    get_ar_summary,
 )
 from genai_operations.llm import LLM
 from os import environ
@@ -48,36 +44,32 @@ llm_pipe = llm_object.openai(openai_key=key, model=MODEL)
 agent = create_agent(
     model=llm_pipe,
     tools=[
-        # Profile/User Tools
-        get_user_profile,
-        search_users,
+        # Vendor Profile Tools
+        get_vendor_profile,
+        search_vendors,
         
-        # Balance Tools
-        get_account_balance,
-        get_card_balance,
+        # AR Balance & Aging Tools
+        get_vendor_ar_balance,
+        get_ar_aging_report,
         
-        # Transaction Tools
-        search_transactions,
-        get_transaction_by_merchant,
-        get_denied_transactions,
+        # Invoice Tools
+        search_invoices,
+        get_vendor_invoices,
+        get_overdue_invoices,
         
-        # Credit Limit Tools
-        get_credit_limits,
-        get_card_credit_limit,
-        update_credit_limit,
+        # Vendor Credit/Terms Tools
+        get_vendor_credit_terms,
+        get_all_vendor_credit_terms,
         
-        # Fraud Alert Tools
-        get_fraud_alerts,
-        get_fraud_alerts_by_employee,
+        # Dispute & Issues Tools
+        get_ar_disputes,
+        get_vendor_disputes,
+        get_critical_payment_issues,
         
-        # Fleet/Fuel Tools
-        get_fleet_data,
-        get_fleet_by_driver,
-        search_fleet,
-        
-        # Composite Tools
-        get_employee_summary,
-        get_high_risk_employees,
+        # Vendor Summary/Analysis Tools
+        get_vendor_summary,
+        get_at_risk_vendors,
+        get_ar_summary,
     ],
     system_prompt=concierge_system_prompt,
 )
