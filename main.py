@@ -1,4 +1,5 @@
 # main.py
+from typing import cast, Any
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -19,7 +20,7 @@ origins = [
 ]
 
 app.add_middleware(
-    CORSMiddleware,
+    cast(Any, CORSMiddleware),
     allow_origins=["*"],  # Allow all origins for development; restrict in production
     allow_credentials=True,
     allow_methods=["*"],          # allows OPTIONS, POST, GET, etc
