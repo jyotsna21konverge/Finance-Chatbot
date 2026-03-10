@@ -1,8 +1,5 @@
 from langchain.agents import create_agent
 from tools.tools import (
-    # Visualization Tool
-    create_visualization,
-    
     # Vendor Profile Tools
     get_vendor_profile,
     search_vendors,
@@ -15,7 +12,6 @@ from tools.tools import (
     search_invoices,
     get_vendor_invoices,
     get_overdue_invoices,
-    get_invoice_status_summary,
     
     # Vendor Credit/Terms Tools
     get_vendor_credit_terms,
@@ -30,8 +26,6 @@ from tools.tools import (
     get_vendor_summary,
     get_at_risk_vendors,
     get_ar_summary,
-    get_ar_totals,
-    get_vendor_invoice_totals,
 )
 from genai_operations.llm import LLM
 from os import environ
@@ -50,9 +44,6 @@ llm_pipe = llm_object.openai(openai_key=key, model=MODEL)
 agent = create_agent(
     model=llm_pipe,
     tools=[
-        # Visualization Tool
-        create_visualization,
-        
         # Vendor Profile Tools
         get_vendor_profile,
         search_vendors,
@@ -65,7 +56,6 @@ agent = create_agent(
         search_invoices,
         get_vendor_invoices,
         get_overdue_invoices,
-        get_invoice_status_summary,
         
         # Vendor Credit/Terms Tools
         get_vendor_credit_terms,
@@ -80,8 +70,6 @@ agent = create_agent(
         get_vendor_summary,
         get_at_risk_vendors,
         get_ar_summary,
-        get_ar_totals,
-        get_vendor_invoice_totals,
     ],
     system_prompt=concierge_system_prompt,
 )
