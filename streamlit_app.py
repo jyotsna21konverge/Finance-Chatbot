@@ -7,8 +7,6 @@ from datetime import datetime
 from agents.agent import ask_agent
 from dataconnectors.json_loader import json_loader
 import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go
 
 def parse_output(output):
     """
@@ -39,12 +37,11 @@ def parse_output(output):
     return output
 
 def extract_tool_outputs(flow):
-    """Extract all tool outputs from the flow/steps, including visualization configs."""
+    """Extract all tool outputs from the flow/steps."""
     tool_outputs = {}
-    viz_configs = []
     
     if not flow:
-        return tool_outputs, viz_configs
+        return tool_outputs
     
     for step in flow:
         if not isinstance(step, dict):
@@ -57,12 +54,6 @@ def extract_tool_outputs(flow):
             
             # Skip if output is empty or None
             if not parsed_output:
-                continue
-            
-            # Check if this is a visualization config
-            if tool_name == "create_visualization" and isinstance(parsed_output, dict):
-                if parsed_output.get("ok") and "visualization" in parsed_output:
-                    viz_configs.append(parsed_output["visualization"])
                 continue
             
             # Handle wrapped responses like {'ok': True, 'data': [...]}
@@ -79,146 +70,14 @@ def extract_tool_outputs(flow):
             elif isinstance(parsed_output, dict):
                 tool_outputs[tool_name].append(parsed_output)
     
-    return tool_outputs, viz_configs
+    return tool_outputs
 
-def render_dynamic_visualization(viz_config, tool_outputs):
-    """Render a visualization based on agent's recommendation."""
-    chart_type = viz_config.get("chart_type")
-    title = viz_config.get("title", "Visualization")
-    data_source = viz_config.get("data_source")
-    x_field = viz_config.get("x_field")
-    y_field = viz_config.get("y_field")
-    description = viz_config.get("description", "")
-    
-    # Get the data from tool outputs
-    data_list = tool_outputs.get(data_source, [])
-    
-    if not data_list:
-        st.warning(f"No data available from {data_source}")
-        return
-    
-    with st.expander(f"📊 {title}", expanded=True):
-        if description:
-            st.caption(description)
-        
-        try:
-            # Convert to DataFrame for easier manipulation
-            if isinstance(data_list, list) and data_list and isinstance(data_list[0], dict):
-                df = pd.DataFrame(data_list)
-            else:
-                st.warning("Data format not suitable for visualization")
-                return
-            
-            # Auto-detect fields if not provided
-            if not x_field or not y_field:
-                # Try to infer fields from data structure
-                cols = df.columns.tolist()
-                
-                # For pie charts, look for common field patterns
-                if chart_type == "pie":
-                    # Look for category field (status, category, name, etc.)
-                    category_candidates = [c for c in cols if any(keyword in c.lower() for keyword in ['status', 'category', 'name', 'type', 'vendor'])]
-                    # Look for value field (count, amount, total, percentage, etc.)
-                    value_candidates = [c for c in cols if any(keyword in c.lower() for keyword in ['count', 'amount', 'total', 'percentage', 'value'])]
-                    
-                    if not x_field and category_candidates:
-                        x_field = category_candidates[0]
-                    if not y_field and value_candidates:
-                        y_field = value_candidates[0]
-                
-                # For bar/line charts, similar logic
-                elif chart_type in ["bar", "line"]:
-                    if not x_field and len(cols) > 0:
-                        # First non-numeric column as x
-                        non_numeric = df.select_dtypes(exclude=['number']).columns
-                        x_field = non_numeric[0] if len(non_numeric) > 0 else cols[0]
-                    if not y_field and len(cols) > 1:
-                        # First numeric column as y
-                        numeric = df.select_dtypes(include=['number']).columns
-                        y_field = numeric[0] if len(numeric) > 0 else cols[1]
-            
-            if chart_type == "bar":
-                if x_field and y_field and x_field in df.columns and y_field in df.columns:
-                    chart_data = df[[x_field, y_field]].copy()
-                    st.bar_chart(chart_data.set_index(x_field))
-                else:
-                    st.warning(f"Cannot create bar chart. Available columns: {', '.join(df.columns)}")
-                    st.dataframe(df, width='stretch')
-            
-            elif chart_type == "line":
-                if x_field and y_field and x_field in df.columns and y_field in df.columns:
-                    chart_data = df[[x_field, y_field]].copy()
-                    st.line_chart(chart_data.set_index(x_field))
-                else:
-                    st.warning(f"Cannot create line chart. Available columns: {', '.join(df.columns)}")
-                    st.dataframe(df, width='stretch')
-            
-            elif chart_type == "pie":
-                if x_field and y_field and x_field in df.columns and y_field in df.columns:
-                    # Create proper pie chart using plotly
-                    fig = px.pie(
-                        df, 
-                        names=x_field, 
-                        values=y_field,
-                        title=title,
-                        hole=0.3  # Makes it a donut chart for better readability
-                    )
-                    fig.update_traces(textposition='inside', textinfo='percent+label')
-                    st.plotly_chart(fig, use_container_width=True)
-                    
-                    # Also show data table for reference
-                    st.dataframe(df[[x_field, y_field]], width='stretch')
-                else:
-                    st.warning(f"Cannot create pie chart. Available columns: {', '.join(df.columns)}")
-                    st.info(f"Detected fields - x: {x_field}, y: {y_field}")
-                    st.dataframe(df, width='stretch')
-            
-            elif chart_type == "table":
-                st.dataframe(df, width='stretch')
-            
-            elif chart_type == "metrics":
-                # Display key metrics in columns
-                numeric_cols = df.select_dtypes(include=['number']).columns
-                if len(numeric_cols) > 0:
-                    cols = st.columns(min(len(numeric_cols), 4))
-                    for idx, col_name in enumerate(numeric_cols[:4]):
-                        with cols[idx]:
-                            value = df[col_name].sum() if len(df) > 1 else df[col_name].iloc[0]
-                            st.metric(col_name, f"{value:,.2f}" if isinstance(value, float) else value)
-                st.dataframe(df, width='stretch')
-            
-            elif chart_type == "scatter":
-                if x_field and y_field and x_field in df.columns and y_field in df.columns:
-                    st.scatter_chart(df, x=x_field, y=y_field)
-                else:
-                    st.warning(f"Cannot create scatter plot. Available columns: {', '.join(df.columns)}")
-                    st.dataframe(df, width='stretch')
-            
-            else:
-                st.warning(f"Unsupported chart type: {chart_type}")
-                st.dataframe(df, width='stretch')
-        
-        except Exception as e:
-            st.error(f"Error rendering visualization: {str(e)}")
-            import traceback
-            st.code(traceback.format_exc())
-            st.dataframe(df, width='stretch')
-
-
-def render_tool_data_visualization(tool_outputs, viz_configs=None):
-    """Render visualizations based on tool output data and agent recommendations."""
+def render_tool_data_visualization(tool_outputs):
+    """Render visualizations based on tool output data."""
     st.markdown("### 📊 Data Visualization")
     
-    # First, render agent-recommended visualizations
-    if viz_configs:
-        st.info(f"🤖 Agent recommended {len(viz_configs)} visualization(s)")
-        for viz_config in viz_configs:
-            render_dynamic_visualization(viz_config, tool_outputs)
-        st.markdown("---")
-    
     if not tool_outputs:
-        if not viz_configs:
-            st.info("No tool data available to visualize")
+        st.info("No tool data available to visualize")
         return
     
     for tool_name, data_list in tool_outputs.items():
@@ -1210,13 +1069,11 @@ Ask questions about vendor profiles, invoice status, AR balances, payment disput
                     
                     # Extract and visualize tool outputs
                     if msg.get("steps"):
-                        tool_outputs, viz_configs = extract_tool_outputs(msg.get("steps", []))
-                        if tool_outputs or viz_configs:
+                        tool_outputs = extract_tool_outputs(msg.get("steps", []))
+                        if tool_outputs:
                             # Show compact tool count badge
-                            viz_count = len(viz_configs) if viz_configs else 0
-                            data_count = len(tool_outputs)
-                            st.success(f"✓ Visualization ready ({viz_count} chart{'s' if viz_count != 1 else ''}, {data_count} data source{'s' if data_count != 1 else ''})")
-                            render_tool_data_visualization(tool_outputs, viz_configs)
+                            st.success(f"✓ Visualization ready ({len(tool_outputs)} tool{'s' if len(tool_outputs) != 1 else ''})")
+                            render_tool_data_visualization(tool_outputs)
                         else:
                             st.warning("⚠️ No visualizations available for this response")
                     
@@ -1318,11 +1175,6 @@ Ask questions about vendor profiles, invoice status, AR balances, payment disput
             except Exception as e:
                 st.error(f"❌ Error: {str(e)}")
                 st.markdown("Please check your question and try again.")
-                # Show detailed error for debugging
-                with st.expander("🔍 Error Details"):
-                    st.code(f"{type(e).__name__}: {str(e)}")
-                    import traceback
-                    st.code(traceback.format_exc())
 
 # Footer
 st.markdown("---")
