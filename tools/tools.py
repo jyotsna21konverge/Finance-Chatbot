@@ -9,6 +9,71 @@ from dataconnectors.json_loader import json_loader
 
 
 # =====================
+# Visualization Tool
+# =====================
+
+@tool("create_visualization")
+def create_visualization(
+    chart_type: Literal["bar", "line", "pie", "table", "metrics", "scatter"],
+    title: str,
+    data_source: str,
+    x_field: Optional[str] = None,
+    y_field: Optional[str] = None,
+    description: Optional[str] = None
+) -> Dict[str, Any]:
+    """
+    Recommend a visualization for the data being presented.
+    
+    Parameters:
+      - chart_type: Type of chart (bar, line, pie, table, metrics, scatter)
+      - title: Title for the visualization
+      - data_source: Which tool's data to visualize (e.g., "get_invoice_status_summary", "search_invoices")
+      - x_field: Field name for x-axis/categories (OPTIONAL - will auto-detect if not provided)
+        * For pie charts: category field like "status", "category", "vendor_name"
+        * For bar/line: x-axis field
+      - y_field: Field name for y-axis/values (OPTIONAL - will auto-detect if not provided)
+        * For pie charts: value field like "count", "amount", "percentage"
+        * For bar/line: y-axis field
+      - description: Brief description of what the visualization shows
+    
+    Chart type guidelines:
+      - bar: Comparisons across categories (aging buckets, vendor counts, status breakdown)
+      - line: Trends over time (payment history, balance changes)
+      - pie: Proportional breakdown (status distribution, category percentages)
+        * IMPORTANT: For invoice status, use x_field="status" and y_field="count" or "percentage"
+      - table: Detailed records (invoice lists, vendor profiles)
+      - metrics: Key numbers (totals, counts, averages)
+      - scatter: Correlations between two variables
+    
+    NOTE: If x_field and y_field are not provided, the system will attempt to auto-detect
+    appropriate fields based on the data structure and chart type.
+    
+    Returns visualization configuration that the UI will use to render the chart.
+    """
+    if not chart_type or not title or not data_source:
+        return {"ok": False, "error": "chart_type, title, and data_source are required"}
+    
+    valid_chart_types = ["bar", "line", "pie", "table", "metrics", "scatter"]
+    if chart_type not in valid_chart_types:
+        return {"ok": False, "error": f"chart_type must be one of: {', '.join(valid_chart_types)}"}
+    
+    # Build visualization config
+    viz_config = {
+        "ok": True,
+        "visualization": {
+            "chart_type": chart_type,
+            "title": title,
+            "data_source": data_source,
+            "x_field": x_field,
+            "y_field": y_field,
+            "description": description or f"{chart_type.capitalize()} chart showing {title}"
+        }
+    }
+    
+    return viz_config
+
+
+# =====================
 # Vendor Profile Tools
 # =====================
 
@@ -452,5 +517,173 @@ def get_ar_summary() -> Dict[str, Any]:
         )
         
         return summary
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
+
+
+@tool("get_ar_totals")
+def get_ar_totals() -> Dict[str, Any]:
+    """
+    Get total AR metrics across all vendors.
+    Perfect for queries asking about total AR balance, overall amounts, or aggregate metrics.
+    
+    Returns:
+      - total_ar_balance: Total accounts receivable across all vendors
+      - total_current: Total current (not overdue) amount
+      - total_overdue: Total overdue amount (30+ days)
+      - total_overdue_30: Amount overdue 30-60 days
+      - total_overdue_60: Amount overdue 60-90 days
+      - total_overdue_90: Amount overdue 90+ days
+      - vendor_count: Number of vendors
+      - overdue_percentage: Percentage of AR that is overdue
+    """
+    try:
+        # Get all balances
+        all_balances = json_loader.get_balances()
+        
+        # Calculate totals
+        total_ar = 0
+        total_current = 0
+        total_overdue_30 = 0
+        total_overdue_60 = 0
+        total_overdue_90 = 0
+        
+        for balance in all_balances:
+            total_ar += float(balance.get("ar_balance", 0) or 0)
+            total_current += float(balance.get("current_due", 0) or 0)
+            total_overdue_30 += float(balance.get("overdue_30", 0) or 0)
+            total_overdue_60 += float(balance.get("overdue_60", 0) or 0)
+            total_overdue_90 += float(balance.get("overdue_90", 0) or 0)
+        
+        total_overdue = total_overdue_30 + total_overdue_60 + total_overdue_90
+        overdue_percentage = (total_overdue / total_ar * 100) if total_ar > 0 else 0
+        
+        result = {
+            "metric": "AR Totals",
+            "total_ar_balance": round(total_ar, 2),
+            "total_current": round(total_current, 2),
+            "total_overdue": round(total_overdue, 2),
+            "total_overdue_30": round(total_overdue_30, 2),
+            "total_overdue_60": round(total_overdue_60, 2),
+            "total_overdue_90": round(total_overdue_90, 2),
+            "vendor_count": len(all_balances),
+            "overdue_percentage": round(overdue_percentage, 1)
+        }
+        
+        return {"ok": True, "data": [result]}  # Return as list for consistency
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
+
+
+@tool("get_invoice_status_summary")
+def get_invoice_status_summary() -> Dict[str, Any]:
+    """
+    Get summary of invoice counts and amounts by status.
+    Perfect for analyzing invoice status distribution and percentages.
+    
+    Returns:
+      - status: Invoice status (current, overdue, paid)
+      - count: Number of invoices with this status
+      - total_amount: Total invoice amount for this status
+      - percentage: Percentage of total invoices
+    """
+    try:
+        # Get all invoices
+        all_invoices = json_loader.get_transactions(limit=1000)
+        
+        # Group by status
+        status_summary = {}
+        total_count = len(all_invoices)
+        
+        for invoice in all_invoices:
+            status = invoice.get("status", "unknown")
+            amount = float(invoice.get("invoice_amount", 0))
+            
+            if status not in status_summary:
+                status_summary[status] = {
+                    "status": status,
+                    "count": 0,
+                    "total_amount": 0
+                }
+            
+            status_summary[status]["count"] += 1
+            status_summary[status]["total_amount"] += amount
+        
+        # Calculate percentages and format results
+        results = []
+        for status_data in status_summary.values():
+            percentage = (status_data["count"] / total_count * 100) if total_count > 0 else 0
+            results.append({
+                "status": status_data["status"].capitalize(),
+                "count": status_data["count"],
+                "total_amount": round(status_data["total_amount"], 2),
+                "percentage": round(percentage, 1)
+            })
+        
+        # Sort by count descending
+        results.sort(key=lambda x: x["count"], reverse=True)
+        
+        return {"ok": True, "total_invoices": total_count, "data": results}
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
+
+
+@tool("get_vendor_invoice_totals")
+def get_vendor_invoice_totals(limit: int = 50) -> Dict[str, Any]:
+    """
+    Get total invoice amounts grouped by vendor.
+    Useful for analyzing invoice distribution across vendors.
+    
+    Returns:
+      - vendor_name: Name of the vendor
+      - vendor_id: Vendor identifier
+      - total_invoice_amount: Sum of all invoice amounts for this vendor
+      - invoice_count: Number of invoices for this vendor
+      - average_invoice_amount: Average invoice amount
+    """
+    if limit <= 0 or limit > 500:
+        return {"ok": False, "error": "limit must be between 1 and 500"}
+    
+    try:
+        # Get all invoices
+        all_invoices = json_loader.get_transactions(limit=1000)
+        
+        # Group by vendor and calculate totals
+        vendor_totals = {}
+        for invoice in all_invoices:
+            vendor_id = invoice.get("vendor_id")
+            vendor_name = invoice.get("vendor_name", vendor_id)
+            invoice_amount = float(invoice.get("invoice_amount", 0))
+            
+            if vendor_id not in vendor_totals:
+                vendor_totals[vendor_id] = {
+                    "vendor_id": vendor_id,
+                    "vendor_name": vendor_name,
+                    "total_invoice_amount": 0,
+                    "invoice_count": 0,
+                    "invoices": []
+                }
+            
+            vendor_totals[vendor_id]["total_invoice_amount"] += invoice_amount
+            vendor_totals[vendor_id]["invoice_count"] += 1
+            vendor_totals[vendor_id]["invoices"].append(invoice_amount)
+        
+        # Calculate averages and format results
+        results = []
+        for vendor_data in vendor_totals.values():
+            results.append({
+                "vendor_id": vendor_data["vendor_id"],
+                "vendor_name": vendor_data["vendor_name"],
+                "total_invoice_amount": round(vendor_data["total_invoice_amount"], 2),
+                "invoice_count": vendor_data["invoice_count"],
+                "average_invoice_amount": round(
+                    vendor_data["total_invoice_amount"] / vendor_data["invoice_count"], 2
+                ) if vendor_data["invoice_count"] > 0 else 0
+            })
+        
+        # Sort by total amount descending
+        results.sort(key=lambda x: x["total_invoice_amount"], reverse=True)
+        
+        return {"ok": True, "count": len(results[:limit]), "data": results[:limit]}
     except Exception as e:
         return {"ok": False, "error": str(e)}
