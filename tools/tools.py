@@ -6,6 +6,7 @@ These tools interact with JSON files for vendor and invoice management.
 from typing import Any, Dict, List, Optional, Literal
 from langchain.tools import tool
 from dataconnectors.json_loader import json_loader
+from datetime import datetime, timedelta
 
 
 # =====================
@@ -71,6 +72,237 @@ def create_visualization(
     }
     
     return viz_config
+
+
+# =====================
+# Time-Based Analysis Tools
+# =====================
+
+@tool("get_recent_invoices")
+def get_recent_invoices(days_back: int = 30) -> Dict[str, Any]:
+    """
+    Get invoices created within the last N days.
+    Perfect for queries like "invoices in last 1 month" or "recent invoices".
+    
+    Parameters:
+      - days_back: Number of days to look back (default 30 for last month)
+    
+    Returns:
+      - invoice_id, vendor_name, vendor_id
+      - invoice_date, due_date
+      - invoice_amount, amount_due (outstanding)
+      - status, payment_status
+      - days_since_invoice: How many days ago the invoice was created
+    """
+    if days_back <= 0 or days_back > 365:
+        return {"ok": False, "error": "days_back must be between 1 and 365"}
+    
+    try:
+        # Get all invoices
+        all_invoices = json_loader.get_transactions(limit=1000)
+        
+        # Calculate cutoff date
+        cutoff_date = datetime.now() - timedelta(days=days_back)
+        
+        recent_invoices = []
+        for invoice in all_invoices:
+            try:
+                # Parse invoice date
+                invoice_date_str = invoice.get("invoice_date", "")
+                if invoice_date_str:
+                    # Handle ISO format dates
+                    invoice_date = datetime.fromisoformat(invoice_date_str.replace('Z', '+00:00'))
+                    
+                    # Check if within date range
+                    if invoice_date >= cutoff_date:
+                        days_since = (datetime.now(invoice_date.tzinfo) - invoice_date).days
+                        
+                        recent_invoices.append({
+                            "invoice_id": invoice.get("invoice_id"),
+                            "vendor_id": invoice.get("vendor_id"),
+                            "vendor_name": invoice.get("vendor_name"),
+                            "invoice_date": invoice.get("invoice_date"),
+                            "due_date": invoice.get("due_date"),
+                            "invoice_amount": float(invoice.get("invoice_amount", 0)),
+                            "amount_due": float(invoice.get("amount_due", 0)),
+                            "status": invoice.get("status"),
+                            "payment_status": invoice.get("payment_status"),
+                            "days_since_invoice": days_since
+                        })
+            except Exception as e:
+                # Skip invoices with date parsing errors
+                continue
+        
+        return {
+            "ok": True,
+            "days_back": days_back,
+            "count": len(recent_invoices),
+            "data": recent_invoices
+        }
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
+
+
+@tool("get_vendor_outstanding_by_period")
+def get_vendor_outstanding_by_period(days_back: int = 30) -> Dict[str, Any]:
+    """
+    Get vendors who raised invoices in the last N days with their total outstanding amounts.
+    Perfect for: "List vendors with invoices in last 1 month and their outstanding amounts"
+    
+    Parameters:
+      - days_back: Number of days to look back (default 30 for last month)
+    
+    Returns:
+      - vendor_id, vendor_name
+      - invoice_count: Number of invoices in the period
+      - total_invoice_amount: Total amount of invoices in period
+      - total_outstanding_amount: Total amount still due
+      - average_days_outstanding: Average days since invoice
+    """
+    if days_back <= 0 or days_back > 365:
+        return {"ok": False, "error": "days_back must be between 1 and 365"}
+    
+    try:
+        # Get all invoices directly (don't call another tool)
+        all_invoices = json_loader.get_transactions(limit=1000)
+        
+        if not all_invoices:
+            return {"ok": True, "days_back": days_back, "vendor_count": 0, "data": []}
+        
+        # Calculate cutoff date
+        cutoff_date = datetime.now() - timedelta(days=days_back)
+        
+        # Group by vendor
+        vendor_summary = {}
+        
+        for invoice in all_invoices:
+            try:
+                # Parse invoice date
+                invoice_date_str = invoice.get("invoice_date", "")
+                if not invoice_date_str:
+                    continue
+                
+                # Handle ISO format dates
+                invoice_date = datetime.fromisoformat(invoice_date_str.replace('Z', '+00:00'))
+                
+                # Check if within date range
+                if invoice_date < cutoff_date:
+                    continue
+                
+                vendor_id = invoice.get("vendor_id")
+                vendor_name = invoice.get("vendor_name")
+                
+                if not vendor_id:
+                    continue
+                
+                if vendor_id not in vendor_summary:
+                    vendor_summary[vendor_id] = {
+                        "vendor_id": vendor_id,
+                        "vendor_name": vendor_name,
+                        "invoice_count": 0,
+                        "total_invoice_amount": 0.0,
+                        "total_outstanding_amount": 0.0,
+                        "days_outstanding_list": []
+                    }
+                
+                # Add invoice data
+                vendor_summary[vendor_id]["invoice_count"] += 1
+                vendor_summary[vendor_id]["total_invoice_amount"] += float(invoice.get("invoice_amount", 0))
+                vendor_summary[vendor_id]["total_outstanding_amount"] += float(invoice.get("amount_due", 0))
+                
+                # Calculate days since invoice
+                days_since = (datetime.now(invoice_date.tzinfo) - invoice_date).days
+                vendor_summary[vendor_id]["days_outstanding_list"].append(days_since)
+                
+            except Exception as e:
+                # Skip invoices with errors
+                continue
+        
+        # Format results
+        results = []
+        for vendor_data in vendor_summary.values():
+            days_list = vendor_data["days_outstanding_list"]
+            avg_days = sum(days_list) / len(days_list) if days_list else 0
+            
+            results.append({
+                "vendor_name": vendor_data["vendor_name"],
+                "vendor_id": vendor_data["vendor_id"],
+                "invoice_count": vendor_data["invoice_count"],
+                "total_invoice_amount": round(vendor_data["total_invoice_amount"], 2),
+                "total_outstanding_amount": round(vendor_data["total_outstanding_amount"], 2),
+                "average_days_outstanding": round(avg_days, 1)
+            })
+        
+        # Sort by total outstanding amount (descending)
+        results.sort(key=lambda x: x["total_outstanding_amount"], reverse=True)
+        
+        return {
+            "ok": True,
+            "days_back": days_back,
+            "vendor_count": len(results),
+            "data": results
+        }
+    except Exception as e:
+        import traceback
+        return {"ok": False, "error": f"Error: {str(e)}", "traceback": traceback.format_exc()}
+
+
+@tool("get_invoices_by_date_range")
+def get_invoices_by_date_range(start_date: str, end_date: str) -> Dict[str, Any]:
+    """
+    Get invoices within a specific date range.
+    
+    Parameters:
+      - start_date: Start date in format "YYYY-MM-DD" (e.g., "2026-02-01")
+      - end_date: End date in format "YYYY-MM-DD" (e.g., "2026-03-10")
+    
+    Returns invoices created between these dates with vendor and amount information.
+    """
+    try:
+        # Parse dates
+        start = datetime.strptime(start_date, "%Y-%m-%d")
+        end = datetime.strptime(end_date, "%Y-%m-%d")
+        
+        if start > end:
+            return {"ok": False, "error": "start_date must be before end_date"}
+        
+        # Get all invoices
+        all_invoices = json_loader.get_transactions(limit=1000)
+        
+        invoices_in_range = []
+        for invoice in all_invoices:
+            try:
+                invoice_date_str = invoice.get("invoice_date", "")
+                if invoice_date_str:
+                    invoice_date = datetime.fromisoformat(invoice_date_str.replace('Z', '+00:00'))
+                    invoice_date_only = invoice_date.replace(tzinfo=None)
+                    
+                    if start <= invoice_date_only <= end:
+                        invoices_in_range.append({
+                            "invoice_id": invoice.get("invoice_id"),
+                            "vendor_id": invoice.get("vendor_id"),
+                            "vendor_name": invoice.get("vendor_name"),
+                            "invoice_date": invoice.get("invoice_date"),
+                            "due_date": invoice.get("due_date"),
+                            "invoice_amount": float(invoice.get("invoice_amount", 0)),
+                            "amount_due": float(invoice.get("amount_due", 0)),
+                            "status": invoice.get("status"),
+                            "payment_status": invoice.get("payment_status")
+                        })
+            except Exception as e:
+                continue
+        
+        return {
+            "ok": True,
+            "start_date": start_date,
+            "end_date": end_date,
+            "count": len(invoices_in_range),
+            "data": invoices_in_range
+        }
+    except ValueError as e:
+        return {"ok": False, "error": f"Invalid date format. Use YYYY-MM-DD. Error: {str(e)}"}
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
 
 
 # =====================

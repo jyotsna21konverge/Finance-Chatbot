@@ -3,6 +3,11 @@ from tools.tools import (
     # Visualization Tool
     create_visualization,
     
+    # Time-Based Analysis Tools
+    get_recent_invoices,
+    get_vendor_outstanding_by_period,
+    get_invoices_by_date_range,
+    
     # Vendor Profile Tools
     get_vendor_profile,
     search_vendors,
@@ -52,6 +57,11 @@ agent = create_agent(
     tools=[
         # Visualization Tool
         create_visualization,
+        
+        # Time-Based Analysis Tools
+        get_recent_invoices,
+        get_vendor_outstanding_by_period,
+        get_invoices_by_date_range,
         
         # Vendor Profile Tools
         get_vendor_profile,
