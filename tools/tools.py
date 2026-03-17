@@ -1,6 +1,6 @@
 """
 JSON-based tools for Accounts Receivable (AR) operations.
-These tools interact with JSON files for vendor and invoice management.
+These tools interact with JSON files for customer and order management.
 """
 
 from typing import Any, Dict, List, Optional, Literal
@@ -30,7 +30,7 @@ def create_visualization(
       - title: Title for the visualization
       - data_source: Which tool's data to visualize (e.g., "get_invoice_status_summary", "search_invoices")
       - x_field: Field name for x-axis/categories (OPTIONAL - will auto-detect if not provided)
-        * For pie charts: category field like "status", "category", "vendor_name"
+        * For pie charts: category field like "status", "category", "customer_name"
         * For bar/line: x-axis field
       - y_field: Field name for y-axis/values (OPTIONAL - will auto-detect if not provided)
         * For pie charts: value field like "count", "amount", "percentage"
@@ -38,11 +38,11 @@ def create_visualization(
       - description: Brief description of what the visualization shows
     
     Chart type guidelines:
-      - bar: Comparisons across categories (aging buckets, vendor counts, status breakdown)
+      - bar: Comparisons across categories (aging buckets, customer counts, status breakdown)
       - line: Trends over time (payment history, balance changes)
       - pie: Proportional breakdown (status distribution, category percentages)
         * IMPORTANT: For invoice status, use x_field="status" and y_field="count" or "percentage"
-      - table: Detailed records (invoice lists, vendor profiles)
+      - table: Detailed records (invoice lists, customer profiles)
       - metrics: Key numbers (totals, counts, averages)
       - scatter: Correlations between two variables
     
@@ -88,7 +88,7 @@ def get_recent_invoices(days_back: int = 30) -> Dict[str, Any]:
       - days_back: Number of days to look back (default 30 for last month)
     
     Returns:
-      - invoice_id, vendor_name, vendor_id
+      - invoice_id, customer_name, customer_id
       - invoice_date, due_date
       - invoice_amount, amount_due (outstanding)
       - status, payment_status
@@ -119,8 +119,8 @@ def get_recent_invoices(days_back: int = 30) -> Dict[str, Any]:
                         
                         recent_invoices.append({
                             "invoice_id": invoice.get("invoice_id"),
-                            "vendor_id": invoice.get("vendor_id"),
-                            "vendor_name": invoice.get("vendor_name"),
+                            "customer_id": invoice.get("customer_id"),
+                            "customer_name": invoice.get("customer_name"),
                             "invoice_date": invoice.get("invoice_date"),
                             "due_date": invoice.get("due_date"),
                             "invoice_amount": float(invoice.get("invoice_amount", 0)),
@@ -143,17 +143,17 @@ def get_recent_invoices(days_back: int = 30) -> Dict[str, Any]:
         return {"ok": False, "error": str(e)}
 
 
-@tool("get_vendor_outstanding_by_period")
-def get_vendor_outstanding_by_period(days_back: int = 30) -> Dict[str, Any]:
+@tool("get_customer_outstanding_by_period")
+def get_customer_outstanding_by_period(days_back: int = 30) -> Dict[str, Any]:
     """
-    Get vendors who raised invoices in the last N days with their total outstanding amounts.
-    Perfect for: "List vendors with invoices in last 1 month and their outstanding amounts"
+    Get customers who raised invoices in the last N days with their total outstanding amounts.
+    Perfect for: "List customers with invoices in last 1 month and their outstanding amounts"
     
     Parameters:
       - days_back: Number of days to look back (default 30 for last month)
     
     Returns:
-      - vendor_id, vendor_name
+      - customer_id, customer_name
       - invoice_count: Number of invoices in the period
       - total_invoice_amount: Total amount of invoices in period
       - total_outstanding_amount: Total amount still due
@@ -167,13 +167,13 @@ def get_vendor_outstanding_by_period(days_back: int = 30) -> Dict[str, Any]:
         all_invoices = json_loader.get_transactions(limit=1000)
         
         if not all_invoices:
-            return {"ok": True, "days_back": days_back, "vendor_count": 0, "data": []}
+            return {"ok": True, "days_back": days_back, "customer_count": 0, "data": []}
         
         # Calculate cutoff date
         cutoff_date = datetime.now() - timedelta(days=days_back)
         
-        # Group by vendor
-        vendor_summary = {}
+        # Group by customer
+        customer_summary = {}
         
         for invoice in all_invoices:
             try:
@@ -189,16 +189,16 @@ def get_vendor_outstanding_by_period(days_back: int = 30) -> Dict[str, Any]:
                 if invoice_date < cutoff_date:
                     continue
                 
-                vendor_id = invoice.get("vendor_id")
-                vendor_name = invoice.get("vendor_name")
+                customer_id = invoice.get("customer_id")
+                customer_name = invoice.get("customer_name")
                 
-                if not vendor_id:
+                if not customer_id:
                     continue
                 
-                if vendor_id not in vendor_summary:
-                    vendor_summary[vendor_id] = {
-                        "vendor_id": vendor_id,
-                        "vendor_name": vendor_name,
+                if customer_id not in customer_summary:
+                    customer_summary[customer_id] = {
+                        "customer_id": customer_id,
+                        "customer_name": customer_name,
                         "invoice_count": 0,
                         "total_invoice_amount": 0.0,
                         "total_outstanding_amount": 0.0,
@@ -206,13 +206,13 @@ def get_vendor_outstanding_by_period(days_back: int = 30) -> Dict[str, Any]:
                     }
                 
                 # Add invoice data
-                vendor_summary[vendor_id]["invoice_count"] += 1
-                vendor_summary[vendor_id]["total_invoice_amount"] += float(invoice.get("invoice_amount", 0))
-                vendor_summary[vendor_id]["total_outstanding_amount"] += float(invoice.get("amount_due", 0))
+                customer_summary[customer_id]["invoice_count"] += 1
+                customer_summary[customer_id]["total_invoice_amount"] += float(invoice.get("invoice_amount", 0))
+                customer_summary[customer_id]["total_outstanding_amount"] += float(invoice.get("amount_due", 0))
                 
                 # Calculate days since invoice
                 days_since = (datetime.now(invoice_date.tzinfo) - invoice_date).days
-                vendor_summary[vendor_id]["days_outstanding_list"].append(days_since)
+                customer_summary[customer_id]["days_outstanding_list"].append(days_since)
                 
             except Exception as e:
                 # Skip invoices with errors
@@ -220,16 +220,16 @@ def get_vendor_outstanding_by_period(days_back: int = 30) -> Dict[str, Any]:
         
         # Format results
         results = []
-        for vendor_data in vendor_summary.values():
-            days_list = vendor_data["days_outstanding_list"]
+        for customer_data in customer_summary.values():
+            days_list = customer_data["days_outstanding_list"]
             avg_days = sum(days_list) / len(days_list) if days_list else 0
             
             results.append({
-                "vendor_name": vendor_data["vendor_name"],
-                "vendor_id": vendor_data["vendor_id"],
-                "invoice_count": vendor_data["invoice_count"],
-                "total_invoice_amount": round(vendor_data["total_invoice_amount"], 2),
-                "total_outstanding_amount": round(vendor_data["total_outstanding_amount"], 2),
+                "customer_name": customer_data["customer_name"],
+                "customer_id": customer_data["customer_id"],
+                "invoice_count": customer_data["invoice_count"],
+                "total_invoice_amount": round(customer_data["total_invoice_amount"], 2),
+                "total_outstanding_amount": round(customer_data["total_outstanding_amount"], 2),
                 "average_days_outstanding": round(avg_days, 1)
             })
         
@@ -239,7 +239,7 @@ def get_vendor_outstanding_by_period(days_back: int = 30) -> Dict[str, Any]:
         return {
             "ok": True,
             "days_back": days_back,
-            "vendor_count": len(results),
+            "customer_count": len(results),
             "data": results
         }
     except Exception as e:
@@ -256,7 +256,7 @@ def get_invoices_by_date_range(start_date: str, end_date: str) -> Dict[str, Any]
       - start_date: Start date in format "YYYY-MM-DD" (e.g., "2026-02-01")
       - end_date: End date in format "YYYY-MM-DD" (e.g., "2026-03-10")
     
-    Returns invoices created between these dates with vendor and amount information.
+    Returns invoices created between these dates with customer and amount information.
     """
     try:
         # Parse dates
@@ -280,8 +280,8 @@ def get_invoices_by_date_range(start_date: str, end_date: str) -> Dict[str, Any]
                     if start <= invoice_date_only <= end:
                         invoices_in_range.append({
                             "invoice_id": invoice.get("invoice_id"),
-                            "vendor_id": invoice.get("vendor_id"),
-                            "vendor_name": invoice.get("vendor_name"),
+                            "customer_id": invoice.get("customer_id"),
+                            "customer_name": invoice.get("customer_name"),
                             "invoice_date": invoice.get("invoice_date"),
                             "due_date": invoice.get("due_date"),
                             "invoice_amount": float(invoice.get("invoice_amount", 0)),
@@ -306,34 +306,34 @@ def get_invoices_by_date_range(start_date: str, end_date: str) -> Dict[str, Any]
 
 
 # =====================
-# Vendor Profile Tools
+# Customer Profile Tools
 # =====================
 
-@tool("get_vendor_profile")
-def get_vendor_profile(vendor_id: str) -> Dict[str, Any]:
+@tool("get_customer_profile")
+def get_customer_profile(customer_id: str) -> Dict[str, Any]:
     """
-    Get vendor profile information by vendor ID.
-    Returns vendor details including contact, payment terms, credit rating, and history.
+    Get customer profile information by customer ID.
+    Returns customer details including contact, payment terms, credit rating, and history.
     """
-    if not vendor_id or not isinstance(vendor_id, str):
-        return {"ok": False, "error": "vendor_id must be a non-empty string"}
+    if not customer_id or not isinstance(customer_id, str):
+        return {"ok": False, "error": "customer_id must be a non-empty string"}
     
     try:
-        profiles = json_loader.get_profiles(vendor_id=vendor_id)
+        profiles = json_loader.get_profiles(customer_id=customer_id)
         if profiles:
             return {"ok": True, "data": profiles[0]}
-        return {"ok": False, "error": f"No profile found for vendor_id: {vendor_id}"}
+        return {"ok": False, "error": f"No profile found for customer_id: {customer_id}"}
     except Exception as e:
         return {"ok": False, "error": str(e)}
 
 
-@tool("search_vendors")
-def search_vendors(search_field: str, search_value: str) -> Dict[str, Any]:
+@tool("search_customers")
+def search_customers(search_field: str, search_value: str) -> Dict[str, Any]:
     """
-    Search for vendors by any field (name, industry, status, credit_rating, payment_history, etc).
+    Search for customers by any field (name, industry, status, credit_rating, payment_history, etc).
     
     Examples:
-      search_field: "vendor_name", search_value: "TechSupply"
+      search_field: "customer_name", search_value: "TechSupply"
       search_field: "industry", search_value: "Manufacturing"
       search_field: "status", search_value: "at_risk"
       search_field: "credit_rating", search_value: "A"
@@ -352,10 +352,10 @@ def search_vendors(search_field: str, search_value: str) -> Dict[str, Any]:
 # AR Balance & Aging Tools
 # =====================
 
-@tool("get_vendor_ar_balance")
-def get_vendor_ar_balance(vendor_id: str) -> Dict[str, Any]:
+@tool("get_customer_ar_balance")
+def get_customer_ar_balance(customer_id: str) -> Dict[str, Any]:
     """
-    Get AR aging report for a specific vendor.
+    Get AR aging report for a specific customer.
     
     Returns:
       - ar_balance (total outstanding)
@@ -365,14 +365,14 @@ def get_vendor_ar_balance(vendor_id: str) -> Dict[str, Any]:
       - last_payment info
       - payment_terms and days_overdue
     """
-    if not vendor_id or not isinstance(vendor_id, str):
-        return {"ok": False, "error": "vendor_id must be a non-empty string"}
+    if not customer_id or not isinstance(customer_id, str):
+        return {"ok": False, "error": "customer_id must be a non-empty string"}
     
     try:
-        balance = json_loader.get_balances(vendor_id=vendor_id)
+        balance = json_loader.get_balances(customer_id=customer_id)
         if balance:
             return {"ok": True, "data": balance}
-        return {"ok": False, "error": f"No AR data found for vendor_id: {vendor_id}"}
+        return {"ok": False, "error": f"No AR data found for customer_id: {customer_id}"}
     except Exception as e:
         return {"ok": False, "error": str(e)}
 
@@ -380,12 +380,12 @@ def get_vendor_ar_balance(vendor_id: str) -> Dict[str, Any]:
 @tool("get_ar_aging_report")
 def get_ar_aging_report(limit: int = 50) -> Dict[str, Any]:
     """
-    Get comprehensive AR aging report for all vendors.
+    Get comprehensive AR aging report for all customers.
     
     Returns:
-      - ar_balances for each vendor with age buckets
-      - ar_summary with totals and percentages by aging bucket
-      - vendors_at_risk count
+      - ar_balances for each customer with age buckets
+      - customer_summary with totals and percentages by aging bucket
+      - customers_at_risk count
       - aging_analysis
     """
     if limit <= 0 or limit > 500:
@@ -405,7 +405,7 @@ def get_ar_aging_report(limit: int = 50) -> Dict[str, Any]:
 
 @tool("search_invoices")
 def search_invoices(
-    vendor_id: Optional[str] = None,
+    customer_id: Optional[str] = None,
     status: Optional[Literal["current", "overdue", "paid"]] = None,
     payment_status: Optional[Literal["paid", "unpaid", "partial"]] = None,
     limit: int = 50,
@@ -414,7 +414,7 @@ def search_invoices(
     Search invoices with optional filters.
     
     Parameters:
-      - vendor_id: Filter by vendor
+      - customer_id: Filter by customer
       - status: Filter by status (current, overdue, paid)
       - payment_status: Filter by payment status (paid, unpaid, partial)
       - limit: Maximum number of results
@@ -426,7 +426,7 @@ def search_invoices(
     
     try:
         invoices = json_loader.get_transactions(
-            vendor_id=vendor_id,
+            customer_id=customer_id,
             status=status,
             limit=limit
         )
@@ -435,16 +435,16 @@ def search_invoices(
         return {"ok": False, "error": str(e)}
 
 
-@tool("get_vendor_invoices")
-def get_vendor_invoices(vendor_id: str, limit: int = 50) -> Dict[str, Any]:
+@tool("get_customer_invoices")
+def get_customer_invoices(customer_id: str, limit: int = 50) -> Dict[str, Any]:
     """
-    Get all invoices for a specific vendor.
+    Get all invoices for a specific customer.
     """
-    if not vendor_id or not isinstance(vendor_id, str):
-        return {"ok": False, "error": "vendor_id must be a non-empty string"}
+    if not customer_id or not isinstance(customer_id, str):
+        return {"ok": False, "error": "customer_id must be a non-empty string"}
     
     try:
-        invoices = json_loader.get_transactions(vendor_id=vendor_id, limit=limit)
+        invoices = json_loader.get_transactions(customer_id=customer_id, limit=limit)
         return {"ok": True, "count": len(invoices), "data": invoices}
     except Exception as e:
         return {"ok": False, "error": str(e)}
@@ -452,27 +452,27 @@ def get_vendor_invoices(vendor_id: str, limit: int = 50) -> Dict[str, Any]:
 
 @tool("get_overdue_invoices")
 def get_overdue_invoices(
-    vendor_id: Optional[str] = None,
+    customer_id: Optional[str] = None,
     days_overdue: int = 0,
     limit: int = 50,
 ) -> Dict[str, Any]:
     """
-    Get all overdue invoices, optionally filtered by vendor.
+    Get all overdue invoices, optionally filtered by customer.
     
     Parameters:
-      - vendor_id: Optional filter by vendor
+      - customer_id: Optional filter by customer
       - days_overdue: Filter invoices overdue by minimum X days (default 0)
       - limit: Maximum results
     
     Returns:
-      - invoice details with days_overdue, amounts, and vendor info
+      - invoice details with days_overdue, amounts, and customer info
     """
     if limit <= 0 or limit > 500:
         return {"ok": False, "error": "limit must be between 1 and 500"}
     
     try:
         invoices = json_loader.get_transactions(
-            vendor_id=vendor_id,
+            customer_id=customer_id,
             status="overdue",
             limit=limit
         )
@@ -482,13 +482,13 @@ def get_overdue_invoices(
 
 
 # =====================
-# Vendor Credit/Terms Tools
+# Customer Credit/Terms Tools
 # =====================
 
-@tool("get_vendor_credit_terms")
-def get_vendor_credit_terms(vendor_id: str) -> Dict[str, Any]:
+@tool("get_customer_credit_terms")
+def get_customer_credit_terms(customer_id: str) -> Dict[str, Any]:
     """
-    Get credit limit and payment terms for a specific vendor.
+    Get credit limit and payment terms for a specific customer.
     
     Returns:
       - credit_limit
@@ -499,24 +499,24 @@ def get_vendor_credit_terms(vendor_id: str) -> Dict[str, Any]:
       - credit_rating
       - status
     """
-    if not vendor_id or not isinstance(vendor_id, str):
-        return {"ok": False, "error": "vendor_id must be a non-empty string"}
+    if not customer_id or not isinstance(customer_id, str):
+        return {"ok": False, "error": "customer_id must be a non-empty string"}
     
     try:
-        credit = json_loader.get_credit_limits(vendor_id=vendor_id)
+        credit = json_loader.get_credit_limits(customer_id=customer_id)
         if credit:
             return {"ok": True, "data": credit}
-        return {"ok": False, "error": f"No credit terms data for vendor_id: {vendor_id}"}
+        return {"ok": False, "error": f"No credit terms data for customer_id: {customer_id}"}
     except Exception as e:
         return {"ok": False, "error": str(e)}
 
 
-@tool("get_all_vendor_credit_terms")
-def get_all_vendor_credit_terms(limit: int = 50) -> Dict[str, Any]:
+@tool("get_all_customer_credit_terms")
+def get_all_customer_credit_terms(limit: int = 50) -> Dict[str, Any]:
     """
-    Get credit terms for all vendors.
+    Get credit terms for all customers.
     
-    Returns vendor credit information with utilization and ratings.
+    Returns customer credit information with utilization and ratings.
     """
     if limit <= 0 or limit > 500:
         return {"ok": False, "error": "limit must be between 1 and 500"}
@@ -535,7 +535,7 @@ def get_all_vendor_credit_terms(limit: int = 50) -> Dict[str, Any]:
 
 @tool("get_ar_disputes")
 def get_ar_disputes(
-    vendor_id: Optional[str] = None,
+    customer_id: Optional[str] = None,
     status: Optional[Literal["open", "investigating", "resolved", "escalated"]] = None,
     limit: int = 50,
 ) -> Dict[str, Any]:
@@ -543,7 +543,7 @@ def get_ar_disputes(
     Get payment disputes and AR issues.
     
     Parameters:
-      - vendor_id: Filter by vendor
+      - customer_id: Filter by customer
       - status: Filter by dispute status
       - limit: Maximum results
     
@@ -562,16 +562,16 @@ def get_ar_disputes(
         return {"ok": False, "error": str(e)}
 
 
-@tool("get_vendor_disputes")
-def get_vendor_disputes(vendor_id: str, limit: int = 50) -> Dict[str, Any]:
+@tool("get_customer_disputes")
+def get_customer_disputes(customer_id: str, limit: int = 50) -> Dict[str, Any]:
     """
-    Get all disputes for a specific vendor.
+    Get all disputes for a specific customer.
     """
-    if not vendor_id or not isinstance(vendor_id, str):
-        return {"ok": False, "error": "vendor_id must be a non-empty string"}
+    if not customer_id or not isinstance(customer_id, str):
+        return {"ok": False, "error": "customer_id must be a non-empty string"}
     
     try:
-        disputes = json_loader.get_fraud_alerts_by_employee(vendor_id, limit=limit)
+        disputes = json_loader.get_fraud_alerts_by_employee(customer_id, limit=limit)
         return {"ok": True, "count": len(disputes), "data": disputes}
     except Exception as e:
         return {"ok": False, "error": str(e)}
@@ -582,7 +582,7 @@ def get_critical_payment_issues() -> Dict[str, Any]:
     """
     Get all critical payment issues and at-risk situations.
     
-    Identifies vendors with:
+    Identifies customers with:
       - Multiple overdue invoices (100+ days past due)
       - Payment suspensions
       - Unresolved disputes
@@ -598,14 +598,14 @@ def get_critical_payment_issues() -> Dict[str, Any]:
 
 
 # =====================
-# Vendor Summary/Analysis Tools
+# Customer Summary/Analysis Tools
 # =====================
 
-@tool("get_vendor_summary")
-def get_vendor_summary(vendor_id: str) -> Dict[str, Any]:
+@tool("get_customer_summary")
+def get_customer_summary(customer_id: str) -> Dict[str, Any]:
     """
-    Get a comprehensive summary for a vendor including:
-      - Vendor profile
+    Get a comprehensive summary for a customer including:
+      - Customer profile
       - AR aging report
       - Outstanding invoices (last 10)
       - Credit terms and utilization
@@ -613,52 +613,52 @@ def get_vendor_summary(vendor_id: str) -> Dict[str, Any]:
       - Payment history
       - Status and risk indicators
     """
-    if not vendor_id or not isinstance(vendor_id, str):
-        return {"ok": False, "error": "vendor_id must be a non-empty string"}
+    if not customer_id or not isinstance(customer_id, str):
+        return {"ok": False, "error": "customer_id must be a non-empty string"}
     
     try:
         summary = {
             "ok": True,
-            "vendor_id": vendor_id,
+            "customer_id": customer_id,
             "data": {}
         }
         
         # Get profile
-        profiles = json_loader.get_profiles(vendor_id=vendor_id)
+        profiles = json_loader.get_profiles(customer_id=customer_id)
         summary["data"]["profile"] = profiles[0] if profiles else None
         
         # Get AR balance
-        summary["data"]["ar_balance"] = json_loader.get_balances(vendor_id=vendor_id)
+        summary["data"]["ar_balance"] = json_loader.get_balances(customer_id=customer_id)
         
         # Get invoices
         summary["data"]["invoices"] = json_loader.get_transactions(
-            vendor_id=vendor_id,
+            customer_id=customer_id,
             limit=10
         )
         
         # Get credit terms
-        credit_terms = json_loader.get_credit_limits(vendor_id=vendor_id)
+        credit_terms = json_loader.get_credit_limits(customer_id=customer_id)
         summary["data"]["credit_terms"] = credit_terms
         
         # Get disputes
-        summary["data"]["disputes"] = json_loader.get_fraud_alerts_by_employee(vendor_id)
+        summary["data"]["disputes"] = json_loader.get_fraud_alerts_by_employee(customer_id)
         
         return summary
     except Exception as e:
         return {"ok": False, "error": str(e)}
 
 
-@tool("get_at_risk_vendors")
-def get_at_risk_vendors() -> Dict[str, Any]:
+@tool("get_at_risk_customers")
+def get_at_risk_customers() -> Dict[str, Any]:
     """
-    Identify at-risk vendors based on:
+    Identify at-risk customers based on:
       - Multiple invoices overdue 60+ days
       - Unresolved disputes (escalated)
       - Credit limit utilization > 75%
       - Multiple payment issues
       - Payment history rating (poor/fair)
     
-    Returns a list of vendors with risk indicators and recommended actions.
+    Returns a list of customers with risk indicators and recommended actions.
     """
     try:
         at_risk = {}
@@ -673,48 +673,48 @@ def get_at_risk_vendors() -> Dict[str, Any]:
         all_disputes = json_loader.get_fraud_alerts(status="escalated", limit=500)
         
         # Build risk assessment
-        risk_vendors = {}
+        risk_customers = {}
         
         for balance in all_balances:
-            vendor_id = balance.get("vendor_id")
+            customer_id = balance.get("customer_id")
             if balance.get("overdue_60", 0) > 0 or balance.get("overdue_90", 0) > 0:
-                if vendor_id not in risk_vendors:
-                    risk_vendors[vendor_id] = {
-                        "vendor_name": balance.get("vendor_name"),
+                if customer_id not in risk_customers:
+                    risk_customers[customer_id] = {
+                        "customer_name": balance.get("customer_name"),
                         "risk_factors": [],
                         "total_overdue": 0
                     }
-                risk_factors = risk_vendors[vendor_id]["risk_factors"]
+                risk_factors = risk_customers[customer_id]["risk_factors"]
                 if balance.get("overdue_90", 0) > 0:
                     risk_factors.append(f"Invoices overdue 90+ days: ${balance.get('overdue_90', 0)}")
                 if balance.get("overdue_60", 0) > 0:
                     risk_factors.append(f"Invoices overdue 60-90 days: ${balance.get('overdue_60', 0)}")
-                risk_vendors[vendor_id]["total_overdue"] += balance.get("overdue_60", 0) + balance.get("overdue_90", 0)
+                risk_customers[customer_id]["total_overdue"] += balance.get("overdue_60", 0) + balance.get("overdue_90", 0)
         
         for credit in all_credits:
-            vendor_id = credit.get("vendor_id")
+            customer_id = credit.get("customer_id")
             if credit.get("utilization_percent", 0) > 75:
-                if vendor_id not in risk_vendors:
-                    risk_vendors[vendor_id] = {
-                        "vendor_name": credit.get("vendor_name"),
+                if customer_id not in risk_customers:
+                    risk_customers[customer_id] = {
+                        "customer_name": credit.get("customer_name"),
                         "risk_factors": [],
                         "total_overdue": 0
                     }
-                risk_vendors[vendor_id]["risk_factors"].append(
+                risk_customers[customer_id]["risk_factors"].append(
                     f"High credit utilization: {credit.get('utilization_percent', 0)}%"
                 )
         
         for dispute in all_disputes:
-            vendor_id = dispute.get("vendor_id")
-            if vendor_id not in risk_vendors:
-                risk_vendors[vendor_id] = {
-                    "vendor_name": dispute.get("vendor_name"),
+            customer_id = dispute.get("customer_id")
+            if customer_id not in risk_customers:
+                risk_customers[customer_id] = {
+                    "customer_name": dispute.get("customer_name"),
                     "risk_factors": [],
                     "total_overdue": 0
                 }
-            risk_vendors[vendor_id]["risk_factors"].append("Escalated dispute on record")
+            risk_customers[customer_id]["risk_factors"].append("Escalated dispute on record")
         
-        return {"ok": True, "at_risk_count": len(risk_vendors), "data": risk_vendors}
+        return {"ok": True, "at_risk_count": len(risk_customers), "data": risk_customers}
     except Exception as e:
         return {"ok": False, "error": str(e)}
 
@@ -727,7 +727,7 @@ def get_ar_summary() -> Dict[str, Any]:
     Returns:
       - Total AR balance
       - Current vs overdue breakdown
-      - Vendors at risk count
+      - Customers at risk count
       - Top overdue invoices
       - Aging analysis
       - Performance metrics
@@ -743,7 +743,7 @@ def get_ar_summary() -> Dict[str, Any]:
         summary["data"]["ar_breakdown"] = all_balances
         
         # Get summary data if available
-        summary["data"]["high_risk_vendors"] = json_loader.get_fraud_alerts(
+        summary["data"]["high_risk_customers"] = json_loader.get_fraud_alerts(
             status="escalated",
             limit=10
         )
@@ -756,17 +756,17 @@ def get_ar_summary() -> Dict[str, Any]:
 @tool("get_ar_totals")
 def get_ar_totals() -> Dict[str, Any]:
     """
-    Get total AR metrics across all vendors.
+    Get total AR metrics across all customers.
     Perfect for queries asking about total AR balance, overall amounts, or aggregate metrics.
     
     Returns:
-      - total_ar_balance: Total accounts receivable across all vendors
+      - total_ar_balance: Total accounts receivable across all customers
       - total_current: Total current (not overdue) amount
       - total_overdue: Total overdue amount (30+ days)
       - total_overdue_30: Amount overdue 30-60 days
       - total_overdue_60: Amount overdue 60-90 days
       - total_overdue_90: Amount overdue 90+ days
-      - vendor_count: Number of vendors
+      - customer_count: Number of customers
       - overdue_percentage: Percentage of AR that is overdue
     """
     try:
@@ -798,7 +798,7 @@ def get_ar_totals() -> Dict[str, Any]:
             "total_overdue_30": round(total_overdue_30, 2),
             "total_overdue_60": round(total_overdue_60, 2),
             "total_overdue_90": round(total_overdue_90, 2),
-            "vendor_count": len(all_balances),
+            "customer_count": len(all_balances),
             "overdue_percentage": round(overdue_percentage, 1)
         }
         
@@ -860,17 +860,17 @@ def get_invoice_status_summary() -> Dict[str, Any]:
         return {"ok": False, "error": str(e)}
 
 
-@tool("get_vendor_invoice_totals")
-def get_vendor_invoice_totals(limit: int = 50) -> Dict[str, Any]:
+@tool("get_customer_invoice_totals")
+def get_customer_invoice_totals(limit: int = 50) -> Dict[str, Any]:
     """
-    Get total invoice amounts grouped by vendor.
-    Useful for analyzing invoice distribution across vendors.
+    Get total invoice amounts grouped by customer.
+    Useful for analyzing invoice distribution across customers.
     
     Returns:
-      - vendor_name: Name of the vendor
-      - vendor_id: Vendor identifier
-      - total_invoice_amount: Sum of all invoice amounts for this vendor
-      - invoice_count: Number of invoices for this vendor
+      - customer_name: Name of the customer
+      - customer_id: Customer identifier
+      - total_invoice_amount: Sum of all invoice amounts for this customer
+      - invoice_count: Number of invoices for this customer
       - average_invoice_amount: Average invoice amount
     """
     if limit <= 0 or limit > 500:
@@ -880,37 +880,37 @@ def get_vendor_invoice_totals(limit: int = 50) -> Dict[str, Any]:
         # Get all invoices
         all_invoices = json_loader.get_transactions(limit=1000)
         
-        # Group by vendor and calculate totals
-        vendor_totals = {}
+        # Group by customer and calculate totals
+        customer_totals = {}
         for invoice in all_invoices:
-            vendor_id = invoice.get("vendor_id")
-            vendor_name = invoice.get("vendor_name", vendor_id)
+            customer_id = invoice.get("customer_id")
+            customer_name = invoice.get("customer_name", customer_id)
             invoice_amount = float(invoice.get("invoice_amount", 0))
             
-            if vendor_id not in vendor_totals:
-                vendor_totals[vendor_id] = {
-                    "vendor_id": vendor_id,
-                    "vendor_name": vendor_name,
+            if customer_id not in customer_totals:
+                customer_totals[customer_id] = {
+                    "customer_id": customer_id,
+                    "customer_name": customer_name,
                     "total_invoice_amount": 0,
                     "invoice_count": 0,
                     "invoices": []
                 }
             
-            vendor_totals[vendor_id]["total_invoice_amount"] += invoice_amount
-            vendor_totals[vendor_id]["invoice_count"] += 1
-            vendor_totals[vendor_id]["invoices"].append(invoice_amount)
+            customer_totals[customer_id]["total_invoice_amount"] += invoice_amount
+            customer_totals[customer_id]["invoice_count"] += 1
+            customer_totals[customer_id]["invoices"].append(invoice_amount)
         
         # Calculate averages and format results
         results = []
-        for vendor_data in vendor_totals.values():
+        for customer_data in customer_totals.values():
             results.append({
-                "vendor_id": vendor_data["vendor_id"],
-                "vendor_name": vendor_data["vendor_name"],
-                "total_invoice_amount": round(vendor_data["total_invoice_amount"], 2),
-                "invoice_count": vendor_data["invoice_count"],
+                "customer_id": customer_data["customer_id"],
+                "customer_name": customer_data["customer_name"],
+                "total_invoice_amount": round(customer_data["total_invoice_amount"], 2),
+                "invoice_count": customer_data["invoice_count"],
                 "average_invoice_amount": round(
-                    vendor_data["total_invoice_amount"] / vendor_data["invoice_count"], 2
-                ) if vendor_data["invoice_count"] > 0 else 0
+                    customer_data["total_invoice_amount"] / customer_data["invoice_count"], 2
+                ) if customer_data["invoice_count"] > 0 else 0
             })
         
         # Sort by total amount descending

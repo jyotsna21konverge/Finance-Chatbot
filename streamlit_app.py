@@ -105,6 +105,14 @@ def render_dynamic_visualization(viz_config, tool_outputs):
             # Convert to DataFrame for easier manipulation
             if isinstance(data_list, list) and data_list and isinstance(data_list[0], dict):
                 df = pd.DataFrame(data_list)
+                
+                # Convert numeric string columns to actual numbers
+                for col in df.columns:
+                    try:
+                        # Try to convert to numeric
+                        df[col] = pd.to_numeric(df[col], errors='ignore')
+                    except:
+                        pass
             else:
                 st.warning("Data format not suitable for visualization")
                 return
@@ -117,7 +125,7 @@ def render_dynamic_visualization(viz_config, tool_outputs):
                 # For pie charts, look for common field patterns
                 if chart_type == "pie":
                     # Look for category field (status, category, name, etc.)
-                    category_candidates = [c for c in cols if any(keyword in c.lower() for keyword in ['status', 'category', 'name', 'type', 'vendor'])]
+                    category_candidates = [c for c in cols if any(keyword in c.lower() for keyword in ['status', 'category', 'name', 'type', 'customer'])]
                     # Look for value field (count, amount, total, percentage, etc.)
                     value_candidates = [c for c in cols if any(keyword in c.lower() for keyword in ['count', 'amount', 'total', 'percentage', 'value'])]
                     
@@ -226,7 +234,7 @@ def render_tool_data_visualization(tool_outputs, viz_configs=None):
             continue
         
         try:
-            # SPECIAL HANDLING: Vendor Summary returns a dict with nested fields
+            # SPECIAL HANDLING: Customer Summary returns a dict with nested fields
             if "summary" in tool_name.lower():
                 with st.expander(f"👥 {tool_name}", expanded=True):
                     for item in data_list:
@@ -244,7 +252,7 @@ def render_tool_data_visualization(tool_outputs, viz_configs=None):
                         if profile and isinstance(profile, dict):
                             col1, col2, col3, col4 = st.columns(4)
                             with col1:
-                                st.metric("Vendor Name", str(profile.get("vendor_name", "N/A"))[:20])
+                                st.metric("Customer Name", str(profile.get("customer_name", "N/A"))[:20])
                             with col2:
                                 st.metric("Credit Rating", profile.get("credit_rating", "N/A"))
                             with col3:
@@ -314,7 +322,7 @@ def render_tool_data_visualization(tool_outputs, viz_configs=None):
                                 if isinstance(disp, dict):
                                     dispute_list.append({
                                         "Dispute ID": disp.get("dispute_id", "N/A"),
-                                        "Amount": f"${float(disp.get('disputed_amount', 0)):,.2f}",
+                                        "Amount": f"${float(disp.get('dispute_amount', 0)):,.2f}",
                                         "Status": disp.get("dispute_status", "N/A")
                                     })
                             if dispute_list:
@@ -327,9 +335,9 @@ def render_tool_data_visualization(tool_outputs, viz_configs=None):
                 data_list = [data_list]
             
             # Check for more specific patterns FIRST (invoice, credit, dispute, aging)
-            # Then check general patterns (vendor)
+            # Then check general patterns (customer)
             
-            # Handle invoice data - CHECK FIRST (before vendor)
+            # Handle invoice data - CHECK FIRST (before customer)
             if "invoice" in tool_name.lower():
                 with st.expander(f"📋 {tool_name}", expanded=True):
                     invoice_list = []
@@ -340,7 +348,7 @@ def render_tool_data_visualization(tool_outputs, viz_configs=None):
                         amount = float(item.get('invoice_amount', item.get('amount', 0)))
                         invoice_list.append({
                             "Invoice ID": item.get("invoice_id", "N/A"),
-                            "Vendor": item.get("vendor_name", "N/A"),
+                            "Customer": item.get("customer_name", "N/A"),
                             "Amount": f"${amount:,.2f}",
                             "Due": f"${float(item.get('amount_due', 0)):,.2f}",
                             "Status": str(item.get("status", "N/A")).upper(),
@@ -362,7 +370,7 @@ def render_tool_data_visualization(tool_outputs, viz_configs=None):
                             chart_df = pd.DataFrame(list(status_counts.items()), columns=["Status", "Count"])
                             st.bar_chart(chart_df.set_index("Status"))
             
-            # Handle credit/terms data - CHECK BEFORE VENDOR
+            # Handle credit/terms data - CHECK BEFORE CUSTOMER
             elif "credit" in tool_name.lower() or "payment_terms" in tool_name.lower() or "terms" in tool_name.lower():
                 with st.expander(f"💳 {tool_name}", expanded=True):
                     credit_list = []
@@ -378,7 +386,7 @@ def render_tool_data_visualization(tool_outputs, viz_configs=None):
                         total_used += used
                         
                         credit_list.append({
-                            "Vendor": item.get("vendor_name", item.get("vendor_id", "N/A")),
+                            "Customer": item.get("customer_name", item.get("customer_id", "N/A")),
                             "Limit": f"${limit:,.2f}",
                             "Used": f"${used:,.2f}",
                             "Utilization %": f"{item.get('utilization_percent', 0):.1f}%"
@@ -404,7 +412,7 @@ def render_tool_data_visualization(tool_outputs, viz_configs=None):
                             }
                             st.bar_chart(pd.DataFrame(chart_data).set_index("Status"))
             
-            # Handle AR aging data - CHECK BEFORE VENDOR
+            # Handle AR aging data - CHECK BEFORE CUSTOMER
             elif "aging" in tool_name.lower() or "balance" in tool_name.lower():
                 with st.expander(f"📊 {tool_name}", expanded=True):
                     current_total = 0
@@ -436,7 +444,7 @@ def render_tool_data_visualization(tool_outputs, viz_configs=None):
                     }
                     st.bar_chart(pd.DataFrame(aging_chart_data).set_index("Status"))
             
-            # Handle disputes data - CHECK BEFORE VENDOR
+            # Handle disputes data - CHECK BEFORE CUSTOMER
             elif "dispute" in tool_name.lower():
                 with st.expander(f"🔴 {tool_name}", expanded=True):
                     dispute_list = []
@@ -444,12 +452,12 @@ def render_tool_data_visualization(tool_outputs, viz_configs=None):
                     
                     for item in data_list:
                         if isinstance(item, dict):
-                            amount = float(item.get("disputed_amount", 0) or 0)
+                            amount = float(item.get("dispute_amount", 0) or 0)
                             total_disputed += amount
                             
                             dispute_list.append({
                                 "Dispute ID": item.get("dispute_id", "N/A"),
-                                "Vendor": item.get("vendor_name", item.get("vendor_id", "N/A")),
+                                "Customer": item.get("customer_name", item.get("customer_id", "N/A")),
                                 "Amount": f"${amount:,.2f}",
                                 "Reason": item.get("dispute_reason", "N/A"),
                                 "Status": item.get("dispute_status", "N/A")
@@ -465,8 +473,8 @@ def render_tool_data_visualization(tool_outputs, viz_configs=None):
                         df = pd.DataFrame(dispute_list)
                         st.dataframe(df, use_container_width=True)
             
-            # Handle vendor profile data - AFTER more specific checks
-            elif "vendor" in tool_name.lower():
+            # Handle customer profile data - AFTER more specific checks
+            elif "customer" in tool_name.lower():
                 with st.expander(f"👥 {tool_name}", expanded=True):
                     for item in data_list:
                         if not isinstance(item, dict):
@@ -474,7 +482,7 @@ def render_tool_data_visualization(tool_outputs, viz_configs=None):
                         
                         col1, col2, col3, col4 = st.columns(4)
                         with col1:
-                            st.metric("Vendor Name", str(item.get("vendor_name", "N/A"))[:20])
+                            st.metric("Customer Name", str(item.get("customer_name", "N/A"))[:20])
                         with col2:
                             st.metric("Credit Rating", item.get("credit_rating", "N/A"))
                         with col3:
@@ -483,8 +491,8 @@ def render_tool_data_visualization(tool_outputs, viz_configs=None):
                             st.metric("Payment Terms", item.get("payment_terms", "N/A"))
                         
                         # Display as table
-                        st.markdown("**Vendor Details:**")
-                        df_data = pd.DataFrame([{k: v for k, v in item.items() if k not in ['id', 'vendor_id']}])
+                        st.markdown("**Customer Details:**")
+                        df_data = pd.DataFrame([{k: v for k, v in item.items() if k not in ['id', 'customer_id']}])
                         st.dataframe(df_data, use_container_width=True)
                         st.divider()
             
@@ -516,7 +524,7 @@ def get_ar_metrics():
         total_used = sum(c.get("current_ar_balance", 0) for c in credits)
         total_available = total_credit - total_used
         
-        num_vendors = len(balances)
+        num_customers = len(balances)
         num_invoices = len(transactions)
         num_overdue_invoices = len([t for t in transactions if t.get("status") == "overdue"])
         
@@ -528,7 +536,7 @@ def get_ar_metrics():
             "current_due": total_current,
             "total_overdue": total_overdue,
             "pct_overdue": pct_overdue,
-            "num_vendors": num_vendors,
+            "num_customers": num_customers,
             "num_invoices": num_invoices,
             "num_overdue_invoices": num_overdue_invoices,
             "total_credit": total_credit,
@@ -566,7 +574,7 @@ def render_dashboard():
             st.metric(
                 "Current Due",
                 f"${metrics['current_due']:,.2f}",
-                delta=f"{metrics['num_vendors']} vendors"
+                delta=f"{metrics['num_customers']} customers"
             )
         
         with col3:
@@ -624,8 +632,8 @@ def render_dashboard():
             
             credits = json_loader.get_credit_limits()
             credit_data = {
-                "Vendor": [c.get("vendor_name", c.get("vendor_id", "Unknown"))[:20] for c in credits],
-                "Limit": [c.get("credit_limit", 0) for c in credits],
+                "Customer": [c.get("customer_name", c.get("customer_id", "Unknown"))[:20] for c in credits],
+                "Credit_Limit": [c.get("credit_limit", 0) for c in credits],
                 "Used": [c.get("current_ar_balance", 0) for c in credits],
                 "Utilization %": [c.get("utilization_percent", 0) for c in credits]
             }
@@ -638,35 +646,35 @@ def render_dashboard():
             }
             st.bar_chart(pd.DataFrame(fig_data).set_index("Status"))
             
-            st.markdown("**Credit Utilization by Vendor:**")
-            st.dataframe(credit_df[["Vendor", "Limit", "Used", "Utilization %"]], use_container_width=True)
+            st.markdown("**Credit Utilization by Customer:**")
+            st.dataframe(credit_df[["Customer", "Credit_Limit", "Used", "Utilization %"]], use_container_width=True)
         
         st.markdown("---")
         
-        # At-Risk Vendors and Top Overdue
+        # At-Risk Customers and Top Overdue
         col1, col2 = st.columns(2)
         
         with col1:
-            st.subheader("⚠️ At-Risk Vendors")
+            st.subheader("⚠️ At-Risk Customers")
             
-            # Get vendors with high overdue or utilization
+            # Get customers with high overdue or utilization
             at_risk = []
             for balance in balances:
                 overdue = balance.get("overdue_60", 0) + balance.get("overdue_90", 0)
                 if overdue > 0:
-                    vendor = next((p for p in json_loader.get_profiles() if p.get("vendor_id") == balance.get("vendor_id")), {})
+                    customer = next((p for p in json_loader.get_profiles() if p.get("customer_id") == balance.get("customer_id")), {})
                     at_risk.append({
-                        "Vendor": vendor.get("vendor_name", balance.get("vendor_id")),
-                        "Status": vendor.get("status", "Unknown"),
+                        "Customer": customer.get("customer_name", balance.get("customer_id")),
+                        "Status": customer.get("status", "Unknown"),
                         "Overdue 60+": f"${overdue:,.2f}",
-                        "Credit Rating": vendor.get("credit_rating", "N/A")
+                        "Credit Rating": customer.get("credit_rating", "N/A")
                     })
             
             if at_risk:
                 at_risk_df = pd.DataFrame(at_risk)
                 st.dataframe(at_risk_df, use_container_width=True)
             else:
-                st.info("No at-risk vendors detected")
+                st.info("No at-risk customers detected")
         
         with col2:
             st.subheader("📋 Top Overdue Invoices")
@@ -678,10 +686,10 @@ def render_dashboard():
             
             top_overdue = []
             for invoice in overdue_invoices[:5]:
-                vendor = next((p for p in json_loader.get_profiles() if p.get("vendor_id") == invoice.get("vendor_id")), {})
+                customer = next((p for p in json_loader.get_profiles() if p.get("customer_id") == invoice.get("customer_id")), {})
                 top_overdue.append({
                     "Invoice": invoice.get("invoice_id"),
-                    "Vendor": vendor.get("vendor_name", invoice.get("vendor_id")),
+                    "Customer": customer.get("customer_name", invoice.get("customer_id")),
                     "Amount": f"${invoice.get("amount_due", 0):,.2f}",
                     "Status": invoice.get("payment_status", "Unknown")
                 })
@@ -703,8 +711,8 @@ def render_dashboard():
             for dispute in disputes:
                 dispute_data.append({
                     "Dispute ID": dispute.get("dispute_id"),
-                    "Vendor": dispute.get("vendor_name", dispute.get("vendor_id")),
-                    "Amount": f"${dispute.get('disputed_amount', 0):,.2f}",
+                    "Customer": dispute.get("customer_name", dispute.get("customer_id")),
+                    "Amount": f"${dispute.get('dispute_amount', 0):,.2f}",
                     "Reason": dispute.get("dispute_reason", "Unknown"),
                     "Status": dispute.get("dispute_status", "Unknown")
                 })
@@ -1180,8 +1188,8 @@ else:
     st.markdown("""
 ---
 ### Welcome to the AR Management System
-This intelligent agent helps you manage vendor relationships, track invoice payments, analyze aging reports, and resolve disputes.
-Ask questions about vendor profiles, invoice status, AR balances, payment disputes, and more.
+This intelligent agent helps you manage customer relationships, track order payments, analyze aging reports, and resolve disputes.
+Ask questions about customer profiles, order status, AR balances, payment disputes, and more.
 """)
 
     # Create initial session if needed

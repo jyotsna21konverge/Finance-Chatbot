@@ -2,57 +2,57 @@
 ==============================
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 1: SINGLE TOOL QUESTIONS (Basic Vendor/Invoice Lookups)
+SECTION 1: SINGLE TOOL QUESTIONS (Basic Customer/Invoice Lookups)
 ═══════════════════════════════════════════════════════════════════════════════
 
-A. VENDOR PROFILE QUESTIONS (Single Tool: get_vendor_profile / search_vendors)
+A. CUSTOMER PROFILE QUESTIONS (Single Tool: get_customer_profile / search_customers)
 
--   Who is vendor vend_001?
+-   Who is customer cust_001?
 -   Get profile for TechSupply Solutions.
--   What is the credit rating of vend_001?
--   Show me vend_003 details.
+-   What is the credit rating of cust_001?
+-   Show me cust_003 details.
 -   What industry is Global Manufacturing Corp in?
--   Get all vendors with credit rating A.
--   Show all manufacturing vendors.
--   Who are the vendors with "at_risk" status?
+-   Get all customers with credit rating A.
+-   Show all manufacturing customers.
+-   Who are the customers with "at_risk" status?
 -   What is the payment terms for TechSupply Solutions?
--   Which vendors have "excellent" payment history?
+-   Which customers have "excellent" payment history?
 
-B. AR BALANCE QUESTIONS (Single Tool: get_vendor_ar_balance / get_ar_aging_report)
+B. AR BALANCE QUESTIONS (Single Tool: get_customer_ar_balance / get_ar_aging_report)
 
--   What is the current AR balance for vend_001?
+-   What is the current AR balance for cust_001?
 -   Show AR aging report for Global Manufacturing Corp.
 -   How many invoices are outstanding for TechSupply?
--   What is the total AR balance across all vendors?
+-   What is the total AR balance across all customers?
 -   Show the overdue breakdown for Premium Consulting Group.
--   How much is overdue 90+ days for vend_004?
+-   How much is overdue 90+ days for cust_004?
 -   Get aging analysis summary.
--   Which vendor has the highest current_due amount?
+-   Which customer has the highest current_due amount?
 -   What percentage of AR is overdue 30+ days?
 
-C. INVOICE QUESTIONS (Single Tool: search_invoices / get_vendor_invoices)
+C. INVOICE QUESTIONS (Single Tool: search_invoices / get_customer_invoices)
 
 -   Show all unpaid invoices.
--   What are the recent invoices for vend_002?
+-   What are the recent invoices for cust_002?
 -   List all current (not overdue) invoices.
 -   Show overdue invoices for Office Pro Supplies.
 -   How many invoices are outstanding for Logistics Express?
 -   What invoices were issued for Cloud Services?
 -   Get all invoices with status "overdue".
--   Show invoices from Manufacturing vendors.
+-   Show invoices from Manufacturing customers.
 -   What are the top 5 largest invoices outstanding?
 
-D. CREDIT TERMS QUESTIONS (Single Tool: get_vendor_credit_terms / get_all_vendor_credit_terms)
+D. CREDIT TERMS QUESTIONS (Single Tool: get_customer_credit_terms / get_all_customer_credit_terms)
 
--   What is the credit limit for vend_001?
+-   What is the credit limit for cust_001?
 -   Show credit terms for CloudHost Solutions.
--   Get all vendor credit information.
+-   Get all customer credit information.
 -   What is the utilization percent for Global Manufacturing Corp?
--   Which vendors have credit utilization above 50%?
--   What is the available credit for each vendor?
--   Show vendors at their credit limit.
+-   Which customers have credit utilization above 50%?
+-   What is the available credit for each customer?
+-   Show customers at their credit limit.
 
-E. DISPUTE QUESTIONS (Single Tool: get_ar_disputes / get_vendor_disputes)
+E. DISPUTE QUESTIONS (Single Tool: get_ar_disputes / get_customer_disputes)
 
 -   Show all open disputes.
 -   What disputes exist for Global Manufacturing Corp?
@@ -64,33 +64,33 @@ E. DISPUTE QUESTIONS (Single Tool: get_ar_disputes / get_vendor_disputes)
 SECTION 2: MULTI-TOOL QUESTIONS (Combining Multiple Tools)
 ═══════════════════════════════════════════════════════════════════════════════
 
-A. VENDOR PERFORMANCE & RISK ANALYSIS
+A. CUSTOMER PERFORMANCE & RISK ANALYSIS
 
--   Give me a complete profile and AR status for vend_002.
+-   Give me a complete profile and AR status for cust_002.
 -   What is the financial health of Global Manufacturing Corp? (profile + balance + terms + disputes)
--   Compare AR aging between all manufacturing vendors.
--   Which vendor is most at risk based on overdue balances and disputes?
--   What is the relationship between credit rating and payment delays for each vendor?
+-   Compare AR aging between all manufacturing customers.
+-   Which customer is most at risk based on overdue balances and disputes?
+-   What is the relationship between credit rating and payment delays for each customer?
 
 B. CASH FLOW PRIORITIZATION
 
 -   Show me the top 10 invoices that need immediate attention (largest + most overdue).
--   What invoices from at-risk vendors are past due?
--   Which vendors should we prioritize for collections?
+-   What invoices from at-risk customers are past due?
+-   Which customers should we prioritize for collections?
 -   What is the total cash at risk (invoices 60+ days overdue)?
 
-C. VENDOR RELATIONSHIP ISSUES
+C. CUSTOMER RELATIONSHIP ISSUES
 
--   Which vendors have active disputes? What are the amounts?
+-   Which customers have active disputes? What are the amounts?
 -   What is the payment issue for Logistics Express International?
--   Are there vendor relationship concerns with our A-rated suppliers?
--   Show me vendors with quality or service issues (reflected in disputes).
+-   Are there customer relationship concerns with our A-rated suppliers?
+-   Show me customers with quality or service issues (reflected in disputes).
 
 D. CREDIT MANAGEMENT
 
--   Which vendors have exceeded 75% credit utilization?
--   Should any vendor credit limits be adjusted based on payment performance?
--   What vendors are on payment suspension?
+-   Which customers have exceeded 75% credit utilization?
+-   Should any customer credit limits be adjusted based on payment performance?
+-   What customers are on payment suspension?
 -   Compare credit rating with actual payment history trends.
 
 ═══════════════════════════════════════════════════════════════════════════════
@@ -101,32 +101,32 @@ A. AR PORTFOLIO ANALYSIS
 
 -   What is the total AR and aging distribution?
 -   How much AR is current vs overdue by age bucket?
--   What percentage of vendors are at-risk?
+-   What percentage of customers are at-risk?
 -   What is our Days Sales Outstanding (DSO)?
--   Show all vendors with invoices overdue 90+ days.
+-   Show all customers with invoices overdue 90+ days.
 
 B. RISK MANAGEMENT & COMPLIANCE
 
--   Which vendors have critical issues requiring escalation?
+-   Which customers have critical issues requiring escalation?
 -   What is the total amount at risk (overdue 60+)?
--   Show vendors with payment suspension status.
+-   Show customers with payment suspension status.
 -   What unresolved disputes could impact cash flow?
--   Identify all compliance risks in the vendor portfolio.
+-   Identify all compliance risks in the customer portfolio.
 
 C. COLLECTIONS & FOLLOW-UP STRATEGY
 
--   List all vendors we should contact for immediate payment.
+-   List all customers we should contact for immediate payment.
 -   What invoices are about to breach aging thresholds?
--   Which vendors consistently pay late despite good credit ratings?
--   Show payment plan requirements for suspended vendors.
+-   Which customers consistently pay late despite good credit ratings?
+-   Show payment plan requirements for suspended customers.
 -   What is the follow-up status for disputed invoices?
 
-D. VENDOR SEGMENT ANALYSIS
+D. CUSTOMER SEGMENT ANALYSIS
 
 -   Compare AR metrics across different industries.
--   How does payment performance vary by vendor size or type?
+-   How does payment performance vary by customer size or type?
 -   Which industry segment has the highest at-risk AR?
--   Show performance trends for strategic vs standard vendors.
+-   Show performance trends for strategic vs standard customers.
 
 ═══════════════════════════════════════════════════════════════════════════════
 SECTION 4: SCENARIO-BASED & DECISION-SUPPORT QUESTIONS
@@ -134,17 +134,17 @@ SECTION 4: SCENARIO-BASED & DECISION-SUPPORT QUESTIONS
 
 A. IMMEDIATE ACTION REQUIRED
 
--   What is the critical AR situation right now? (critical disputes, high-risk vendors, overdue 90+)
--   Which vendors need payment plan enforcement?
+-   What is the critical AR situation right now? (critical disputes, high-risk customers, overdue 90+)
+-   Which customers need payment plan enforcement?
 -   What disputes are blocking cash collection?
--   Show all vendors that should be escalated to management.
+-   Show all customers that should be escalated to management.
 
-B. VENDOR RELATIONSHIP DECISIONS
+B. CUSTOMER RELATIONSHIP DECISIONS
 
 -   Should we continue extending credit to CloudHost Solutions? (based on payment history, disputes, overdue)
 -   Should we adjust payment terms for Global Manufacturing Corp?
--   Which vendors qualify for early payment discounts?
--   What vendors should we prioritize for relationship building?
+-   Which customers qualify for early payment discounts?
+-   What customers should we prioritize for relationship building?
 
 C. CASH FLOW FORECASTING
 
@@ -155,32 +155,32 @@ C. CASH FLOW FORECASTING
 
 D. PROCESS IMPROVEMENT
 
--   Which vendors have recurring issues (late payment, disputes)?
+-   Which customers have recurring issues (late payment, disputes)?
 -   What invoicing or billing issues can we identify?
--   Are there patterns in dispute reasons by vendor?
+-   Are there patterns in dispute reasons by customer?
 -   What operational improvements can reduce AR days?
 
 ═══════════════════════════════════════════════════════════════════════════════
-SECTION 5: SPECIFIC VENDOR DEEP DIVES
+SECTION 5: SPECIFIC CUSTOMER DEEP DIVES
 ═══════════════════════════════════════════════════════════════════════════════
 
-VENDOR: vend_001 - TechSupply Solutions
+CUSTOMER: cust_001 - TechSupply Solutions
 
 -   Get full summary for TechSupply Solutions.
 -   What is our current relationship status with TechSupply?
 -   Are all TechSupply invoices being paid on time?
 -   What is the outstanding amount and aging?
--   Do we have any disputes with this vendor?
+-   Do we have any disputes with this customer?
 
-VENDOR: vend_002 - Global Manufacturing Corp
+CUSTOMER: cust_002 - Global Manufacturing Corp
 
 -   Show complete AR profile for Global Manufacturing Corp.
--   What is the payment trend for this vendor?
+-   What is the payment trend for this customer?
 -   How many invoices are overdue and by how much?
 -   What quality or service issues have been flagged?
 -   Is credit suspension recommended?
 
-VENDOR: vend_004 - Logistics Express International
+CUSTOMER: cust_004 - Logistics Express International
 
 -   What is the risk level for Logistics Express?
 -   How many invoices are overdue 60+ days?
@@ -188,7 +188,7 @@ VENDOR: vend_004 - Logistics Express International
 -   Should we enforce a payment plan?
 -   What is the recommended next action?
 
-VENDOR: vend_006 - CloudHost Solutions
+CUSTOMER: cust_006 - CloudHost Solutions
 
 -   Why is CloudHost Solutions suspended?
 -   What is the critical situation requiring escalation?
@@ -207,11 +207,11 @@ A. AR EFFICIENCY METRICS
 -   What percentage of AR is collected on time?
 -   What is the average days overdue?
 
-B. VENDOR PAYMENT METRICS
+B. CUSTOMER PAYMENT METRICS
 
--   What is the on-time payment rate by vendor?
--   Which vendors have the best payment performance?
--   Which vendors have the worst payment history?
+-   What is the on-time payment rate by customer?
+-   Which customers have the best payment performance?
+-   Which customers have the worst payment history?
 -   What is the average payment delay?
 
 C. RISK METRICS
@@ -219,18 +219,18 @@ C. RISK METRICS
 -   What percentage of AR is at risk?
 -   What is the bad debt reserve requirement?
 -   What is the total disputed amount?
--   What is the concentration risk by vendor?
+-   What is the concentration risk by customer?
 
 ═══════════════════════════════════════════════════════════════════════════════
 SECTION 7: TREND & PATTERN ANALYSIS
 ═══════════════════════════════════════════════════════════════════════════════
 
--   Which vendors are improving with payment performance?
--   Which vendors are deteriorating?
+-   Which customers are improving with payment performance?
+-   Which customers are deteriorating?
 -   What is the seasonal pattern in AR aging?
 -   What are the top reasons for disputes?
 -   Which industries have the highest write-off risk?
 -   What is the trend in days sales outstanding?
--   Are there vendors whose issues are getting worse?
+-   Are there customers whose issues are getting worse?
 -   What early warning signs indicate future AR problems?
 

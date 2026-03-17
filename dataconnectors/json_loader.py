@@ -50,34 +50,34 @@ class JSONDataLoader:
         self._data_cache.clear()
     
     # =====================
-    # Vendor Profile Data
+    # Customer Profile Data
     # =====================
     
-    def get_profiles(self, vendor_id: Optional[str] = None) -> List[Dict[str, Any]]:
-        """Get vendor profiles from profiles.json."""
+    def get_profiles(self, customer_id: Optional[str] = None) -> List[Dict[str, Any]]:
+        """Get customer profiles from profiles.json."""
         data = self._load_json_file("profiles.json")
-        vendors = data.get("vendors", [])
+        customers = data.get("customers", [])
         
-        if vendor_id:
-            return [v for v in vendors if v.get("vendor_id") == vendor_id]
-        return vendors
+        if customer_id:
+            return [c for c in customers if c.get("customer_id") == customer_id]
+        return customers
     
     def search_profiles(self, search_field: str, search_value: Any) -> List[Dict[str, Any]]:
-        """Search vendor profiles by any field."""
-        vendors = self.get_profiles()
-        return [v for v in vendors if v.get(search_field) == search_value]
+        """Search customer profiles by any field."""
+        customers = self.get_profiles()
+        return [c for c in customers if c.get(search_field) == search_value]
     
     # =====================
     # AR Balance & Aging Data
     # =====================
     
-    def get_balances(self, vendor_id: Optional[str] = None) -> List[Dict[str, Any]]:
+    def get_balances(self, customer_id: Optional[str] = None) -> List[Dict[str, Any]]:
         """Get AR aging report data from balances.json."""
         data = self._load_json_file("balances.json")
         balances = data.get("ar_balances", [])
         
-        if vendor_id:
-            return [b for b in balances if b.get("vendor_id") == vendor_id]
+        if customer_id:
+            return [b for b in balances if b.get("customer_id") == customer_id]
         return balances
     # =====================
     # Invoice/Transaction Data
@@ -85,17 +85,17 @@ class JSONDataLoader:
     
     def get_transactions(
         self,
-        vendor_id: Optional[str] = None,
+        customer_id: Optional[str] = None,
         status: Optional[str] = None,
         limit: int = 50,
     ) -> List[Dict[str, Any]]:
         """Get invoices from transactions.json with optional filters."""
         data = self._load_json_file("transactions.json")
-        invoices = data.get("invoices", [])
+        invoices = data.get("customer_orders", [])
         
         # Apply filters
-        if vendor_id:
-            invoices = [i for i in invoices if i.get("vendor_id") == vendor_id]
+        if customer_id:
+            invoices = [i for i in invoices if i.get("customer_id") == customer_id]
         if status:
             invoices = [i for i in invoices if i.get("status") == status]
         
@@ -110,60 +110,60 @@ class JSONDataLoader:
     ) -> List[Dict[str, Any]]:
         """Search invoices by any field."""
         data = self._load_json_file("transactions.json")
-        invoices = data.get("invoices", [])
+        invoices = data.get("customer_orders", [])
         results = [i for i in invoices if i.get(search_field) == search_value]
         return results[:limit]
     
     # =====================
-    # Vendor Credit Terms Data
+    # Customer Credit Terms Data
     # =====================
     
-    def get_credit_limits(self, vendor_id: Optional[str] = None) -> List[Dict[str, Any]]:
-        """Get vendor credit terms from credit_limits.json."""
+    def get_credit_limits(self, customer_id: Optional[str] = None) -> List[Dict[str, Any]]:
+        """Get customer credit terms from credit_limits.json."""
         data = self._load_json_file("credit_limits.json")
-        vendors = data.get("vendors", [])
+        customers = data.get("customers", [])
         
-        if vendor_id:
-            return [v for v in vendors if v.get("vendor_id") == vendor_id]
-        return vendors
+        if customer_id:
+            return [c for c in customers if c.get("customer_id") == customer_id]
+        return customers
     
     def update_credit_limit(
         self,
-        vendor_id: str,
+        customer_id: str,
         new_limit: float,
         adjustment_reason: str = "Manual adjustment",
     ) -> Dict[str, Any]:
-        """Update credit limit for a vendor."""
+        """Update credit limit for a customer."""
         data = self._load_json_file("credit_limits.json")
-        vendors = data.get("vendors", [])
+        customers = data.get("customers", [])
         
-        for vendor in vendors:
-            if vendor.get("vendor_id") == vendor_id:
-                old_limit = vendor.get("credit_limit")
-                vendor["credit_limit"] = new_limit
-                vendor["available_credit"] = new_limit - vendor.get("current_ar_balance", 0)
-                vendor["utilization_percent"] = (
-                    (vendor.get("current_ar_balance", 0) / new_limit * 100) if new_limit > 0 else 0
+        for customer in customers:
+            if customer.get("customer_id") == customer_id:
+                old_limit = customer.get("credit_limit")
+                customer["credit_limit"] = new_limit
+                customer["available_credit"] = new_limit - customer.get("current_ar_balance", 0)
+                customer["utilization_percent"] = (
+                    (customer.get("current_ar_balance", 0) / new_limit * 100) if new_limit > 0 else 0
                 )
                 
                 # Add to adjustment history
-                if "adjustment_history" not in vendor:
-                    vendor["adjustment_history"] = []
+                if "adjustment_history" not in customer:
+                    customer["adjustment_history"] = []
                 
                 adjustment = {
-                    "adjustment_id": f"adj_{len(vendor['adjustment_history']) + 1:03d}",
+                    "adjustment_id": f"adj_{len(customer['adjustment_history']) + 1:03d}",
                     "timestamp": "2026-03-05T00:00:00Z",
                     "previous_limit": old_limit,
                     "new_limit": new_limit,
                     "adjustment_type": "permanent",
                     "adjustment_reason": adjustment_reason,
                 }
-                vendor["adjustment_history"].append(adjustment)
+                customer["adjustment_history"].append(adjustment)
                 
                 self._save_json_file("credit_limits.json", data)
                 return {"ok": True, "message": f"Credit limit updated from {old_limit} to {new_limit}"}
         
-        return {"ok": False, "error": f"Vendor {vendor_id} not found"}
+        return {"ok": False, "error": f"Customer {customer_id} not found"}
     
     # =====================
     # AR Disputes Data
@@ -171,24 +171,24 @@ class JSONDataLoader:
     
     def get_fraud_alerts(
         self,
-        vendor_id: Optional[str] = None,
+        customer_id: Optional[str] = None,
         status: Optional[str] = None,
         limit: int = 50,
     ) -> List[Dict[str, Any]]:
         """Get AR disputes and payment issues from fraud_alerts.json."""
         data = self._load_json_file("fraud_alerts.json")
-        disputes = data.get("ar_disputes", [])
+        disputes = data.get("customer_disputes", [])
         
-        if vendor_id:
-            disputes = [d for d in disputes if d.get("vendor_id") == vendor_id]
+        if customer_id:
+            disputes = [d for d in disputes if d.get("customer_id") == customer_id]
         if status:
             disputes = [d for d in disputes if d.get("dispute_status") == status]
         
         return disputes[:limit]
     
-    def get_fraud_alerts_by_employee(self, vendor_id: str, limit: int = 50) -> List[Dict[str, Any]]:
-        """Get disputes for a specific vendor (AR-focused)."""
-        return self.get_fraud_alerts(vendor_id=vendor_id, limit=limit)
+    def get_fraud_alerts_by_employee(self, customer_id: str, limit: int = 50) -> List[Dict[str, Any]]:
+        """Get disputes for a specific customer (AR-focused)."""
+        return self.get_fraud_alerts(customer_id=customer_id, limit=limit)
 
 
 # Global instance for easy access

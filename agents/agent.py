@@ -5,38 +5,38 @@ from tools.tools import (
     
     # Time-Based Analysis Tools
     get_recent_invoices,
-    get_vendor_outstanding_by_period,
+    get_customer_outstanding_by_period,
     get_invoices_by_date_range,
     
-    # Vendor Profile Tools
-    get_vendor_profile,
-    search_vendors,
+    # Customer Profile Tools
+    get_customer_profile,
+    search_customers,
     
     # AR Balance & Aging Tools
-    get_vendor_ar_balance,
+    get_customer_ar_balance,
     get_ar_aging_report,
     
     # Invoice Tools
     search_invoices,
-    get_vendor_invoices,
+    get_customer_invoices,
     get_overdue_invoices,
     get_invoice_status_summary,
     
-    # Vendor Credit/Terms Tools
-    get_vendor_credit_terms,
-    get_all_vendor_credit_terms,
+    # Customer Credit/Terms Tools
+    get_customer_credit_terms,
+    get_all_customer_credit_terms,
     
     # Dispute & Issues Tools
     get_ar_disputes,
-    get_vendor_disputes,
+    get_customer_disputes,
     get_critical_payment_issues,
     
-    # Vendor Summary/Analysis Tools
-    get_vendor_summary,
-    get_at_risk_vendors,
+    # Customer Summary/Analysis Tools
+    get_customer_summary,
+    get_at_risk_customers,
     get_ar_summary,
     get_ar_totals,
-    get_vendor_invoice_totals,
+    get_customer_invoice_totals,
 )
 from genai_operations.llm import LLM
 from os import environ
@@ -60,38 +60,38 @@ agent = create_agent(
         
         # Time-Based Analysis Tools
         get_recent_invoices,
-        get_vendor_outstanding_by_period,
+        get_customer_outstanding_by_period,
         get_invoices_by_date_range,
         
-        # Vendor Profile Tools
-        get_vendor_profile,
-        search_vendors,
+        # Customer Profile Tools
+        get_customer_profile,
+        search_customers,
         
         # AR Balance & Aging Tools
-        get_vendor_ar_balance,
+        get_customer_ar_balance,
         get_ar_aging_report,
         
         # Invoice Tools
         search_invoices,
-        get_vendor_invoices,
+        get_customer_invoices,
         get_overdue_invoices,
         get_invoice_status_summary,
         
-        # Vendor Credit/Terms Tools
-        get_vendor_credit_terms,
-        get_all_vendor_credit_terms,
+        # Customer Credit/Terms Tools
+        get_customer_credit_terms,
+        get_all_customer_credit_terms,
         
         # Dispute & Issues Tools
         get_ar_disputes,
-        get_vendor_disputes,
+        get_customer_disputes,
         get_critical_payment_issues,
         
-        # Vendor Summary/Analysis Tools
-        get_vendor_summary,
-        get_at_risk_vendors,
+        # Customer Summary/Analysis Tools
+        get_customer_summary,
+        get_at_risk_customers,
         get_ar_summary,
         get_ar_totals,
-        get_vendor_invoice_totals,
+        get_customer_invoice_totals,
     ],
     system_prompt=concierge_system_prompt,
 )
