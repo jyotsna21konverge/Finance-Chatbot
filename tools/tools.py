@@ -556,7 +556,7 @@ def get_ar_disputes(
         return {"ok": False, "error": "limit must be between 1 and 500"}
     
     try:
-        disputes = json_loader.get_fraud_alerts(limit=limit)
+        disputes = json_loader.get_fraud_alerts(customer_id=customer_id, status=status, limit=limit)
         return {"ok": True, "count": len(disputes), "data": disputes}
     except Exception as e:
         return {"ok": False, "error": str(e)}

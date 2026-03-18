@@ -8,11 +8,11 @@
       "invoice_amount": 35000.00,
       "dispute_amount": 5000.00,
       "dispute_date": "2026-02-28T10:30:00Z",
-      "dispute_reason": "Quality Issues",
+      "dispute_reason": "Defective precision components affecting product quality",
       "dispute_status": "open",
       "resolution_date": null,
       "priority": "high",
-      "notes": "Defective components received, affecting 40% of shipment. Customer disputes claim.",
+      "notes": "Defective components received, affecting 40% of shipment. Halting production line pending resolution.",
       "impact": "Payment pending resolution, straining customer relationship"
     },
     {
@@ -23,11 +23,11 @@
       "invoice_amount": 40000.00,
       "dispute_amount": 8000.00,
       "dispute_date": "2026-02-15T14:45:00Z",
-      "dispute_reason": "Pricing Discrepancy",
+      "dispute_reason": "Bulk order unit price lower than invoiced - GMC internal contract mismatch",
       "dispute_status": "investigating",
       "resolution_date": null,
       "priority": "medium",
-      "notes": "Invoice shows different unit price than purchase order. 200 units affected.",
+      "notes": "GMC provided PO at $150/unit, invoice shows $190/unit for 200 units. Cost impact on automotive assembly line.",
       "impact": "Payment withheld, potential credit memo required"
     },
     {
@@ -38,11 +38,11 @@
       "invoice_amount": 18000.00,
       "dispute_amount": 2500.00,
       "dispute_date": "2026-02-20T09:15:00Z",
-      "dispute_reason": "Partial Delivery",
+      "dispute_reason": "2 of 5 workstations missing from shipment - delayed office setup",
       "dispute_status": "resolved",
       "resolution_date": "2026-03-01T11:00:00Z",
       "priority": "low",
-      "notes": "2 out of 5 workstations not delivered as scheduled. Credit memo issued for $2,500.",
+      "notes": "Essential IT equipment shipment incomplete, delaying employee onboarding. Credit memo issued $2,500.",
       "impact": "Partially resolved - adjusted invoice amount"
     },
     {
@@ -53,11 +53,11 @@
       "invoice_amount": 13000.00,
       "dispute_amount": 13000.00,
       "dispute_date": "2026-01-20T16:20:00Z",
-      "dispute_reason": "Service Downtime",
+      "dispute_reason": "24-hour hosting infrastructure outage - SLA breach violation",
       "dispute_status": "escalated",
       "resolution_date": null,
       "priority": "critical",
-      "notes": "24-hour service outage in November resulted in business loss. Full refund demanded.",
+      "notes": "November outage caused complete service disruption for CloudHost's 50+ clients. Full refund demanded.",
       "impact": "Critical - customer payment suspended, legal review recommended"
     },
     {
@@ -68,12 +68,12 @@
       "invoice_amount": 28000.00,
       "dispute_amount": 3500.00,
       "dispute_date": "2026-03-05T13:10:00Z",
-      "dispute_reason": "Late Delivery",
+      "dispute_reason": "10-day shipping delay causing missed customs deadlines and expediting surcharges",
       "dispute_status": "open",
       "resolution_date": null,
       "priority": "high",
-      "notes": "Shipment arrived 10 days late, causing production delays and expediting costs.",
-      "impact": "Deduction requested for expediting costs incurred"
+      "notes": "LEI's international fleet shipment arrived late, triggering port fees and expedited courier costs.",
+      "impact": "Deduction requested for unnecessary expediting costs incurred"
     },
     {
       "dispute_id": "disp_006",
@@ -83,11 +83,11 @@
       "invoice_amount": 8300.00,
       "dispute_amount": 1200.00,
       "dispute_date": "2026-02-25T10:45:00Z",
-      "dispute_reason": "Underbilling Resolution",
+      "dispute_reason": "Cloud storage overage billing - underbilled last month for excess data transfer",
       "dispute_status": "resolved",
       "resolution_date": "2026-03-08T14:30:00Z",
       "priority": "medium",
-      "notes": "Previous month's usage higher than billed. Credit applied from this month's invoice.",
+      "notes": "CloudHost's data sync usage higher than standard tier. Credit applied to current month's cloud invoice.",
       "impact": "Resolved - adjustment applied to current invoice"
     }
   ],
@@ -99,9 +99,9 @@
       "issue_type": "Repeated Late Payment",
       "severity": "high",
       "status": "active",
-      "description": "Customer has 3+ invoices overdue 60+ days. Payment terms consistently not met.",
+      "description": "LEI has 3+ shipping invoices overdue 60+ days. International logistics contracts consistently not paid on time, affecting cash flow for fleet maintenance.",
       "reported_date": "2026-02-10T00:00:00Z",
-      "required_action": "Enforce payment schedule, consider payment plan"
+      "required_action": "Enforce payment schedule, consider requiring prepayment for future shipments"
     },
     {
       "issue_id": "piss_002",
@@ -110,9 +110,9 @@
       "issue_type": "Compliance Risk",
       "severity": "critical",
       "status": "active",
-      "description": "Multiple overdue invoices 100+ days past due. Customer credit suspended.",
+      "description": "CloudHost has multiple hosting service invoices 100+ days overdue. Cloud infrastructure services suspended due to non-payment, critical SLA violations.",
       "reported_date": "2026-01-15T00:00:00Z",
-      "required_action": "Urgent - Payment plan required before credit restoration"
+      "required_action": "Urgent - Payment plan required before service restoration and credit recovery"
     },
     {
       "issue_id": "piss_003",
@@ -121,9 +121,9 @@
       "issue_type": "Payment Pattern Alert",
       "severity": "medium",
       "status": "monitoring",
-      "description": "Increasing pattern of late payments over past 6 months. Currently 38 days overdue.",
+      "description": "GMC showing escalating late payment trend over 6 months for precision component orders. Currently 38 days overdue on $40K bulk purchase.",
       "reported_date": "2026-02-15T00:00:00Z",
-      "required_action": "Monitor closely, escalate if pattern continues"
+      "required_action": "Monitor closely, escalate if payment pattern continues to slip"
     }
   ]
 }
